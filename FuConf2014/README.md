@@ -3,6 +3,7 @@ https://github.com/Dyalog/mkrom
 
 Slides and scripts from [Morten Krombergs talk at FuConf 2014](http://confengine.com/functional-conf-2014/proposal/436/pragmatic-functional-programming-using-dyalog) in Bangalore:
 
+The APL source files are best viewed with the APL385 font that can be found [here](http://www.dyalog.com/apl-font-keyboard.htm).
 ##Files:
 1. Pragmatic*.PPTX : The PowerPoint presentation 
 2. part1_log.txt   : Transcript of the first demo session 
