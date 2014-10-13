@@ -1,0 +1,54 @@
+﻿⍝ Using APL
+]load d:\demos\fc2014\DSL -disperse
+]load d:\demos\fc2014\Friends
+]load d:\demos\fc2014\HTTPTools
+]box on
+wikipedia
+XHTML←wikipedia'List_of_most_common_surnames_in_Asia'
+Table 1
+Column 'Romanization' of Table 1
+Column
+Columns
+surnames←Column 'Romanization' of Table 1
+surnames,←Column 'Bangla Romanization' of Table 4
+surnames
+surnames←firstWord ⊃,/'Romanization' 'Bangla Romanization' {Column ⍺ of Table ⍵}¨1 4
+surnames
+
+XHTML←wikipedia'List_of_most_popular_given_names'
+given←,Columns'No. 1' 'No. 2'of ⎕←Table 1
+given,←,1 1↓⎕←Table 2
+given←(firstWord given)~⊂'NA'
+given
+
+≢initials←'ABCDEFGHIJKLMNOPQRSTUVWXYZ',¨⊂'. '
+initials
+⍴initials ∘., surnames
+⍴all←given ∘., (' ',¨initials) ∘., surnames
+≢PEOPLE←,all
+PEOPLE←PEOPLE[50000?≢PEOPLE] ⍝ Take 50,000 random names
+               {⌊2⍟⍵} ≢PEOPLE ⍝ Base 2 log of # of friends
+         20↑{?⍵⍴⌊2⍟⍵} ≢PEOPLE ⍝ Random exponents
+nFriends←{?2*?⍵⍴⌊2⍟⍵} ≢PEOPLE ⍝ Roughly logarithmic distribution of friends      
+20↑nFriends
+FRIENDS←nFriends ?¨ ≢PEOPLE         ⍝ Deal nFriends[i] random numbers from 50000
+FRIENDS←{(nFriends?¨⍵)~¨⍳⍵} ≢PEOPLE ⍝ Disallow narcissism
+PEOPLE[1]
+FRIENDS[1]
+PEOPLE[1⊃FRIENDS]
+nFriends←≢¨FRIENDS
+'CI25' ⎕FMT +/nFriends
+(+/ ÷ ≢) nFriends
+(⌈/,(+⌿÷≢),⌊/) nFriends
+lonely←nFriends⍳1
+PEOPLE[lonely]
+circle←(FRIENDS Friends.circle) lonely
+{⍺,≢⍵}⌸circle 
+distant_friend←circle⍳⌈/circle
+path←lonely (FRIENDS Friends.path) distant_friend
+⍪PEOPLE[path]
+' → '∘,¨PEOPLE[path]
+3↓∊' → '∘,¨PEOPLE[path]
+)load D:\Devt\MiServer3\miserver
+Start 'ms3'
+]open http://localhost:8080/Friends

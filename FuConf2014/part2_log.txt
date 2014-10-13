@@ -1,0 +1,345 @@
+﻿      ⍝ Using APL
+      ]load d:\demos\fc2014\DSL -disperse
+* 6 objects dispersed in #
+      ]load d:\demos\fc2014\Friends
+#.Friends
+      ]load d:\demos\fc2014\HTTPTools
+#.HTTPTools
+      ]box on ⍝ turn on boxed display of nested structures
+Was OFF
+      wikipedia
+{#.HTTPTools.CachedGet'http://en.wikipedia.org/wiki/',⍵}
+      XHTML←wikipedia'List_of_most_common_surnames_in_Asia'
+      Table 1
+┌──┬──────────┬────────────┬─────────────────┐
+│  │Name      │Romanization│Meaning          │
+├──┼──────────┼────────────┼─────────────────┤
+│1 │Məmmədov  │Mammadov    │"Son of Mammad"  │
+├──┼──────────┼────────────┼─────────────────┤
+│2 │Əliyev    │Aliyev      │"Son of Ali"     │
+├──┼──────────┼────────────┼─────────────────┤
+│3 │Həsənov   │Hasanov     │"Son of Hasan"   │
+├──┼──────────┼────────────┼─────────────────┤
+│4 │Hüseynov  │Huseynov    │"Son of Hussein" │
+├──┼──────────┼────────────┼─────────────────┤
+│5 │Quliyev   │Guliyev     │"Son of Qulu"    │
+├──┼──────────┼────────────┼─────────────────┤
+│6 │Hacıyev   │Hajiev      │                 │
+├──┼──────────┼────────────┼─────────────────┤
+│7 │Rəsulov   │Rasulov     │"Son of Rasoul"  │
+├──┼──────────┼────────────┼─────────────────┤
+│8 │Süleymanov│Suleymanov  │"Son of Suleyman"│
+├──┼──────────┼────────────┼─────────────────┤
+│9 │Musayev   │Musayev     │"Son of Musa"    │
+├──┼──────────┼────────────┼─────────────────┤
+│10│Abbasov   │Abbasov     │"Son of Abbas"   │
+├──┼──────────┼────────────┼─────────────────┤
+│11│Babayev   │Babayev     │"Son of Baba"    │
+├──┼──────────┼────────────┼─────────────────┤
+│12│Vəliyev   │Valiyev     │"Son of Vali"    │
+├──┼──────────┼────────────┼─────────────────┤
+│13│Orucov    │Orujov      │                 │
+├──┼──────────┼────────────┼─────────────────┤
+│14│İsmayılov │Ismayilov   │"Son of Ismayil" │
+├──┼──────────┼────────────┼─────────────────┤
+│15│Ibrahimov │Ibrahimov   │"Son of Ibrahim" │
+└──┴──────────┴────────────┴─────────────────┘
+      Table
+{
+    ⍝ Extract ⍵'th table from XHTML as a matrix
+    ⍝ Number of columns based on number of <th>'s found
+    ⍝ If a <td> contains an <a> use the content from <a>
+
+     data←⎕XML XHTML
+     i←(+\data[;2]∊⊂'table')⍳⍵         ⍝ Position of nth table
+     n←(i↓data[;1])((⍳∘0)>)data[i;1]   ⍝ Consecutive more deeply nested tags)
+     t←data[i+⍳n;]                     ⍝ This is all data pertaining to our table
+
+     i←{(⍵∊'td' 'th')/⍳≢⍵}t[;2]        ⍝ td or th
+     cols←+/t[i;2]∊⊂'th'               ⍝ count the th's
+     rows←(≢i)(⌊÷)cols                 ⍝ compute number of rows
+     i←i+t[i+1;2]∊⊂,'a'                ⍝ use following row if it is <a>
+     (rows cols)⍴t[i;3]                ⍝ reshape content into matrix
+ }
+      Column 'Romanization' of Table 1
+┌────────┬──────┬───────┬────────┬───────┬──────┬───────┬──────────┬───────┬────
+│Mammadov│Aliyev│Hasanov│Huseynov│Guliyev│Hajiev│Rasulov│Suleymanov│Musayev│Abba
+└────────┴──────┴───────┴────────┴───────┴──────┴───────┴──────────┴───────┴────
+      ───┬───────┬───────┬──────┬─────────┬─────────┐
+      sov│Babayev│Valiyev│Orujov│Ismayilov│Ibrahimov│
+      ───┴───────┴───────┴──────┴─────────┴─────────┘
+      Column
+{,Columns(,⊂1⊃⍵)(2⊃⍵)}
+      Columns
+{                              
+     (column table)←⍵          
+     1↓table[;table[1;]⍳column]
+ }             
+⍝ Column, Table and wikipedia are an example of a simple "embedded" DSL                
+⍝   for extracting data from tables in wikipedia pages
+      surnames←Column 'Romanization' of Table 1
+      surnames,←Column 'Bangla Romanization' of Table 4
+      surnames
+┌────────┬──────┬───────┬────────┬───────┬──────┬───────┬──────────┬───────┬────
+│Mammadov│Aliyev│Hasanov│Huseynov│Guliyev│Hajiev│Rasulov│Suleymanov│Musayev│Abba
+└────────┴──────┴───────┴────────┴───────┴──────┴───────┴──────────┴───────┴────
+      ───┬───────┬───────┬──────┬─────────┬─────────┬────┬────┬──────┬──────────
+      sov│Babayev│Valiyev│Orujov│Ismayilov│Ibrahimov│Kazi│Khan│Mahmud│Mojumdar /
+      ───┴───────┴───────┴──────┴─────────┴─────────┴────┴────┴──────┴──────────
+      ─────────┬─────┬───────────┬─────┬─────────────┬──────────────┬───────────
+       Majumder│Marma│Mina / Miah│Mirza│Mitro / Mitra│Molla / Mollah│Mohammod /
+      ─────────┴─────┴───────────┴─────┴─────────────┴──────────────┴───────────
+      ───────────────────┬────────────────────────┬──────────────┬──────────────
+      Mohammud / Muhammad│Mukhopadhyay (Mukherjee)│Munsi / Munshi│Patoyari / Pat
+      ───────────────────┴────────────────────────┴──────────────┴──────────────
+      ────┬──────────┬─────────────────────────┬─────────┬────┬─────────────────
+      wary│Pal / Paul│Rohoman / Rohman / Rahman│Ray / Roy│Saha│Sorkar / Sarker /
+      ────┴──────────┴─────────────────────────┴─────────┴────┴─────────────────
+      ───────┬───┬──────────────┬──────┬───────┬─────┬─────┐
+       Sarkar│Sen│Shekh / Sheikh│Thakur│Tripura│Uddin│Wazed│
+      ───────┴───┴──────────────┴──────┴───────┴─────┴─────┘
+      firstWord ⍝ An anonymous function composed with the each operator
+┌───────────────────┬─┐
+│{(¯1+⌊/⍵⍳' ,/(')↑⍵}│¨│
+└───────────────────┴─┘
+      surnames←firstWord ⊃,/'Romanization' 'Bangla Romanization' {Column ⍺ of Table ⍵}¨1 4
+⍝ Use an anonymous function to extract both columns from both tables in one 
+⍝   functional expression.
+⍝ Because the DSL is embedded, it can be seamlessly mixed with APL language as desired
+      surnames
+┌────────┬──────┬───────┬────────┬───────┬──────┬───────┬──────────┬───────┬────
+│Mammadov│Aliyev│Hasanov│Huseynov│Guliyev│Hajiev│Rasulov│Suleymanov│Musayev│Abba
+└────────┴──────┴───────┴────────┴───────┴──────┴───────┴──────────┴───────┴────
+      ───┬───────┬───────┬──────┬─────────┬─────────┬────┬────┬──────┬────────┬─
+      sov│Babayev│Valiyev│Orujov│Ismayilov│Ibrahimov│Kazi│Khan│Mahmud│Mojumdar│M
+      ───┴───────┴───────┴──────┴─────────┴─────────┴────┴────┴──────┴────────┴─
+      ────┬────┬─────┬─────┬─────┬────────┬────────────┬─────┬────────┬───┬─────
+      arma│Mina│Mirza│Mitro│Molla│Mohammod│Mukhopadhyay│Munsi│Patoyari│Pal│Rohom
+      ────┴────┴─────┴─────┴─────┴────────┴────────────┴─────┴────────┴───┴─────
+      ──┬───┬────┬──────┬───┬─────┬──────┬───────┬─────┬─────┐
+      an│Ray│Saha│Sorkar│Sen│Shekh│Thakur│Tripura│Uddin│Wazed│
+      ──┴───┴────┴──────┴───┴─────┴──────┴───────┴─────┴─────┘
+      XHTML←wikipedia'List_of_most_popular_given_names'
+      given←,Columns'No. 1' 'No. 2'of ⎕←Table 1
+⍝ ⎕← assignment to ⎕ (symbolizing the terminal) outputs intermediate results to the session
+┌─────────────────┬─────────────┬──────────┬─────────┬────────┬───────┬─────────
+│Region (year)    │No. 1        │No. 2     │No. 3    │No. 4   │No. 5  │No. 6
+├─────────────────┼─────────────┼──────────┼─────────┼────────┼───────┼─────────
+│Algeria          │Mohamed      │Abdelkader│Ahmed    │Mohammed│Ali    │Rachid
+├─────────────────┼─────────────┼──────────┼─────────┼────────┼───────┼─────────
+│Egypt            │Mohamed      │NA        │NA       │NA      │NA     │NA
+├─────────────────┼─────────────┼──────────┼─────────┼────────┼───────┼─────────
+│Egypt            │Peter, Pierre│NA        │NA       │NA      │NA     │NA
+├─────────────────┼─────────────┼──────────┼─────────┼────────┼───────┼─────────
+│Equatorial Guinea│Manuel       │Juan      │Antonio  │José    │NA     │NA
+├─────────────────┼─────────────┼──────────┼─────────┼────────┼───────┼─────────
+│Libya            │Mohammed     │Ahmed     │Ali      │Hamza   │Ibrahim│Mahmoud
+├─────────────────┼─────────────┼──────────┼─────────┼────────┼───────┼─────────
+│Mali             │Mamadou      │Moussa    │Mahamadou│Adama   │Bakary │Abdoulaye
+├─────────────────┼─────────────┼──────────┼─────────┼────────┼───────┼─────────
+│Morocco          │Mohamed      │Ahmed     │Mohammed │Said    │Rachid │Mustapha
+├─────────────────┼─────────────┼──────────┼─────────┼────────┼───────┼─────────
+│Tunisia          │Mehdi        │Youssef   │Aziz     │Karim   │NA     │NA
+└─────────────────┴─────────────┴──────────┴─────────┴────────┴───────┴─────────
+      ┬────────┬──────┬───────────┬──────────┐
+      │No. 7   │No. 8 │No. 9      │No. 10    │
+      ┼────────┼──────┼───────────┼──────────┤
+      │Said    │Brahim│Omar       │Djamel    │
+      ┼────────┼──────┼───────────┼──────────┤
+      │NA      │NA    │NA         │NA        │
+      ┼────────┼──────┼───────────┼──────────┤
+      │NA      │NA    │NA         │NA        │
+      ┼────────┼──────┼───────────┼──────────┤
+      │NA      │NA    │NA         │NA        │
+      ┼────────┼──────┼───────────┼──────────┤
+      │Abdallah│Tareq │Hassan     │Khaled    │
+      ┼────────┼──────┼───────────┼──────────┤
+      │Modibo  │Oumar │Sekou      │Souleymane│
+      ┼────────┼──────┼───────────┼──────────┤
+      │Youssef │Hassan│Abdel-salam│Ali       │
+      ┼────────┼──────┼───────────┼──────────┤
+      │NA      │NA    │NA         │NA        │
+      ┴────────┴──────┴───────────┴──────────┘
+      given,←,1 1↓⎕←Table 2 ⍝ 1 1↓ drops one row and one column
+┌─────────────────┬───────────────────┬───────┬────────────┬─────────┬─────────┬
+│Region (year)    │No. 1              │No. 2  │No. 3       │No. 4    │No. 5    │
+├─────────────────┼───────────────────┼───────┼────────────┼─────────┼─────────┼
+│Algeria          │Fatima             │Sara   │Fatiha      │Aicha    │Fatma    │
+├─────────────────┼───────────────────┼───────┼────────────┼─────────┼─────────┼
+│Egypt            │Shaimaa            │NA     │NA          │NA       │NA       │
+├─────────────────┼───────────────────┼───────┼────────────┼─────────┼─────────┼
+│Egypt            │Mary, Marie, Mariam│NA     │NA          │NA       │NA       │
+├─────────────────┼───────────────────┼───────┼────────────┼─────────┼─────────┼
+│Equatorial Guinea│María del Carmen   │Isabel │María Teresa│Esperanza│Milagrosa│
+├─────────────────┼───────────────────┼───────┼────────────┼─────────┼─────────┼
+│Libya            │Aya                │Rania  │Sarah       │Reem     │Hoda     │
+├─────────────────┼───────────────────┼───────┼────────────┼─────────┼─────────┼
+│Mali             │Fatoumata          │Mariam │Aminata     │Hawa     │Awa      │
+├─────────────────┼───────────────────┼───────┼────────────┼─────────┼─────────┼
+│Morocco          │Fatima             │Khadija│Aicha       │Malika   │Naima    │
+├─────────────────┼───────────────────┼───────┼────────────┼─────────┼─────────┼
+│Tunisia          │Mariam             │Shayma │Khawla      │NA       │NA       │
+└─────────────────┴───────────────────┴───────┴────────────┴─────────┴─────────┴
+      ───────┬───────┬──────┬──────┬────────┐
+      No. 6  │No. 7  │No. 8 │No. 9 │No. 10  │
+      ───────┼───────┼──────┼──────┼────────┤
+      Amina  │Meriem │Karima│Kheira│Nadia   │
+      ───────┼───────┼──────┼──────┼────────┤
+      NA     │NA     │NA    │NA    │NA      │
+      ───────┼───────┼──────┼──────┼────────┤
+      NA     │NA     │NA    │NA    │NA      │
+      ───────┼───────┼──────┼──────┼────────┤
+      NA     │NA     │NA    │NA    │NA      │
+      ───────┼───────┼──────┼──────┼────────┤
+      Marwa  │Mona   │Fatima│Eisha │Nesreen │
+      ───────┼───────┼──────┼──────┼────────┤
+      Oumou  │Djeneba│Bintou│Fanta │Kadiatou│
+      ───────┼───────┼──────┼──────┼────────┤
+      Rachida│Nadia  │Karima│Amina │Saida   │
+      ───────┼───────┼──────┼──────┼────────┤
+      NA     │NA     │NA    │NA    │NA      │
+      ───────┴───────┴──────┴──────┴────────┘
+      given←(firstWord given)~⊂'NA' ⍝ ~ is "without" - removes "NA"'s
+      given
+┌───────┬──────────┬───────┬─────┬──────┬────┬────────┬─────┬───────┬──────┬────
+│Mohamed│Abdelkader│Mohamed│Peter│Manuel│Juan│Mohammed│Ahmed│Mamadou│Moussa│Moha
+└───────┴──────────┴───────┴─────┴──────┴────┴────────┴─────┴───────┴──────┴────
+      ───┬─────┬─────┬───────┬──────┬────┬──────┬─────┬─────┬─────┬──────┬──────
+      med│Ahmed│Mehdi│Youssef│Fatima│Sara│Fatiha│Aicha│Fatma│Amina│Meriem│Karima
+      ───┴─────┴─────┴───────┴──────┴────┴──────┴─────┴─────┴─────┴──────┴──────
+      ┬──────┬─────┬───────┬────┬─────┬──────┬─────┬─────────┬─────────┬───┬────
+      │Kheira│Nadia│Shaimaa│Mary│María│Isabel│María│Esperanza│Milagrosa│Aya│Rani
+      ┴──────┴─────┴───────┴────┴─────┴──────┴─────┴─────────┴─────────┴───┴────
+      ─┬─────┬────┬────┬─────┬────┬──────┬─────┬───────┬─────────┬──────┬───────
+      a│Sarah│Reem│Hoda│Marwa│Mona│Fatima│Eisha│Nesreen│Fatoumata│Mariam│Aminata
+      ─┴─────┴────┴────┴─────┴────┴──────┴─────┴───────┴─────────┴──────┴───────
+      ┬────┬───┬─────┬───────┬──────┬─────┬────────┬──────┬───────┬─────┬──────┬
+      │Hawa│Awa│Oumou│Djeneba│Bintou│Fanta│Kadiatou│Fatima│Khadija│Aicha│Malika│
+      ┴────┴───┴─────┴───────┴──────┴─────┴────────┴──────┴───────┴─────┴──────┴
+      ─────┬───────┬─────┬──────┬─────┬─────┬──────┬──────┬──────┐
+      Naima│Rachida│Nadia│Karima│Amina│Saida│Mariam│Shayma│Khawla│
+      ─────┴───────┴─────┴──────┴─────┴─────┴──────┴──────┴──────┘
+      ≢initials←'ABCDEFGHIJKLMNOPQRSTUVWXYZ',¨⊂'. '
+26
+      initials
+┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───
+│A. │B. │C. │D. │E. │F. │G. │H. │I. │J. │K. │L. │M. │N. │O. │P. │Q. │R. │S. │T.
+└───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───
+      ┬───┬───┬───┬───┬───┬───┐
+      │U. │V. │W. │X. │Y. │Z. │
+      ┴───┴───┴───┴───┴───┴───┘
+      ⍴initials ∘., surnames ⍝ Outer product with catenation
+26 39
+      ⍴all←given ∘., (' ',¨initials) ∘., surnames ⍝ Outer product of THREE lists
+64 26 39
+⍝ all contains all combinations of the 64 given names, 26 initials and 39 surnames
+      ≢PEOPLE←,all ⍝ Ravel: remove structure and make list of 64k names
+64896
+      PEOPLE←PEOPLE[50000?≢PEOPLE]  ⍝ Take 50,000 random names
+                     {⌊2⍟⍵} ≢PEOPLE ⍝ Base 2 log of # of friends
+15
+               20↑{?⍵⍴⌊2⍟⍵} ≢PEOPLE ⍝ Random exponents
+3 12 14 6 8 11 5 11 15 13 6 4 10 14 8 15 14 8 7 14
+      nFriends←{?2*?⍵⍴⌊2⍟⍵} ≢PEOPLE ⍝ Roughly logarithmic distribution of friends      
+      20↑nFriends
+66 1 1490 116 6 216 14007 3 2 3 1 18450 2 1 48 4 1 26553 15363 36
+      FRIENDS←nFriends ?¨ ≢PEOPLE         ⍝ Deal nFriends[i] random numbers from 50000
+      FRIENDS←{(nFriends?¨⍵)~¨⍳⍵} ≢PEOPLE ⍝ ~¨⍳⍵ disallows narcissism (no friends of self)
+      PEOPLE[1]
+┌──────────────────────┐
+│Abdelkader E. Mammadov│
+└──────────────────────┘
+      1⊃FRIENDS ⍝ List of Mammadov's friends
+46455 16448 27564 14315 36766 19778 44155 49308 6095 30556 46032 2973 2121 36412
+      22047 34062 26410 18378 27705 35207 7616 344 18114 34971 41852 2527 11561
+      42760 9653 36809 45961 1442 23657 38291 44384 46366 17664 18945 8232 41375
+      26276 7500 659 9753 13899 40545 36899 7409 7932 12492 48393 35191 41828
+      41559 20229 28368 20171 6236 45815 5713 12169 8513 16133 33826 375 46945
+      PEOPLE[1⊃FRIENDS] ⍝ ... the names of his friends
+┌─────────────┬────────────┬──────────────┬────────────────┬────────────────┬───
+│Aicha N. Khan│Mehdi T. Pal│Isabel E. Kazi│Mary I. Patoyari│Mohammed T. Kazi│Ran
+└─────────────┴────────────┴──────────────┴────────────────┴────────────────┴───
+      ─────────┬──────────────┬──────────────────┬──────────────────┬───────────
+      ia Z. Pal│Sarah O. Shekh│Shaimaa E. Valiyev│Mohamed X. Abbasov│Aya Y. Kazi
+      ─────────┴──────────────┴──────────────────┴──────────────────┴───────────
+      ┬─────────────────┬─────────────────┬─────────────────┬────────────────┬──
+      │Amina E. Mohammod│Fatima P. Guliyev│Bintou L. Babayev│Meriem R. Thakur│Kh
+      ┴─────────────────┴─────────────────┴─────────────────┴────────────────┴──
+      ─────────────┬─────────────┬────────────────┬───────────────┬─────────────
+      eira E. Munsi│Sarah C. Mina│Karima T. Thakur│Mehdi J. Hajiev│Fatoumata O.
+      ─────────────┴─────────────┴────────────────┴───────────────┴─────────────
+      ───────┬──────────────┬─────────────┬───────────────┬──────────┬──────────
+      Rasulov│Manuel K. Khan│Mona I. Shekh│Khadija Q. Kazi│Aya T. Ray│Bintou H.
+      ───────┴──────────────┴─────────────┴───────────────┴──────────┴──────────
+      ────────────┬──────────────────┬────────────────┬──────────────────┬──────
+      Mukhopadhyay│Reem Q. Suleymanov│Fanta W. Babayev│Aminata I. Musayev│Karima
+      ────────────┴──────────────────┴────────────────┴──────────────────┴──────
+      ─────────┬───────────────────┬───────────────┬────────────────────┬───────
+       T. Marma│Abdelkader R. Wazed│Fatma Z. Thakur│Esperanza M. Abbasov│Fatma H
+      ─────────┴───────────────────┴───────────────┴────────────────────┴───────
+      ───────┬─────────────────┬───────────┬─────────────────────┬──────────────
+      . Shekh│Nadia E. Mammadov│Mona J. Ray│Aicha X. Mukhopadhyay│Reem F. Sorkar
+      ───────┴─────────────────┴───────────┴─────────────────────┴──────────────
+      ┬───────────────┬─────────────┬───────────────┬──────────────┬────────────
+      │Fatma E. Aliyev│Eisha S. Saha│Karima N. Munsi│Marwa U. Mitro│Karima G. Ra
+      ┴───────────────┴─────────────┴───────────────┴──────────────┴────────────
+      ─────┬───────────────┬───────────────┬────────────────────┬───────────────
+      sulov│María F. Aliyev│Manuel K. Marma│Youssef E. Ismayilov│Mohamed R. Uddi
+      ─────┴───────────────┴───────────────┴────────────────────┴───────────────
+      ─┬──────────────────┬───────────────┬─────────────────┬──────────────┬────
+      n│Kadiatou X. Orujov│Shayma C. Shekh│Nadia R. Mojumdar│Aicha T. Mitro│Amin
+      ─┴──────────────────┴───────────────┴─────────────────┴──────────────┴────
+      ──────────┬─────────────┬─────────────────┬────────────────┬──────────────
+      a Y. Munsi│Hoda P. Marma│Shayma W. Tripura│Mamadou O. Mitro│Aicha T. Ismay
+      ──────────┴─────────────┴─────────────────┴────────────────┴──────────────
+      ────┬─────────────────┬───────────────────┬──────────────────┬────────────
+      ilov│Sarah J. Mohammod│Moussa V. Ibrahimov│Mohamed I. Abbasov│Manuel W. Al
+      ────┴─────────────────┴───────────────────┴──────────────────┴────────────
+      ────┬─────────────────────┬───────────────┬───────────────┬─────────────┬─
+      iyev│Milagrosa F. Mohammod│Nadia R. Orujov│Mohammed E. Ray│Reem A. Uddin│H
+      ────┴─────────────────────┴───────────────┴───────────────┴─────────────┴─
+      ───────────┬──────────────┬────────────────┬─────────────┐
+      oda D. Kazi│Saida Q. Munsi│Youssef Q. Wazed│Shayma M. Sen│
+      ───────────┴──────────────┴────────────────┴─────────────┘
+      nFriends←≢¨FRIENDS ⍝ count how many friends each person has
+      'CI25' ⎕FMT +/nFriends ⍝ [C]omma separated [I]nteger field of width [25]
+              107,399,146
+      (+/ ÷ ≢) nFriends ⍝ average is the sum (+/) divided by (÷) the count (≢)
+2147.98292
+      (⌈/,(+⌿÷≢),⌊/) nFriends ⍝ max, avg, and min of nFriends
+32757 2147.98292 0
+      lonely←nFriends⍳1 ⍝ find first person with only one friend
+      PEOPLE[lonely] ⍝ lonely persons name
+┌────────────┐
+│Ahmed I. Pal│
+└────────────┘
+      circle←(FRIENDS Friends.circle) lonely ⍝ See file friends.dyalog for source
+      {⍺,≢⍵}⌸circle 
+4 49520
+3   477
+1     1
+2     2
+      distant_friend←circle⍳⌈/circle ⍝ find first friend at maximum distance (4 steps)
+      path←lonely (FRIENDS Friends.path) distant_friend
+      ⍪PEOPLE[path]
+┌──────────────────────┐
+│Ahmed I. Pal          │
+├──────────────────────┤
+│Meriem F. Ray         │
+├──────────────────────┤
+│Abdelkader V. Munsi   │
+├──────────────────────┤
+│Kadiatou N. Abbasov   │
+├──────────────────────┤
+│Abdelkader E. Mammadov│
+└──────────────────────┘
+      ' → '∘,¨PEOPLE[path] ⍝ prefix each name with ' → '
+┌───────────────┬────────────────┬──────────────────────┬──────────────────────┬
+│ → Ahmed I. Pal│ → Meriem F. Ray│ → Abdelkader V. Munsi│ → Kadiatou N. Abbasov│
+└───────────────┴────────────────┴──────────────────────┴──────────────────────┴
+      ─────────────────────────┐
+       → Abdelkader E. Mammadov│
+      ─────────────────────────┘
+      3↓∊' → '∘,¨PEOPLE[path] ⍝ ∊ monadic (enlist) removes nesting
+Ahmed I. Pal → Meriem F. Ray → Abdelkader V. Munsi → Kadiatou N. Abbasov → Abdel
+      kader E. Mammadov
