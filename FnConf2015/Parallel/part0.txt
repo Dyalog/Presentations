@@ -1,0 +1,10 @@
+﻿⍝ Setup
+)load isolate
+)copy dfns cmpx
+NumThreads←1111⌶
+SetParallelArraySize←1112⌶
+⎕PP←3 
+]load c:\dropbox\dyalog15\futiso\ll
+IÏx←{⍺⍺ ll.Each ⍵}
+]box on
+]demo c:\dropbox\fnconf15\part1

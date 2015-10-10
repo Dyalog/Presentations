@@ -1,0 +1,22 @@
+﻿⍝ Turns out there is one more parallel form, unique to Dyalog APL
+ns1←⎕NS ''             ⍝ Make empty namespace ("dynamic object")     
+ns1.mat←3 4⍴⍳12        ⍝ Put a 3x4 matrix in it
+ns1.mat
+ns1.(+/mat)            ⍝ Evaluate expression inside ns1
+ns2←⎕NS ''             ⍝ Make another namespace      
+ns2.mat←2 3⍴⍳6         ⍝ Put a 2x3 matrix in that one
+nss←ns1,ns2            ⍝ Make list of 2 namespaces
+nss
+nss.(mat,+/mat)
+⍝    [array of objects].[expression]   is an implicit "map" 
+⍝    ... like in SQL: table.(col1+col2)    table is a collection of rows
+iss←ø¨nss              ⍝ Clone the two namespaces as "isolates"
+iss.(mat,+/mat)        ⍝ We have achieved parallel execution
+⍝ The result of an expression executed in an isolate is a FUTURE
+iss.⎕DL 4 6            ⍝ Delay 4 seconds in 1st isolate, 6 in the 2nd
+waits←iss.⎕DL 5 10     ⍝ Do not display result: does not block
+≢waits                 ⍝ We have an array of futures
+1↑waits                ⍝ Let's see the 1st one?
+waits                  ⍝ The whole array
+]demo c:\dropbox\fnconf15\part3
+

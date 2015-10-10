@@ -1,0 +1,136 @@
+﻿      ]demo c:\dropbox\fnconf15\part1
+Loaded Script c:\dropbox\fnconf15\part1.txt
+Script Initialized...
+
+      ⍝ APL's Parallel Language Features
+      mat←3 4⍴⍳12
+      mat
+1  2  3  4
+5  6  7  8
+9 10 11 12
+      mat (×⍤1 0) 1 10 100            ⍝ Rank Left:1, Right:0
+  1    2    3    4
+ 50   60   70   80
+900 1000 1100 1200
+      (⍳10) ∘.× ⍳10                   ⍝ "Outer" (or Cartesian) Product
+ 1  2  3  4  5  6  7  8  9  10
+ 2  4  6  8 10 12 14 16 18  20
+ 3  6  9 12 15 18 21 24 27  30
+ 4  8 12 16 20 24 28 32 36  40
+ 5 10 15 20 25 30 35 40 45  50
+ 6 12 18 24 30 36 42 48 54  60
+ 7 14 21 28 35 42 49 56 63  70
+ 8 16 24 32 40 48 56 64 72  80
+ 9 18 27 36 45 54 63 72 81  90
+10 20 30 40 50 60 70 80 90 100
+      1 0 2 ¯1 +.× 1 2 3 4            ⍝ Vector Product
+3
+      (2 5⍴'ITALY','BENIN') +.≠ 'INDIA'  ⍝ Inner Product: ⍺ f.g ⍵ ←→ f/ ⍺ g ⍵
+4 4
+      +/1 2 3 4                       ⍝ Reduction
+10
+      +/ 1 0 2 ¯1 × 1 2 3 4           ⍝ Vector Product
+3
+      'IBIBB' {⍺,+/⍵}⌸ 2 1 2 4 5      ⍝ Key Operator
+I  4
+B 10
+      {≢⍵}⌸?1E8⍴6                     ⍝ Frequency distribution of 100 million dice rolls
+16673116 16662163 16664923 16666872 16666203 16666723
+      1 2 3 × 10 100 100              ⍝ "Map" is implicit
+10 200 300
+      ⍝ Return to slides
+      NumThreads ⍬                    ⍝ How many cores have I got?
+4
+      NumThreads 4                    ⍝ Use all 4 cores
+4
+      SetParallelArraySize 32768      ⍝ Size at which we "go parallel" on DOUBLEs
+32768
+      aSingle← ¯1↓ aMulti←32768 ⍴ 123.456
+      bSingle← ¯1↓ bMulti←32768 ⍴ 654.321
+      cmpx 'aSingle + bSingle' 'aMulti + bMulti' ⍝ + is Addition in APL 
+  aSingle + bSingle → 4.9E¯5 |  0% ⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕    
+* aMulti + bMulti   → 5.3E¯5 | +9% ⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕
+      cmpx 'aSingle ÷ bSingle' 'aMulti ÷ bMulti' ⍝ ÷    Division
+  aSingle ÷ bSingle → 5.8E¯5 |   0% ⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕
+* aMulti ÷ bMulti   → 4.2E¯5 | -29% ⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕           
+      cmpx 'aSingle ⍟ bSingle' 'aMulti ⍟ bMulti' ⍝ ⍟    Base-a Log of b
+  aSingle ⍟ bSingle → 1.3E¯3 |   0% ⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕
+* aMulti ⍟ bMulti   → 5.1E¯4 | -60% ⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕                        
+      ]demo c:\dropbox\fnconf15\part2
+Loaded Script c:\dropbox\fnconf15\part2.txt
+Script Initialized...
+
+      ⍝ Turns out there is one more parallel form, unique to Dyalog APL
+      ns1←⎕NS ''             ⍝ Make empty namespace ("dynamic object")     
+      ns1.mat←3 4⍴⍳12        ⍝ Put a 3x4 matrix in it
+      ns1.mat
+1  2  3  4
+5  6  7  8
+9 10 11 12
+      ns1.(+/mat)            ⍝ Evaluate expression inside ns1
+10 26 42
+      ns2←⎕NS ''             ⍝ Make another namespace      
+      ns2.mat←2 3⍴⍳6         ⍝ Put a 2x3 matrix in that one
+      nss←ns1,ns2            ⍝ Make list of 2 namespaces
+      nss
+ #.[Namespace]  #.[Namespace] 
+      nss.(mat,+/mat)
+┌─────────────┬────────┐
+│1  2  3  4 10│1 2 3  6│
+│5  6  7  8 26│4 5 6 15│
+│9 10 11 12 42│        │
+└─────────────┴────────┘
+      ⍝    [array of objects].[expression]   is an implicit "map" 
+      ⍝    ... like in SQL: table.(col1+col2)    table is a collection of rows
+      iss←ø¨nss              ⍝ Clone the two namespaces as "isolates"
+      iss.(mat,+/mat)        ⍝ We have achieved parallel execution
+┌─────────────┬────────┐
+│1  2  3  4 10│1 2 3  6│
+│5  6  7  8 26│4 5 6 15│
+│9 10 11 12 42│        │
+└─────────────┴────────┘
+      ⍝ The result of an expression executed in an isolate is a FUTURE
+      iss.⎕DL 4 6            ⍝ Delay 4 seconds in 1st isolate, 6 in the 2nd
+4.01 6.01
+      waits←iss.⎕DL 5 10     ⍝ Do not display result: does not block
+      ≢waits                 ⍝ We have an array of futures
+2
+      1↑waits                ⍝ Let's see the 1st one?
+5.01
+      waits                  ⍝ The whole array
+5.01 10
+      ]demo c:\dropbox\fnconf15\part3
+Loaded Script c:\dropbox\fnconf15\part3.txt
+Script Initialized...
+
+      ⍝ Parallel Each
+      CoPrimeRatio←{÷⍵÷+/1=⍵∨⍳⍵}   ⍝ Ratio of Co-primes less than ⍵
+      (⍳10),⍪CoPrimeRatio ¨ ⍳10
+ 1 1    
+ 2 0.5  
+ 3 0.667
+ 4 0.5  
+ 5 0.8  
+ 6 0.333
+ 7 0.857
+ 8 0.5  
+ 9 0.667
+10 0.4  
+      MinMax←⌊/ , ⌈/               ⍝ Min reduction catenate Max reduction
+      MinMax CoPrimeRatio ¨ ⍳10
+0.333 1
+      1000 + ⍳10
+1001 1002 1003 1004 1005 1006 1007 1008 1009 1010
+      MinMax CoPrimeRatio ¨ 1000   + ⍳10
+0.286 0.999
+      MinMax CoPrimeRatio ¨ 10000  + ⍳10
+0.288 1
+      MinMax CoPrimeRatio ¨ 100000 + ⍳10
+0.286 1
+      n←100000+⍳200
+      ]time CoPrimeRatio ¨ n
+1301
+      ]time CoPrimeRatio IÏ n
+773
+      (CoPrimeRatio ¨ n) ∧.= (CoPrimeRatio IÏ n)
+1

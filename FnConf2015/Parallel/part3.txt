@@ -1,0 +1,13 @@
+﻿⍝ Parallel Each
+CoPrimeRatio←{÷⍵÷+/1=⍵∨⍳⍵}   ⍝ Ratio of Co-primes less than ⍵
+(⍳10),⍪CoPrimeRatio ¨ ⍳10
+MinMax←⌊/ , ⌈/               ⍝ Min reduction catenate Max reduction
+MinMax CoPrimeRatio ¨ ⍳10
+1000 + ⍳10
+MinMax CoPrimeRatio ¨ 1000   + ⍳10
+MinMax CoPrimeRatio ¨ 10000  + ⍳10
+MinMax CoPrimeRatio ¨ 100000 + ⍳10
+n←100000+⍳200
+]time CoPrimeRatio ¨ n
+]time CoPrimeRatio IÏ n
+(CoPrimeRatio ¨ n) ∧.= (CoPrimeRatio IÏ n)

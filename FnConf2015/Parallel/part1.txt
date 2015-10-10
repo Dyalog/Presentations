@@ -1,0 +1,22 @@
+﻿⍝ APL's Parallel Language Features
+mat←3 4⍴⍳12
+mat
+mat (×⍤1 0) 1 10 100            ⍝ Rank Left:1, Right:0
+(⍳10) ∘.× ⍳10                   ⍝ "Outer" (or Cartesian) Product
+1 0 2 ¯1 +.× 1 2 3 4            ⍝ Vector Product
+(2 5⍴'ITALY','BENIN') +.≠ 'INDIA'  ⍝ Inner Product: ⍺ f.g ⍵ ←→ f/ ⍺ g ⍵
++/1 2 3 4                       ⍝ Reduction
++/ 1 0 2 ¯1 × 1 2 3 4           ⍝ Vector Product
+'IBIBB' {⍺,+/⍵}⌸ 2 1 2 4 5      ⍝ Key Operator
+{≢⍵}⌸?1E8⍴6                     ⍝ Frequency distribution of 100 million dice rolls
+1 2 3 × 10 100 100              ⍝ "Map" is implicit
+⍝ Return to slides
+NumThreads ⍬                    ⍝ How many cores have I got?
+NumThreads 4                    ⍝ Use all 4 cores
+SetParallelArraySize 32768      ⍝ Size at which we "go parallel" on DOUBLEs
+aSingle← ¯1↓ aMulti←32768 ⍴ 123.456
+bSingle← ¯1↓ bMulti←32768 ⍴ 654.321
+cmpx 'aSingle + bSingle' 'aMulti + bMulti' ⍝ + is Addition in APL 
+cmpx 'aSingle ÷ bSingle' 'aMulti ÷ bMulti' ⍝ ÷    Division
+cmpx 'aSingle ⍟ bSingle' 'aMulti ⍟ bMulti' ⍝ ⍟    Base-a Log of b
+]demo c:\dropbox\fnconf15\part2

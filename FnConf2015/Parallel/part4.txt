@@ -1,0 +1,31 @@
+﻿z←CoPrimeRatio IÏ 100000+⍳200 
+isolate.State ''
+]time CoPrimeRatio IÏx 100000+⍳200
+⍝ Arrays of futures
+ratios←CoPrimeRatio IÏ 1000000×⍳12
+ratios[1]
+3↑ratios
+ratios
+ratios←CoPrimeRatio IÏ 1000000×⍳12
+isolate.Values 'ratios'
+isolate.Values 'ratios'
+isolate.Failed 'ratios'
+⍝ Explicit Isolates
+]load c:\dropbox\fnconf15\stats
+stats.mean 1 2 3 4
+stats.stddev 1 2 3 4
+MyIsos←ø¨ 3⍴stats        ⍝ ø is model name for ¤ - New isolate (3 clones of stats)
+MyIsos
+MyIsos.x←(1 2 3)(4 5)(6 7 8 9) ⍝ Distributed assignment
+MyIsos[2].x
+MyIsos.x
+MyIsos.(mean x)          ⍝ Compute 3 averages in parallel
+bigdata←(?3 1E6⍴10000)÷10
+3 5↑bigdata
+≢¨ ↓bigdata              ⍝ "split" into 3-element array of 1M elements each
+MyIsos.x←↓bigdata        ⍝ distribute data amongst isolates
+MyIsos.(stddev x)
+futures←(MyIsos[1 2].(stddev x)),⊂MyIsos[3].⎕DL 10
+CoPrimesBelow←{(+\1=max∨⍳max←⌈/⍵)[⍵]}
+
+
