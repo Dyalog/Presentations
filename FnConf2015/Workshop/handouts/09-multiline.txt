@@ -1,0 +1,15 @@
+Try:
+      )ed sign
+      sign←{
+        ⍵<0:'negative'
+        ⍵>0:'positive'
+        'zero'
+      }
+      sign 2
+      )ed fact
+      fact←{
+        ⍵=0:1
+        ⍵×∇ ⍵-1
+      }
+      fact 10
+      !10
