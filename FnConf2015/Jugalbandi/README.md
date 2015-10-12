@@ -7,7 +7,7 @@ The APL source files are best viewed with the APL385 font that can be found [her
 ##Files:
 1. snakes_and_ladders.jpg  : Image of a board
 2. SNL.dyalog              : Mortens SNL application with GUI and Test Framework (~1 hour of coding)
-2. ???                     : Jay's expression of the core algorithm
+2. Gist.txt                : Jay's expression of the core algorithm
 
 
 
