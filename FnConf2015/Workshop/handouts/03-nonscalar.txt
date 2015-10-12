@@ -1,0 +1,6 @@
+Try these expressions:
+
+      5=2+3
+      A←⍳3
+      A=1 2 3
+      A≡1 2 3

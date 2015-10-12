@@ -1,0 +1,5 @@
+* (2×a)÷⍨(-b)(+,-)0.5\*⍨(b*2)-4×a×c "2 times a divided into minus b plus or minus the square root of [the discriminant] b squared minus 4 a c"
+* Find primes from 1 to R: (~R∊R∘.×R)/R←1↓⍳R
+* Or {(~R∊R∘.×R)/R←1↓⍳⍵}
+* Or {{(~⍵∊⍵∘.×⍵)/⍵}1↓⍳⍵}
+* Or {(~⍵∊⍵∘.×⍵)/⍵}∘{1↓⍳⍵}

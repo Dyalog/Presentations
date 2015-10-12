@@ -1,392 +1,94 @@
 <!DOCTYPE html>
-<html>
-  <head>
-      <meta charset="utf-8" />
-      <title>fuconf</title>
-      <style>.markdown-preview { font-family: 'Helvetica Neue', Helvetica, sans-serif; font-size: 14px; line-height: 1.6; overflow: scroll; box-sizing: border-box; padding: 20px; background-color: rgb(255, 255, 255); }
-.markdown-preview code { color: rgb(51, 51, 51); }
-.markdown-preview code, .markdown-preview tt, .markdown-preview pre.editor-colors { font-size: 12px; font-family: Consolas, 'Liberation Mono', Courier, monospace; }
-.markdown-preview a, .markdown-preview a code { color: rgb(65, 131, 196); }
-.markdown-preview ol > li { list-style-type: decimal; }
-.markdown-preview ul > li { list-style-type: disc; }
-.markdown-preview li > pre.editor-colors { display: inline-block; vertical-align: top; width: 100%; }
-.markdown-preview li:last-child > pre.editor-colors { margin-bottom: 0px; }
-.markdown-preview > :first-child { margin-top: 0px !important; }
-.markdown-preview > :last-child { margin-bottom: 0px !important; }
-.markdown-preview a.absent { color: rgb(204, 0, 0); }
-.markdown-preview a.anchor { display: block; padding-left: 30px; margin-left: -30px; cursor: pointer; position: absolute; top: 0px; left: 0px; bottom: 0px; }
-.markdown-preview h1, .markdown-preview h2, .markdown-preview h3, .markdown-preview h4, .markdown-preview h5, .markdown-preview h6 { font-family: 'Helvetica Neue', Helvetica, sans-serif; margin: 20px 0px 10px; padding: 0px 0px 10px; font-weight: bold; -webkit-font-smoothing: antialiased; cursor: text; position: relative; }
-.markdown-preview h1 .octicon-link, .markdown-preview h2 .octicon-link, .markdown-preview h3 .octicon-link, .markdown-preview h4 .octicon-link, .markdown-preview h5 .octicon-link, .markdown-preview h6 .octicon-link { display: none; color: rgb(0, 0, 0); }
-.markdown-preview h1:hover a.anchor, .markdown-preview h2:hover a.anchor, .markdown-preview h3:hover a.anchor, .markdown-preview h4:hover a.anchor, .markdown-preview h5:hover a.anchor, .markdown-preview h6:hover a.anchor { text-decoration: none; line-height: 1; padding-left: 0px; margin-left: -22px; top: 15%; }
-.markdown-preview h1:hover a.anchor .octicon-link, .markdown-preview h2:hover a.anchor .octicon-link, .markdown-preview h3:hover a.anchor .octicon-link, .markdown-preview h4:hover a.anchor .octicon-link, .markdown-preview h5:hover a.anchor .octicon-link, .markdown-preview h6:hover a.anchor .octicon-link { display: inline-block; }
-.markdown-preview h1 tt, .markdown-preview h2 tt, .markdown-preview h3 tt, .markdown-preview h4 tt, .markdown-preview h5 tt, .markdown-preview h6 tt, .markdown-preview h1 code, .markdown-preview h2 code, .markdown-preview h3 code, .markdown-preview h4 code, .markdown-preview h5 code, .markdown-preview h6 code { font-size: inherit; }
-.markdown-preview h1 { font-size: 28px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(221, 221, 221); color: rgb(0, 0, 0); }
-.markdown-preview h2 { font-size: 24px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(238, 238, 238); color: rgb(0, 0, 0); }
-.markdown-preview h3 { font-size: 18px; }
-.markdown-preview h4 { font-size: 16px; }
-.markdown-preview h5 { font-size: 14px; }
-.markdown-preview h6 { color: rgb(119, 119, 119); font-size: 14px; }
-.markdown-preview p, .markdown-preview blockquote, .markdown-preview ul, .markdown-preview ol, .markdown-preview dl, .markdown-preview table, .markdown-preview pre.editor-colors { margin: 15px 0px; }
-.markdown-preview hr { border: 0px none; color: rgb(204, 204, 204); height: 4px; padding: 0px; margin: 15px 0px; background: url('data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC') 0px 0px repeat-x transparent; }
-.markdown-preview > h2:first-child, .markdown-preview > h1:first-child, .markdown-preview > h1:first-child + h2, .markdown-preview > h3:first-child, .markdown-preview > h4:first-child, .markdown-preview > h5:first-child, .markdown-preview > h6:first-child { margin-top: 0px; padding-top: 0px; }
-.markdown-preview a:first-child h1, .markdown-preview a:first-child h2, .markdown-preview a:first-child h3, .markdown-preview a:first-child h4, .markdown-preview a:first-child h5, .markdown-preview a:first-child h6 { margin-top: 0px; padding-top: 0px; }
-.markdown-preview h1 + p, .markdown-preview h2 + p, .markdown-preview h3 + p, .markdown-preview h4 + p, .markdown-preview h5 + p, .markdown-preview h6 + p { margin-top: 0px; }
-.markdown-preview li p.first { display: inline-block; }
-.markdown-preview ul, .markdown-preview ol { padding-left: 30px; }
-.markdown-preview ul.no-list, .markdown-preview ol.no-list { list-style-type: none; padding: 0px; }
-.markdown-preview ul li > :first-child, .markdown-preview ol li > :first-child, .markdown-preview ul li ul:first-of-type, .markdown-preview ol li ul:first-of-type { margin-top: 0px; }
-.markdown-preview ul ul, .markdown-preview ul ol, .markdown-preview ol ol, .markdown-preview ol ul { margin-bottom: 0px; }
-.markdown-preview dl { padding: 0px; }
-.markdown-preview dl dt { font-size: 14px; font-weight: bold; font-style: italic; padding: 0px; margin: 15px 0px 5px; }
-.markdown-preview dl dt:first-child { padding: 0px; }
-.markdown-preview dl dt > :first-child { margin-top: 0px; }
-.markdown-preview dl dt > :last-child { margin-bottom: 0px; }
-.markdown-preview dl dd { margin: 0px 0px 15px; padding: 0px 15px; }
-.markdown-preview dl dd > :first-child { margin-top: 0px; }
-.markdown-preview dl dd > :last-child { margin-bottom: 0px; }
-.markdown-preview blockquote { border-left-width: 4px; border-left-style: solid; border-left-color: rgb(221, 221, 221); padding: 0px 15px; color: rgb(119, 119, 119); }
-.markdown-preview blockquote > :first-child { margin-top: 0px; }
-.markdown-preview blockquote > :last-child { margin-bottom: 0px; }
-.markdown-preview blockquote p { font-size: 16px; line-height: 1.5; }
-.markdown-preview table th { font-weight: bold; }
-.markdown-preview table th, .markdown-preview table td { border: 1px solid rgb(204, 204, 204); padding: 6px 13px; }
-.markdown-preview table tr { border-top-width: 1px; border-top-style: solid; border-top-color: rgb(204, 204, 204); background-color: rgb(255, 255, 255); }
-.markdown-preview table tr:nth-child(2n) { background-color: rgb(248, 248, 248); }
-.markdown-preview img { max-width: 100%; }
-.markdown-preview span.frame { display: block; overflow: hidden; }
-.markdown-preview span.frame > span { border: 1px solid rgb(221, 221, 221); display: block; float: left; overflow: hidden; margin: 13px 0px 0px; padding: 7px; width: auto; }
-.markdown-preview span.frame span img { display: block; float: left; }
-.markdown-preview span.frame span span { clear: both; color: rgb(51, 51, 51); display: block; padding: 5px 0px 0px; }
-.markdown-preview span.align-center { display: block; overflow: hidden; clear: both; }
-.markdown-preview span.align-center > span { display: block; overflow: hidden; margin: 13px auto 0px; text-align: center; }
-.markdown-preview span.align-center span img { margin: 0px auto; text-align: center; }
-.markdown-preview span.align-right { display: block; overflow: hidden; clear: both; }
-.markdown-preview span.align-right > span { display: block; overflow: hidden; margin: 13px 0px 0px; text-align: right; }
-.markdown-preview span.align-right span img { margin: 0px; text-align: right; }
-.markdown-preview span.float-left { display: block; margin-right: 13px; overflow: hidden; float: left; }
-.markdown-preview span.float-left span { margin: 13px 0px 0px; }
-.markdown-preview span.float-right { display: block; margin-left: 13px; overflow: hidden; float: right; }
-.markdown-preview span.float-right > span { display: block; overflow: hidden; margin: 13px auto 0px; text-align: right; }
-.markdown-preview code, .markdown-preview tt { margin: 0px 2px; padding: 0px 5px; border: 1px solid rgb(234, 234, 234); border-radius: 3px; text-shadow: none; background-color: rgb(248, 248, 248); }
-.markdown-preview pre.editor-colors { font-size: 13px; line-height: 19px; overflow: auto; padding: 6px 10px; border-radius: 3px; border: 1px solid rgb(224, 224, 225); background: rgb(250, 250, 250); }
-.markdown-preview kbd { border-radius: 2px; border-width: 1px; border-style: solid; border-color: rgb(221, 221, 221) rgb(204, 204, 204) rgb(204, 204, 204) rgb(221, 221, 221); padding: 1px 4px; line-height: 10px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-image: linear-gradient(rgb(241, 241, 241), rgb(221, 221, 221)); background-color: rgb(221, 221, 221); background-repeat: repeat-x; }
-.markdown-preview .emoji { height: 20px; width: 20px; }
-.markdown-preview { font-size: 1.25em; color: rgb(80, 81, 83); background-color: rgb(255, 255, 255); }
-.markdown-preview h1, .markdown-preview h2 { color: inherit; border-color: rgb(218, 219, 220); }
-.markdown-preview a { color: rgb(20, 146, 255); }
-.markdown-preview hr { background-color: rgb(255, 255, 255); }
-.markdown-preview blockquote { color: rgb(80, 81, 83); border-left-color: rgba(80, 81, 83, 0.701961); }
-.markdown-preview table th, .markdown-preview table td { border-color: rgb(218, 219, 220); }
-.markdown-preview table th { background-color: rgb(255, 255, 255); }
-.markdown-preview table tr { background-color: rgb(255, 255, 255); }
-.markdown-preview table tr:nth-child(2n) { background-color: rgb(247, 247, 247); }
-.markdown-preview code { color: rgb(104, 106, 110); border-color: rgb(218, 219, 220); background-color: rgb(247, 247, 247); background-clip: padding-box; }
-.markdown-preview pre.editor-colors::shadow .line.cursor-line { background-color: transparent; }
-.bracket-matcher .region {
-  border-bottom: 1px dotted lime;
-  position: absolute;
-}
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>
+  fuconf.md
+  
+    - Grip
+  
+</title>
+  <link rel="icon" href="/grip-static/favicon.ico" /><link rel="stylesheet" href="/grip-cache/github-d1b5abdc908e0d7b1177dec08377119b557ebf6285955d1d4b3a49990b7f2f95.css" />
+  <link rel="stylesheet" href="/grip-cache/github2-c5705f05bde95fb4053574650520682ae4d86bdaa9670bb38b6cebaea3095063.css" />
+  <style>
+    /* Page tweaks */
+    .preview-page {
+      margin-top: 64px;
+    }
+    /* Discussion tweaks */
+    .discussion-timeline.wide {
+      width: 920px;
+    }
+    .timeline-comment-wrapper > .timeline-comment:after,
+    .timeline-comment-wrapper > .timeline-comment:before {
+      content: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="preview-page">
+    <div class="container">
+      <div class="repository-with-sidebar repo-container with-full-navigation">
 
-.spell-check-misspelling .region {
-  border-bottom: 1px dashed rgba(250, 128, 114, 0.5);
-}
+        
+          <div class="repository-content context-loader-container">
+            <div id="readme" class="boxed-group flush clearfix announce instapaper_body md">
+              
+                <h3>
+                  <span class="octicon octicon-book"></span>
+                  fuconf.md
+                </h3>
+              
+              <div class="markdown-body entry-content">
+                <p></p>
 
-pre.editor-colors,
-.host {
-  background-color: #fafafa;
-  color: #545454;
-}
-pre.editor-colors .line.cursor-line,
-.host .line.cursor-line {
-  background-color: rgba(56, 75, 112, 0.07);
-}
-pre.editor-colors .invisible,
-.host .invisible {
-  color: #545454;
-}
-pre.editor-colors .cursor,
-.host .cursor {
-  border-left: 2px solid #528bff;
-}
-pre.editor-colors .selection .region,
-.host .selection .region {
-  background-color: #e5e5e6;
-}
-pre.editor-colors .bracket-matcher .region,
-.host .bracket-matcher .region {
-  border-bottom: 1px solid #528bff;
-  box-sizing: border-box;
-  background-color: #eaeaeb;
-}
-pre.editor-colors .invisible-character,
-.host .invisible-character {
-  color: rgba(84, 84, 84, 0.4);
-}
-pre.editor-colors .indent-guide,
-.host .indent-guide {
-  color: rgba(84, 84, 84, 0.4);
-}
-pre.editor-colors .wrap-guide,
-.host .wrap-guide {
-  background-color: rgba(84, 84, 84, 0.4);
-}
-pre.editor-colors .gutter .line-number,
-.host .gutter .line-number {
-  color: #969696;
-  -webkit-font-smoothing: antialiased;
-}
-pre.editor-colors .gutter .line-number.git-line-removed:before,
-.host .gutter .line-number.git-line-removed:before {
-  bottom: -3px;
-}
-pre.editor-colors .gutter .line-number.git-line-removed:after,
-.host .gutter .line-number.git-line-removed:after {
-  content: "";
-  position: absolute;
-  left: 0px;
-  bottom: 0px;
-  width: 25px;
-  border-bottom: 1px dotted rgba(255, 20, 20, 0.5);
-  pointer-events: none;
-}
-pre.editor-colors .gutter .line-number.cursor-line,
-.host .gutter .line-number.cursor-line {
-  color: #545454;
-  background-color: #efeff0;
-}
-pre.editor-colors .gutter .line-number.cursor-line-no-selection,
-.host .gutter .line-number.cursor-line-no-selection {
-  background-color: transparent;
-}
-pre.editor-colors .gutter .line-number .icon-right,
-.host .gutter .line-number .icon-right {
-  color: #545454;
-}
-pre.editor-colors .gutter .line-number .icon-right,
-.host .gutter .line-number .icon-right {
-  color: #545454;
-}
-pre.editor-colors .gutter .line-number.folded,
-.host .gutter .line-number.folded,
-pre.editor-colors .gutter .line-number:after,
-.host .gutter .line-number:after,
-pre.editor-colors .fold-marker:after,
-.host .fold-marker:after {
-  color: #545454;
-}
-.comment {
-  color: #7b7b79;
-  font-style: italic;
-}
-.entity.name.type {
-  color: #a58a03;
-}
-.entity.other.inherited-class {
-  color: #428b1c;
-}
-.keyword {
-  color: #a71cce;
-}
-.keyword.control {
-  color: #a71cce;
-}
-.keyword.operator {
-  color: #545454;
-}
-.keyword.other.special-method {
-  color: #1f51eb;
-}
-.keyword.other.unit {
-  color: #893a01;
-}
-.storage {
-  color: #a71cce;
-}
-.constant {
-  color: #893a01;
-}
-.constant.character.escape {
-  color: #0a8560;
-}
-.constant.numeric {
-  color: #893a01;
-}
-.constant.other.color {
-  color: #0a8560;
-}
-.constant.other.symbol {
-  color: #0a8560;
-}
-.variable {
-  color: #bf1212;
-}
-.variable.interpolation {
-  color: #b81332;
-}
-.variable.parameter.function {
-  color: #545454;
-}
-.invalid.illegal {
-  background-color: #bf1212;
-  color: #fafafa;
-}
-.string {
-  color: #428b1c;
-}
-.string.regexp {
-  color: #0a8560;
-}
-.string.other.link {
-  color: #bf1212;
-}
-.punctuation.definition.comment {
-  color: #7b7b79;
-}
-.punctuation.definition.parameters,
-.punctuation.definition.array {
-  color: #545454;
-}
-.punctuation.definition.heading,
-.punctuation.definition.identity {
-  color: #1f51eb;
-}
-.punctuation.definition.bold {
-  color: #a58a03;
-  font-weight: bold;
-}
-.punctuation.definition.italic {
-  color: #a71cce;
-  font-style: italic;
-}
-.punctuation.section.embedded {
-  color: #b81332;
-}
-.support.class {
-  color: #a58a03;
-}
-.support.function {
-  color: #0a8560;
-}
-.support.function.any-method {
-  color: #1f51eb;
-}
-.entity.name.function {
-  color: #1f51eb;
-}
-.entity.name.class,
-.entity.name.type.class {
-  color: #a58a03;
-}
-.entity.name.section {
-  color: #1f51eb;
-}
-.entity.name.tag {
-  color: #bf1212;
-}
-.entity.other.attribute-name {
-  color: #893a01;
-}
-.entity.other.attribute-name.id {
-  color: #1f51eb;
-}
-.meta.class {
-  color: #a58a03;
-}
-.meta.link {
-  color: #893a01;
-}
-.meta.require {
-  color: #1f51eb;
-}
-.meta.selector {
-  color: #a71cce;
-}
-.meta.separator {
-  background-color: #373b41;
-  color: #545454;
-}
-.meta.tag {
-  color: #545454;
-}
-.none {
-  color: #545454;
-}
-.markup.bold {
-  color: #893a01;
-  font-weight: bold;
-}
-.markup.changed {
-  color: #a71cce;
-}
-.markup.deleted {
-  color: #bf1212;
-}
-.markup.italic {
-  color: #a71cce;
-  font-style: italic;
-}
-.markup.heading .punctuation.definition.heading {
-  color: #1f51eb;
-}
-.markup.inserted {
-  color: #428b1c;
-}
-.markup.list {
-  color: #bf1212;
-}
-.markup.quote {
-  color: #893a01;
-}
-.markup.raw.inline {
-  color: #428b1c;
-}
-.source.gfm .markup {
-  -webkit-font-smoothing: auto;
-}
-.source.gfm .markup.heading {
-  color: #bf1212;
-}
-.source.gfm .markup.link {
-  color: #1f51eb;
-}
-.source.gfm .link .entity {
-  color: #0a8560;
-}
-.ruby.symbol > .punctuation {
-  color: inherit;
-}
-</style>
-  </head>
-  <body class='markdown-preview'><h1 id="array-oriented-functional-programming-with-dyalog">Array-oriented Functional Programming with Dyalog</h1>
-<h2 id="fuconf-15-apl-workshop-13-september-2015">FuConf 15 APL Workshop 13 September 2015</h2>
-<h2 id="jay-foad-morten-kromberg">Jay Foad &amp; Morten Kromberg</h2>
+<h1>
+<a id="user-content-array-oriented-functional-programming-with-dyalog" class="anchor" href="#array-oriented-functional-programming-with-dyalog" aria-hidden="true"><span class="octicon octicon-link"></span></a>Array-oriented Functional Programming with Dyalog</h1>
+
+<h2>
+<a id="user-content-fuconf-15-apl-workshop-13-september-2015" class="anchor" href="#fuconf-15-apl-workshop-13-september-2015" aria-hidden="true"><span class="octicon octicon-link"></span></a>FuConf 15 APL Workshop 13 September 2015</h2>
+
+<h2>
+<a id="user-content-jay-foad--morten-kromberg" class="anchor" href="#jay-foad--morten-kromberg" aria-hidden="true"><span class="octicon octicon-link"></span></a>Jay Foad &amp; Morten Kromberg</h2>
+
 <p>The workshop assumes no prior knowledge of APL. It will be geared to
 functional programmers with an emphasis on theory and the core
 notation. Towards the end of the day Morten Kromberg will round off
 with a discussion about application building.</p>
+
 <p>Prerequisites: It would help if attendees installed Dyalog on their
 laptops prior to the workshop - though we will spend a little time at
 the start of the day making sure everyone is able to use APL.</p>
+
 <p>The format will include many short exercises. Feedback and discussion
 will be encouraged throughout.</p>
-<h1 id="morning">Morning</h1>
+
+<h1>
+<a id="user-content-morning" class="anchor" href="#morning" aria-hidden="true"><span class="octicon octicon-link"></span></a>Morning</h1>
+
 <ul>
 <li>Installing Dyalog and keyboard layouts (<a href="http://dyalog.com/apl-font-keyboard.htm">http://dyalog.com/apl-font-keyboard.htm</a>).</li>
-<li>Entering APL glyphs from the keyboard:<ul>
+<li>Entering APL glyphs from the keyboard:
+
+<ul>
 <li>Click on language bar (hover for help)</li>
-<li>Use double back-tick with auto-complete</li>
-<li>Use back-tick + letter</li>
+<li>Use double back-tick with auto-complete (Mac/RIDE only)</li>
+<li>Use back-tick + letter (Mac/RIDE only)</li>
 <li>Use modifier keys</li>
 </ul>
 </li>
 <li>Configuration: please use <code>]box on</code>.</li>
-<li>TryAPL (<a href="http://tryapl.org/">http://tryapl.org/</a>) has a floating soft keyboard, or you can use the IME.</li>
+<li>TryAPL (<a href="http://tryapl.org/">http://tryapl.org/</a>) has a floating soft keyboard, or you can use the IME (Windows) or Mac keyboard layout.</li>
 </ul>
-<h2 id="introduction-mk-">Introduction (MK?)</h2>
+
+<h2>
+<a id="user-content-introduction" class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h2>
+
 <ul>
 <li>How APL evolved from a mathematical notation.</li>
-<li>Started as “Iverson notation”, used on the blackboard for teaching.</li>
-<li>&quot;A Programming Language&quot; book published in 1962, long before it was
+<li>Started as "Iverson notation", used on the blackboard for teaching.</li>
+<li>"A Programming Language" book published in 1962, long before it was
 implemented on any computer. (<em>Program</em> just meant <em>algorithm</em>.)</li>
 <li>Used to formally describe the System/360 at IBM.</li>
 <li>First interpreter for the 360 in 1966, developed by Ken, Larry Breed, Adin
@@ -395,282 +97,623 @@ Falkoff, Dick Lathwell and Roger Moore.</li>
 <li>Most other languages (e.g. Fortran) grew from the machine up, not from
 maths down.</li>
 </ul>
-<h2 id="first-impressions">First impressions</h2>
-<pre class="editor-colors lang-text"><div class="line"><span class="text plain"><span class="meta paragraph text"><span>mean←{(+⌿⍵)÷≢⍵}</span></span></span></div></pre><ul>
+
+<h2>
+<a id="user-content-first-impressions" class="anchor" href="#first-impressions" aria-hidden="true"><span class="octicon octicon-link"></span></a>First impressions</h2>
+
+<pre><code>mean←{(+⌿⍵)÷≢⍵}
+</code></pre>
+
+<ul>
 <li>The character set: APL uses funny squiggles.</li>
 <li>Simple regular syntax.</li>
-<li><p>No reserved words in the language.</p>
-</li>
-<li><p>Array programming is a paradigm in its own right.</p>
-</li>
+<li><p>No reserved words in the language.</p></li>
+<li><p>Array programming is a paradigm in its own right.</p></li>
 <li>There are other APLs (APL2, NARS2000, GNU APL, NGN APL, ELI, etc), generally
 not completely compatible despite an ISO standard...</li>
 <li>and other languages in the family (A, A+, Nial, J, K etc).</li>
 </ul>
-<pre class="editor-colors lang-text"><div class="line"><span class="text plain"><span class="meta paragraph text"><span>Compare:</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;</span></span></div><div class="line"><span class="text plain"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta paragraph text"><span>{(+⌿⍵)÷≢⍵}1&nbsp;2&nbsp;3&nbsp;4&nbsp;&nbsp;⍝&nbsp;&nbsp;&nbsp;APL</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta paragraph text"><span>(+/&nbsp;%&nbsp;#)&nbsp;1&nbsp;2&nbsp;3&nbsp;4&nbsp;&nbsp;NB.&nbsp;J&nbsp;(Iverson-Hui)</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta paragraph text"><span>{(+/x)%#x}1&nbsp;2&nbsp;3&nbsp;4&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;k&nbsp;(Whitney)</span></span></span></div></pre><p>Array languages tend to share three features:</p>
+
+<pre><code>Compare:
+
+    {(+⌿⍵)÷≢⍵}1 2 3 4  ⍝   APL
+     (+/ % #) 1 2 3 4  NB. J (Iverson-Hui)
+    {(+/x)%#x}1 2 3 4  /   k (Whitney)
+</code></pre>
+
+<p>Array languages tend to share three features:</p>
+
 <ul>
 <li>terse</li>
 <li>symbolic (not wordy)</li>
 <li>high-order functions</li>
 </ul>
+
 <blockquote>
-<p>The only program which stands a chance of being correct is a short one
---Arthur Whitney</p>
+<p>The only program which stands a chance of being correct is a short
+  one --Arthur Whitney</p>
 </blockquote>
-<h2 id="syntax-functions-arguments-and-naming">Syntax: functions, arguments and naming</h2>
+
 <ul>
-<li>Functions are prefix or infix (<em>monadic</em> or <em>dyadic</em>) e.g. negate/subtract.</li>
-<li>Unlike many languages (e.g. C, Java), this goes for user-defined functions
-too.</li>
-<li><em>All</em> functions associate right: 3×2+1 is 3×(2+1)</li>
+<li>Primitives are carefully chosen; e.g. you get Grade instead of Sort,
+which enables <code>names[⍋ages]</code>.</li>
 </ul>
+
+<h2>
+<a id="user-content-syntax-functions-arguments-and-naming" class="anchor" href="#syntax-functions-arguments-and-naming" aria-hidden="true"><span class="octicon octicon-link"></span></a>Syntax: functions, arguments and naming</h2>
+
+<ul>
+<li>Functions are prefix or infix (<em>monadic</em> or <em>dyadic</em>) e.g. <code>-</code>
+stands for negate or subtract respectively.</li>
+<li>Unlike many languages (e.g. C, Java), this goes for user-defined
+functions too.</li>
+<li>
+<em>All</em> functions associate right: <code>3×2+1</code> is <code>3×(2+1)</code>.</li>
+</ul>
+
 <p><strong>Exercise:</strong> go through quickly as a group, introducing some scalar functions:</p>
-<pre class="editor-colors lang-text"><div class="line"><span class="text plain"><span class="meta paragraph text"><span>What&nbsp;do&nbsp;these&nbsp;expressions&nbsp;evaluate&nbsp;to?</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;</span></span></div><div class="line"><span class="text plain"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta paragraph text"><span>3+2</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3*2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⍝&nbsp;*&nbsp;is&nbsp;not&nbsp;multiplication!</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3×2</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9*0.5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⍝&nbsp;square&nbsp;root</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6÷2</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5-3-1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⍝&nbsp;not&nbsp;1</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;2&nbsp;3</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1&nbsp;+&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⍝&nbsp;not&nbsp;1</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;¯1&nbsp;+&nbsp;2</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;+&nbsp;2&nbsp;3</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;2&nbsp;+&nbsp;3</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;2&nbsp;+&nbsp;3&nbsp;4</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;2&nbsp;+&nbsp;3&nbsp;4&nbsp;5&nbsp;&nbsp;&nbsp;⍝&nbsp;errors:&nbsp;see&nbsp;later</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1÷2&nbsp;&nbsp;3÷4</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;(2&nbsp;3)&nbsp;+&nbsp;(4&nbsp;5)&nbsp;6&nbsp;⍝&nbsp;as&nbsp;if&nbsp;(1&nbsp;1)(2&nbsp;3)&nbsp;+&nbsp;(4&nbsp;5)(6&nbsp;6)</span></span></span></div></pre><ul>
-<li>Conformability rules for scalar functions: vectors must have same length, or
-either argument can be a scalar (&quot;scalar extension&quot;)</li>
-<li>Assignment uses the left arrow to name an array, x←3</li>
-</ul>
-<p><strong>Exercise</strong> (introducing assignment):</p>
-<pre class="editor-colors lang-text"><div class="line"><span class="text plain"><span class="meta paragraph text"><span>What&nbsp;do&nbsp;these&nbsp;expressions&nbsp;do?</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;</span></span></div><div class="line"><span class="text plain"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta paragraph text"><span>x←3&nbsp;⍝&nbsp;result&nbsp;of&nbsp;assignment&nbsp;isn&#39;t&nbsp;printed</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x+x</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y+(y←4)&nbsp;&nbsp;&nbsp;&nbsp;⍝&nbsp;R-to-L&nbsp;execution&nbsp;guaranteed&nbsp;here,&nbsp;pass&nbsp;through&nbsp;result</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(x&nbsp;y&nbsp;z)←1&nbsp;2&nbsp;3</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(x&nbsp;y)←y&nbsp;x</span></span></span></div></pre><p><strong>Exercise</strong> (first sight of a non-scalar function):</p>
-<pre class="editor-colors lang-text"><div class="line"><span class="text plain"><span class="meta paragraph text"><span>Try&nbsp;these&nbsp;expressions:</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;</span></span></div><div class="line"><span class="text plain"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta paragraph text"><span>5=2+3&nbsp;&nbsp;&nbsp;&nbsp;⍝&nbsp;not&nbsp;&quot;true&quot;&nbsp;but&nbsp;&quot;1&quot;</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A←⍳3</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A=1&nbsp;2&nbsp;3</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A≡1&nbsp;2&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;⍝&nbsp;non-scalar&nbsp;function</span></span></span></div></pre><h2 id="arrays">Arrays</h2>
+
+<pre><code>What do these expressions evaluate to?
+
+      3+2
+      3*2           ⍝ * is not multiplication!
+      3×2
+      9*0.5         ⍝ square root
+      6÷2
+      5-3-1         ⍝ not 1
+      1 2 3
+      -1 + 2        ⍝ not 1
+      ¯1 + 2
+      1 + 2 3
+      1 2 + 3
+      1 2 + 3 4
+      1 2 + 3 4 5   ⍝ errors: see later
+      1÷2  3÷4
+      1 (2 3) + (4 5) 6 ⍝ as if (1 1)(2 3) + (4 5)(6 6)
+</code></pre>
+
 <ul>
-<li>In APL “everything is an array”, but what’s an array?<ul>
+<li>Conformability rules for scalar functions: vectors must have same length, or
+either argument can be a scalar ("scalar extension")</li>
+<li>Assignment uses the left arrow to name an array, <code>x←3</code>.</li>
+</ul>
+
+<p><strong>Exercise</strong> (introducing assignment):</p>
+
+<pre><code>What do these expressions do?
+
+      x←3           ⍝ result of assignment isn't printed
+      x+x
+      y+(y←4)       ⍝ R-to-L execution guaranteed here, pass through result
+      (x y z)←1 2 3
+      (x y)←y x
+</code></pre>
+
+<p><strong>Exercise</strong> (first sight of a non-scalar function):</p>
+
+<pre><code>Try these expressions:
+
+      5=2+3         ⍝ not "true" but "1"
+      A←⍳3
+      A=1 2 3
+      A≡1 2 3       ⍝ non-scalar function
+</code></pre>
+
+<h2>
+<a id="user-content-arrays" class="anchor" href="#arrays" aria-hidden="true"><span class="octicon octicon-link"></span></a>Arrays</h2>
+
+<ul>
+<li>In APL "everything is an array", but what’s an array?
+
+<ul>
 <li>Rectangular collection of items,</li>
 <li>arranged along zero or more orthogonal axes,</li>
 <li>of numbers, characters and arrays.</li>
 </ul>
 </li>
-<li><em>All</em> primitives work on arrays and return arrays.</li>
+<li>
+<em>All</em> primitives work on arrays and return arrays.</li>
 <li>Strings are just vectors of characters.</li>
 </ul>
+
 <p><strong>Exercise</strong> (introducing some structural primitives):</p>
-<pre class="editor-colors lang-text"><div class="line"><span class="text plain"><span class="meta paragraph text"><span>Try:</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta paragraph text"><span>⍴1&nbsp;2&nbsp;3</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⍴&#39;JAY&#39;</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⍳4</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⍴⍳4</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⌽⍳4</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4↑&#39;BANGALORE&#39;</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;¯4↑&#39;BANGALORE&#39;</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⍴(1&nbsp;2&nbsp;3)(4&nbsp;5&nbsp;6)</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⍴&#39;Morten&#39;&nbsp;&#39;Kromberg&#39;</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5⍴&#39;JAY&#39;&nbsp;⍝&nbsp;introduce&nbsp;Reshape</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A←3&nbsp;3⍴⍳9</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;⍝&nbsp;display&nbsp;is&nbsp;&quot;row&nbsp;major&quot;</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⍴A</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⍴⍴A</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⌽A</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⊖A&nbsp;&nbsp;&nbsp;&nbsp;⍝&nbsp;discuss&nbsp;rank&nbsp;operator&nbsp;later</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,A</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;3⍴&#39;APL&#39;</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;3&nbsp;4⍴⍳24&nbsp;&nbsp;&nbsp;&nbsp;⍝&nbsp;display&nbsp;is&nbsp;in&nbsp;planes</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B←2&nbsp;3&nbsp;4&nbsp;5&nbsp;6&nbsp;7⍴99&nbsp;&nbsp;&nbsp;&nbsp;⍝&nbsp;N.B.&nbsp;don&#39;t&nbsp;display&nbsp;this!</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⍴B</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⍴⍴B</span></span></span></div></pre><ul>
-<li>Other languages have scalars and arrays, but in APL there is no such distinction.</li>
-<li>Every array has a rank. What is the rank of a scalar? Try it! What is the
-shape of a scalar? Compare with ⍳0 and ⍬.</li>
-<li>How many items in a rank-0 array? Try ×/⍬</li>
-<li>APL <em>recycles</em> the word &quot;scalar&quot; to mean &quot;rank-zero array&quot;.</li>
-<li>Why is a scalar an array? Because <em>everything</em> is an array! And it helps with
-consistency: reduction of matrix is vector, of vector is scalar.</li>
-<li>(Muse: &quot;there&#39;s no access to the mote&quot;.)</li>
-<li>Using the array as the fundamental type means that performance can be very
-good, even though it&#39;s interpreted.</li>
+
+<pre><code>Try:
+      ⍴1 2 3
+      ⍴'JAY'
+      ⍳4
+      ⍴⍳4
+      ⌽⍳4
+      4↑'BANGALORE'
+      ¯4↑'BANGALORE'
+      ⍴(1 2 3)(4 5 6)
+      ⍴'Morten' 'Kromberg'
+      5⍴'JAY'       ⍝ introduce Reshape
+      A←3 3⍴⍳9
+      A             ⍝ display is "row major"
+      ⍴A
+      ⍴⍴A
+      ⌽A
+      ⊖A            ⍝ discuss rank operator later
+      ,A
+      3 3⍴'APL'
+      2 3 4⍴⍳24     ⍝ display is in planes
+      B←2 3 4 5 6 7⍴99 ⍝ N.B. don't display this!
+      ⍴B
+      ⍴⍴B
+</code></pre>
+
+<ul>
+<li>Other languages have scalars and arrays, but in APL there is no such
+distinction.</li>
+<li>Every array has a rank. What is the rank of a scalar? Try it! What
+is the shape of a scalar? Compare with <code>⍳0</code> and <code>⍬</code>.</li>
+<li>How many items in a rank-0 array? Try <code>×/⍬</code>.</li>
+<li>APL <em>recycles</em> the word "scalar" to mean "rank-zero array".</li>
+<li>Why is a scalar an array? Because <em>everything</em> is an array! And it
+helps with consistency: reduction of matrix is vector, of vector is
+scalar.</li>
+<li>(Muse: "there's no access to the mote". See Trenchard More's papers
+on "Nested Rectangular Arrays".)</li>
+<li>Using the array as the fundamental type means that performance can
+be very good, even though it's interpreted.</li>
 </ul>
+
 <p><strong>Exercise</strong> (rank of a scalar):</p>
-<pre class="editor-colors lang-text"><div class="line"><span class="text plain"><span class="meta paragraph text"><span>Try:</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta paragraph text"><span>⍴99</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⍴&#39;J&#39;</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⍴⍴99</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⍴⍳0</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(⍳0)≡⍴99</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⍬≡⍴99</span></span></span></div></pre><ul>
-<li>Arrays have <em>value</em> semantics (they&#39;re <em>immutable</em>).</li>
-<li>This is different from almost every mainstream programming language that
-supports arrays.</li>
-<li>(Muse: this has interesting implications for the implementation, which is pretty much
-obliged to use reference counting as well as garbage collection.)</li>
-</ul>
-<h2 id="numbers">Numbers</h2>
+
+<pre><code>Try:
+      ⍴99
+      ⍴'J'
+      ⍴⍴99
+      ⍴⍳0
+      (⍳0)≡⍴99
+      ⍬≡⍴99
+</code></pre>
+
 <ul>
-<li>APL presents the illusion that &quot;a number is just a number&quot;.</li>
-<li>Users don&#39;t have to think about data types.</li>
-<li>Under the covers there is a Scheme-like &quot;numerical tower&quot; (<a href="https://en.wikipedia.org/wiki/Numerical_tower">https://en.wikipedia.org/wiki/Numerical_tower</a>)
-from 1-bit packed booleans all the way up to 2×64-bit floating point complex.</li>
-<li>Automatic promotion on overflow; occasional demotion on heap compaction / garbage
-collection.</li>
+<li>Arrays have <em>value</em> semantics (they're <em>immutable</em>).</li>
+<li>This is different from almost every mainstream programming language
+that supports arrays.</li>
+<li>(Muse: this has interesting implications for the implementation,
+which is pretty much obliged to use reference counting as well as
+garbage collection.)</li>
 </ul>
+
+<h2>
+<a id="user-content-numbers" class="anchor" href="#numbers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Numbers</h2>
+
+<ul>
+<li>APL presents the illusion that "a number is just a number".</li>
+<li>Users don't have to think about data types.</li>
+<li>Under the covers there is a Scheme-like "numerical tower"
+(<a href="https://en.wikipedia.org/wiki/Numerical_tower">https://en.wikipedia.org/wiki/Numerical_tower</a>) from 1-bit packed
+booleans all the way up to 2×64-bit floating point complex.</li>
+<li>Automatic promotion on overflow; occasional demotion on heap
+compaction / garbage collection.</li>
+</ul>
+
 <p><strong>Exercise</strong> (more scalar arithmetic):</p>
-<pre class="editor-colors lang-text"><div class="line"><span class="text plain"><span class="meta paragraph text"><span>Try:</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta paragraph text"><span>0&nbsp;0&nbsp;1&nbsp;1&nbsp;∨&nbsp;0&nbsp;1&nbsp;0&nbsp;1</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0&nbsp;0&nbsp;1&nbsp;1&nbsp;∧&nbsp;0&nbsp;1&nbsp;0&nbsp;1</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;15&nbsp;∨&nbsp;35</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;15&nbsp;∧&nbsp;35</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3÷4</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*1</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;○1</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2*0.5</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;¯1*0.5</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3*99</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3*999</span></span></span></div></pre><h2 id="booleans">Booleans</h2>
+
+<pre><code>Try:
+      0 0 1 1 ∨ 0 1 0 1
+      0 0 1 1 ∧ 0 1 0 1
+      15 ∨ 35
+      15 ∧ 35
+      3÷4
+      *1
+      ○1
+      2*0.5
+      ¯1*0.5
+      3*99
+      3*999
+</code></pre>
+
+<h2>
+<a id="user-content-booleans" class="anchor" href="#booleans" aria-hidden="true"><span class="octicon octicon-link"></span></a>Booleans</h2>
+
 <ul>
-<li>Booleans are just numbers 0 and 1 (we saw this with =).</li>
-<li>Knuth even called this &quot;Iverson&#39;s convention&quot; in his paper &quot;Two Notes on Notation&quot;
+<li>Booleans are just numbers 0 and 1 (we saw this with <code>=</code>).</li>
+<li>Knuth even called this "Iverson's convention" in his paper "Two
+Notes on Notation"
 (<a href="https://www.maa.org/sites/default/files/pdf/upload_library/22/Ford/knuth403-422.pdf">https://www.maa.org/sites/default/files/pdf/upload_library/22/Ford/knuth403-422.pdf</a>).</li>
-<li>This allows useful tricks like +/A&gt;0 (how many positive numbers in A?).</li>
-<li>See Scholes&#39;s blog on Data-driven Conditionals
+<li>This allows useful tricks like <code>+/A&gt;0</code> (how many positive numbers
+in A?).</li>
+<li>See Scholes's blog on Data-driven Conditionals
 (<a href="http://www.dyalog.com/blog/2014/10/data-driven-conditionals-2/">http://www.dyalog.com/blog/2014/10/data-driven-conditionals-2/</a>).</li>
-<li>(MK calls it loop-free programming.)</li>
+<li>(Morten Kromberg calls it loop-free programming.)</li>
 <li>Coming back into fashion because of GPUs.</li>
 </ul>
+
 <p><strong>Exercise</strong> (boolean tricks):</p>
-<pre class="editor-colors lang-text"><div class="line"><span class="text plain"><span class="meta paragraph text"><span>Try:</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta paragraph text"><span>A←1&nbsp;¯2&nbsp;3&nbsp;4&nbsp;¯5</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&gt;0</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(A&gt;0)/A</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;3&nbsp;0/&#39;XYZ&#39;</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B←0&nbsp;1&nbsp;0&nbsp;1&nbsp;1&nbsp;0&nbsp;0&nbsp;1</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B/⍳⍴B</span></span></span></div></pre><h2 id="defined-functions">Defined functions</h2>
+
+<pre><code>Try:
+      A←1 ¯2 3 4 ¯5
+      A&gt;0
+      (A&gt;0)/A
+      2 3 0/'XYZ'
+      B←0 1 0 1 1 0 0 1
+      B/⍳⍴B
+</code></pre>
+
+<h2>
+<a id="user-content-defined-functions" class="anchor" href="#defined-functions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Defined functions</h2>
+
 <ul>
-<li>Dyalog has anonymous (lambda-style) function definitions called <em>dfns</em>.</li>
-<li>MANY examples: <a href="http://dfns.dyalog.com">http://dfns.dyalog.com</a></li>
-<li>Defined in braces, with ⍺ and ⍵ standing for the arguments.</li>
-<li>Functions have at most two arguments, but it&#39;s easy to make an argument tuple
-and decompose it with strand assignment.</li>
+<li>Dyalog has anonymous (lambda-style) function definitions called
+<em>dfns</em>.</li>
+<li>MANY examples: <a href="http://dfns.dyalog.com">http://dfns.dyalog.com</a>
+</li>
+<li>Defined in braces, with <code>⍺</code> and <code>⍵</code> standing for the arguments.</li>
+<li>Functions have at most two arguments, but it's easy to make an
+argument tuple and decompose it with strand assignment.</li>
 </ul>
+
 <p><strong>Exercise</strong> (single line dfns):</p>
-<pre class="editor-colors lang-text"><div class="line"><span class="text plain"><span class="meta paragraph text"><span>Try:</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta paragraph text"><span>{⍺+⍵}</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3{⍺+⍵}4</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3{⍵+⍵}4</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{⍵+⍵}4</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{⍺+⍺}4</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;where←{⍵/⍳⍴⍵}</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;where&nbsp;0&nbsp;1&nbsp;0&nbsp;1&nbsp;1&nbsp;0&nbsp;0&nbsp;1</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;disc←{(a&nbsp;b&nbsp;c)←⍵&nbsp;⋄&nbsp;(b*2)-4×a×c}</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;disc&nbsp;1&nbsp;¯1&nbsp;¯1&nbsp;&nbsp;&nbsp;&nbsp;⍝&nbsp;(defining&nbsp;equation&nbsp;of&nbsp;the&nbsp;golden&nbsp;ratio)</span></span></span></div></pre><ul>
+
+<pre><code>Try:
+      {⍺+⍵}
+      3{⍺+⍵}4
+      3{⍵+⍵}4
+      {⍵+⍵}4
+      {⍺+⍺}4
+      where←{⍵/⍳⍴⍵}
+      where 0 1 0 1 1 0 0 1
+      disc←{(a b c)←⍵ ⋄ (b*2)-4×a×c}
+      disc 1 ¯1 ¯1  ⍝ (defining equation of the golden ratio)
+</code></pre>
+
+<ul>
 <li>There is only one control structure: the guard.</li>
 <li>Dfns consist of a single expression preceded by zero or more local
 definitions and guards.</li>
-<li>At a pinch, you can use diamonds to separate &quot;lines&quot;.</li>
-<li>Use the <em>function editor</em> to define multi-line dfns. Hit ESC to exit the
-editor.</li>
-<li>The current functions is denoted ∇ to facilitate simple recursion:</li>
+<li>At a pinch, you can use diamonds to separate "lines".</li>
+<li>Use the <em>function editor</em> to define multi-line dfns. Hit ESC to exit
+the editor.</li>
+<li>The current functions is denoted <code>∇</code> to facilitate simple recursion:</li>
 </ul>
+
 <p><strong>Exercise</strong> (multi-line dfns):</p>
-<pre class="editor-colors lang-text"><div class="line"><span class="text plain"><span class="meta paragraph text"><span>Try:</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta paragraph text"><span>)ed&nbsp;sign</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sign←{</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta paragraph text"><span>⍵&lt;0:&#39;negative&#39;</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⍵&gt;0:&#39;positive&#39;</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#39;zero&#39;</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta paragraph text"><span>}</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sign&nbsp;2</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)ed&nbsp;fact</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fact←{</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta paragraph text"><span>⍵=0:1</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⍵×∇&nbsp;⍵-1</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta paragraph text"><span>}</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fact&nbsp;10</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!10</span></span></span></div></pre><ul>
+
+<pre><code>Try:
+      )ed sign
+      sign←{
+        ⍵&lt;0:'negative'
+        ⍵&gt;0:'positive'
+        'zero'
+      }
+      sign 2
+      )ed fact
+      fact←{
+        ⍵=0:1
+        ⍵×∇ ⍵-1
+      }
+      fact 10
+      !10
+</code></pre>
+
+<ul>
 <li>User defined functions can Just Work on arrays of arbitrary rank!
 See dfns.easter (<a href="http://dfns.dyalog.com/n_easter.htm">http://dfns.dyalog.com/n_easter.htm</a>)</li>
 </ul>
-<h2 id="workspaces-and-scripts-mk-">Workspaces and scripts (MK)</h2>
+
+<h2>
+<a id="user-content-workspaces-and-scripts" class="anchor" href="#workspaces-and-scripts" aria-hidden="true"><span class="octicon octicon-link"></span></a>Workspaces and scripts</h2>
+
 <ul>
 <li>Introduce )save and )load as a way to take a snapshot of the VM.</li>
 </ul>
-<h2 id="operators">Operators</h2>
-<pre class="editor-colors lang-text"><div class="line"><span class="text plain"><span>&nbsp;&nbsp;&nbsp;</span><span class="meta paragraph text"><span>+/1&nbsp;2&nbsp;3</span></span></span></div></pre><ul>
-<li>/ here is an operator called Reduce (or fold)</li>
-<li>(Monadic) operators take a function operand on their <em>left</em>.</li>
-<li>So +/ is &quot;plus reduce&quot;, or &quot;sum&quot;.</li>
-<li>Reduce inserts its operand function in the spaces: 1+2+3</li>
-<li>Generalises in ways that are more useful than you might expect! (See <a href="http://www.dyalog.com/blog/2014/11/musings-on-reduction/">http://www.dyalog.com/blog/2014/11/musings-on-reduction/</a>)</li>
-</ul>
-<pre class="editor-colors lang-text"><div class="line"><span class="text plain"><span class="meta paragraph text"><span>Try:</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta paragraph text"><span>+/2&nbsp;3&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;⍝&nbsp;&quot;summation&nbsp;over&quot;&nbsp;(KEI)</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;×/2&nbsp;3&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;⍝&nbsp;&quot;product&nbsp;over&quot;&nbsp;(KEI)</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⌈/2&nbsp;3&nbsp;4</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;≠/1&nbsp;0&nbsp;1&nbsp;1&nbsp;&nbsp;⍝&nbsp;parity</span></span></span></div></pre><ul>
-<li>¨ (dieresis) is an operator called Each (or map):</li>
-</ul>
-<pre class="editor-colors lang-text"><div class="line"><span class="text plain"><span class="meta paragraph text"><span>Try:</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta paragraph text"><span>A←&#39;Jay&#39;&nbsp;&#39;Foad&#39;</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⍴A</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⍴¨A</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⌽A</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⌽¨A</span></span></span></div></pre><ul>
-<li>⍨ is an operator called Commute (see <em>Tacit programming</em>, later):</li>
-</ul>
-<pre class="editor-colors lang-text"><div class="line"><span class="text plain"><span class="meta paragraph text"><span>Try:</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta paragraph text"><span>2*3</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2*⍨3</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*⍨3</span></span></span></div></pre><ul>
-<li><em>Dyadic</em> operators also take an operand on the right.</li>
-<li>All dyadic operators are left-associative (cf functions).</li>
-<li>. (dot) is a <em>dyadic</em> operator called Inner Product:</li>
-</ul>
-<pre class="editor-colors lang-text"><div class="line"><span class="text plain"><span class="meta paragraph text"><span>Try:</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta paragraph text"><span>1&nbsp;2&nbsp;3&nbsp;+.×&nbsp;4&nbsp;5&nbsp;6</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+/&nbsp;1&nbsp;2&nbsp;3&nbsp;×&nbsp;4&nbsp;5&nbsp;6</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A←2&nbsp;2⍴1&nbsp;2&nbsp;3&nbsp;4</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;+.×&nbsp;A</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+.×⍨A&nbsp;&nbsp;&nbsp;&nbsp;⍝&nbsp;function&nbsp;vs&nbsp;operator&nbsp;binding&nbsp;makes&nbsp;this&nbsp;very&nbsp;neat</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+.×/A&nbsp;A</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⍴&nbsp;(2&nbsp;3&nbsp;4⍴⍳24)&nbsp;+.×&nbsp;(4&nbsp;5&nbsp;6⍴⍳120)&nbsp;&nbsp;&nbsp;&nbsp;⍝&nbsp;arbitrary&nbsp;ranks</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0.5&nbsp;*⍨&nbsp;3&nbsp;4&nbsp;5&nbsp;+.*&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;⍝&nbsp;scalar&nbsp;extension</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#39;ABC&#39;&nbsp;∨.=&nbsp;&#39;APL&#39;</span></span></span></div></pre><ul>
-<li>As a special case, left operand of ∘ gives Outer Product (or table):</li>
-</ul>
-<pre class="editor-colors lang-text"><div class="line"><span class="text plain"><span class="meta paragraph text"><span>Try:</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta paragraph text"><span>∘.+&nbsp;⍨&nbsp;⍳4&nbsp;&nbsp;&nbsp;&nbsp;⍝&nbsp;&quot;addition&nbsp;table&quot;&nbsp;(KEI)</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;∘.×&nbsp;⍨&nbsp;⍳4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;multiplication&nbsp;table&quot;&nbsp;(KEI)</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;∘.⌈&nbsp;⍨&nbsp;⍳4&nbsp;&nbsp;&nbsp;&nbsp;⍝&nbsp;maximum&nbsp;table</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;∘.=&nbsp;⍨&nbsp;⍳4&nbsp;&nbsp;&nbsp;&nbsp;⍪&nbsp;identity&nbsp;matrix</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⍴&nbsp;(2&nbsp;3⍴⍳6)&nbsp;∘.+&nbsp;(4&nbsp;5⍴⍳20)&nbsp;&nbsp;&nbsp;&nbsp;⍝&nbsp;arbitrary&nbsp;ranks</span></span></span></div></pre><ul>
-<li>⍣ is a dyadic operator called power:</li>
-</ul>
-<pre class="editor-colors lang-text"><div class="line"><span class="text plain"><span class="meta paragraph text"><span>Try:</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta paragraph text"><span>({1+÷⍵}⍣10)1&nbsp;&nbsp;&nbsp;&nbsp;⍝&nbsp;one&nbsp;of&nbsp;the&nbsp;few&nbsp;times&nbsp;when&nbsp;you&nbsp;need&nbsp;parens!</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{1+÷⍵}⍣≡1</span></span></span></div></pre><p><strong>EXERCISE</strong> explain ∨.= (et al) in words, ∨.∧ (used in transitive closure of
-  a boolean matrix)</p>
-<p>Operator muse:</p>
+
+<h2>
+<a id="user-content-operators" class="anchor" href="#operators" aria-hidden="true"><span class="octicon octicon-link"></span></a>Operators</h2>
+
+<pre><code>   +/1 2 3
+</code></pre>
+
 <ul>
-<li>Operators take fns or arrays as operands; creates a 3-layer food chain<ul>
+<li>
+<code>/</code> here is an operator called Reduce (or fold)</li>
+<li>(Monadic) operators take a function operand on their <em>left</em>.</li>
+<li>So <code>+/</code> is "plus reduce", or "sum".</li>
+<li>Reduce inserts its operand function in the spaces: <code>1+2+3</code>
+</li>
+<li>Generalises in ways that are more useful than you might expect! (See
+<a href="http://www.dyalog.com/blog/2014/11/musings-on-reduction/">http://www.dyalog.com/blog/2014/11/musings-on-reduction/</a>)</li>
+</ul>
+
+<pre><code>Try:
+      +/2 3 4       ⍝ "summation over" (KEI)
+      ×/2 3 4       ⍝ "product over" (KEI)
+      ⌈/2 3 4
+      ≠/1 0 1 1     ⍝ parity
+</code></pre>
+
+<ul>
+<li>
+<code>¨</code> (dieresis) is an operator called Each (or map):</li>
+</ul>
+
+<pre><code>Try:
+      A←'Jay' 'Foad'
+      ⍴A
+      ⍴¨A
+      ⌽A
+      ⌽¨A
+</code></pre>
+
+<ul>
+<li>
+<code>⍨</code> is an operator called Commute (see <em>Tacit programming</em>, later):</li>
+</ul>
+
+<pre><code>Try:
+      2*3
+      2*⍨3
+      *⍨3
+</code></pre>
+
+<ul>
+<li>
+<em>Dyadic</em> operators also take an operand on the right.</li>
+<li>All dyadic operators are left-associative (cf functions).</li>
+<li>
+<code>.</code> (dot) is a <em>dyadic</em> operator called Inner Product:</li>
+</ul>
+
+<pre><code>Try:
+      1 2 3 +.× 4 5 6
+      +/ 1 2 3 × 4 5 6
+      A←2 2⍴1 2 3 4
+      A +.× A
+      +.×⍨A         ⍝ function vs operator binding makes this very neat
+      +.×/A A
+      ⍴ (2 3 4⍴⍳24) +.× (4 5 6⍴⍳120)    ⍝ arbitrary ranks
+      0.5 *⍨ 3 4 5 +.* 2                ⍝ scalar extension
+      'ABC' ∨.= 'APL'
+</code></pre>
+
+<ul>
+<li>As a special case, left operand of <code>∘</code> gives Outer Product (or table):</li>
+</ul>
+
+<pre><code>Try:
+      ∘.+ ⍨ ⍳4      ⍝ "addition table" (KEI)
+      ∘.× ⍨ ⍳4      ⍝ "multiplication table" (KEI)
+      ∘.⌈ ⍨ ⍳4      ⍝ maximum table
+      ∘.= ⍨ ⍳4      ⍝ identity matrix
+      ⍴ (2 3⍴⍳6) ∘.+ (4 5⍴⍳20)      ⍝ arbitrary ranks
+</code></pre>
+
+<ul>
+<li>
+<code>⍣</code> is a dyadic operator called power:</li>
+</ul>
+
+<pre><code>Try:
+      ({1+÷⍵}⍣10)1  ⍝ one of the few times when you need parens!
+      {1+÷⍵}⍣≡1
+</code></pre>
+
+<p><strong>Exercise</strong> explain <code>∨.=</code> (et al) in words.</p>
+
+<p><strong>Exercise</strong> explain <code>∨.∧</code> (used in transitive closure of a boolean matrix)</p>
+
+<p>Operator muse:</p>
+
+<ul>
+<li>Operators take fns or arrays as operands; creates a 3-layer food chain
+
+<ul>
 <li>Order 0: array</li>
-<li>Order 1: function, takes (array) <em>arguments</em></li>
-<li>Order 2: operator, takes (array or function) <em>operands</em></li>
+<li>Order 1: function, takes (array) <em>arguments</em>
+</li>
+<li>Order 2: operator, takes (array or function) <em>operands</em>
+</li>
 </ul>
 </li>
 <li>Functions are right-associative and monadic functions are prefix.</li>
 <li>Operators are  left-associative and monadic operators are postfix.</li>
 <li>Some kind of beautiful symmetry there.</li>
-<li>(But it&#39;s not completely symmetrical, cos the grammar distinguishes
-monadic/dyadic operators but not monadic/dyadic functions.)</li>
+<li>(But it's not completely symmetrical, because the grammar
+distinguishes monadic/dyadic operators but not monadic/dyadic
+functions.)</li>
 </ul>
-<h2 id="rank-operator">Rank operator</h2>
+
+<h2>
+<a id="user-content-thinking-arrays" class="anchor" href="#thinking-arrays" aria-hidden="true"><span class="octicon octicon-link"></span></a>Thinking arrays</h2>
+
 <ul>
-<li>Maybe leave this to the afternoon?</li>
+<li>Use brace nesting depth as an example. First show a lisp-style
+recursive algorithm; then show how to do it a whole array at a time,
+bang!</li>
 </ul>
-<h2 id="thinking-arrays">Thinking arrays</h2>
-<p>A worked example. Brace nesting? First show a lisp-style
-recursive algorithm; then show how to do it a whole array at a time, bang!</p>
-<pre class="editor-colors lang-text"><div class="line"><span class="text plain"><span class="meta paragraph text"><span>Tail&nbsp;recursion:</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta paragraph text"><span>brace1←{</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta paragraph text"><span>⍺←⍬</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0=≢⍵:⍺</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(⍺,1&nbsp;¯1&nbsp;0[&#39;()&#39;⍳⊃⍵]+⊃⌽⍺)∇&nbsp;1↓⍵</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta paragraph text"><span>}</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>Array&nbsp;thinking:</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta paragraph text"><span>brace2←{(+\⍵=&#39;(&#39;)-(+\⍵=&#39;)&#39;)}</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;brace3←{+\1&nbsp;¯1&nbsp;0[&#39;()&#39;⍳⍵]}</span></span></span></div></pre><p>cmpx results</p>
-<p>Modern processors love arrays, e.g. summing a bit vector, AW&#39;s links to videos
-of C++ people rediscovering arrays.</p>
-<p>EXERCISE (kata?) rainfall: <a href="https://medium.com/@bearsandsharks/i-failed-a-twitter-interview-52062fbb534b">https://medium.com/@bearsandsharks/i-failed-a-twitter-interview-52062fbb534b</a></p>
-<p>Need another exercise; get them to try something similar to brace nesting for
-themselves. Luhn credit card checksum algorithm?</p>
-<h1 id="afternoon">Afternoon</h1>
-<h2 id="reading-apl-mk-">Reading APL (MK?)</h2>
+
+<pre><code>      ⍝ Tail recursion:
+      brace1←{
+        ⍺←⍬
+        0=≢⍵:⍺
+        (⍺,1 ¯1 0['()'⍳⊃⍵]+⊃⌽⍺)∇ 1↓⍵
+      }
+
+      ⍝ Array thinking:
+      brace2←{(+\⍵='(')-(+\⍵=')')}
+      brace3←{+\1 ¯1 0['()'⍳⍵]}
+</code></pre>
+
+<ul>
+<li>Modern processors love arrays. Arthur Whitney recommended these videos:
+
+<ul>
+<li>Bjarne Stroustrup. Vector good. Linked list bad. <a href="https://www.youtube.com/watch?v=YQs6IC-vgmo">https://www.youtube.com/watch?v=YQs6IC-vgmo</a>
+</li>
+<li>Mike Acton. Vector good. Struct &amp; object bad. <a href="https://www.youtube.com/watch?v=rX0ItVEVjHc">https://www.youtube.com/watch?v=rX0ItVEVjHc</a>
+</li>
+</ul>
+</li>
+</ul>
+
+<p><strong>Exercise</strong> Rainfall: <a href="https://medium.com/@bearsandsharks/i-failed-a-twitter-interview-52062fbb534b">https://medium.com/@bearsandsharks/i-failed-a-twitter-interview-52062fbb534b</a></p>
+
+<p><strong>Exercise</strong> Luhn credit card checksum algorithm: <a href="https://en.wikipedia.org/wiki/Luhn_algorithm">https://en.wikipedia.org/wiki/Luhn_algorithm</a></p>
+
+<h1>
+<a id="user-content-afternoon" class="anchor" href="#afternoon" aria-hidden="true"><span class="octicon octicon-link"></span></a>Afternoon</h1>
+
+<h2>
+<a id="user-content-reading-apl" class="anchor" href="#reading-apl" aria-hidden="true"><span class="octicon octicon-link"></span></a>Reading APL</h2>
+
 <p>How to understand a line of APL: a detailed look at the game of life
 one-liner <a href="http://dfns.dyalog.com/n_life.htm">http://dfns.dyalog.com/n_life.htm</a>
 <a href="http://www.youtube.com/watch?v=a9xAKttWgP4">http://www.youtube.com/watch?v=a9xAKttWgP4</a></p>
+
 <ul>
-<li>life←{↑1 ⍵∨.∧3 4=+/,¯1 0 1∘.⊖¯1 0 1∘.⌽⊂⍵}</li>
+<li><code>life←{↑1 ⍵∨.∧3 4=+/,¯1 0 1∘.⊖¯1 0 1∘.⌽⊂⍵}</code></li>
 <li>Try it out in small chunks, starting from the right.</li>
 <li>Split it into <em>named</em> small chunks on several lines.</li>
-<li>Know what&#39;s a function and what&#39;s an operator.</li>
+<li>Know what's a function and what's an operator.</li>
 <li>Note the creative use of inner product.</li>
 <li>Finally try reading it from left to right.</li>
 </ul>
+
 <p>Other one-liners:</p>
+
 <ul>
-<li>(2×a)÷⍨(-b)(+,-)0.5*⍨(b*2)-4×a×c &quot;2 times a divided into minus b plus or minus the square root of [the discriminant] b squared minus 4 a c&quot;</li>
-<li>Find primes from 1 to R: (~R∊R∘.×R)/R←1↓⍳R</li>
-<li>Or {(~R∊R∘.×R)/R←1↓⍳⍵}</li>
-<li>Or {{(~⍵∊⍵∘.×⍵)/⍵}1↓⍳⍵}</li>
-<li>Or {(~⍵∊⍵∘.×⍵)/⍵}∘{1↓⍳⍵}</li>
+<li>
+<code>(2×a)÷⍨(-b)(+,-)0.5\*⍨(b*2)-4×a×c</code> ("2 times a divided into minus b
+plus or minus the square root of [the discriminant] b squared minus
+4 a c")</li>
+<li>Find primes from 1 to R: <code>(~R∊R∘.×R)/R←1↓⍳R</code>
+</li>
+<li>Or <code>{(~R∊R∘.×R)/R←1↓⍳⍵}</code>
+</li>
+<li>Or <code>{{(~⍵∊⍵∘.×⍵)/⍵}1↓⍳⍵}</code>
+</li>
+<li>Or <code>{(~⍵∊⍵∘.×⍵)/⍵}∘{1↓⍳⍵}</code>
+</li>
 </ul>
+
 <p>Quirks that you may notice:</p>
+
 <ul>
-<li>Some APL programmers like to avoid parentheses, to reduce the cognitive load!</li>
-<li>Hence, put simple argument on left: 1+expr, 0&lt;expr</li>
-<li>Or, use Commute: 2*⍨...</li>
-<li>N.B. game of life has no parentheses, partly because (some) primitives
-(e.g. Residue) were carefully designed to be most useful with a simple constant
-on the <em>left</em>.</li>
+<li>Some APL programmers like to avoid parentheses, to reduce the
+cognitive load!</li>
+<li>Hence, put simple argument on left: <code>1+expr</code>, <code>0&lt;expr</code>
+</li>
+<li>Or, use Commute: <code>2*⍨...</code>
+</li>
+<li>N.B. game of life has no parentheses, partly because (some)
+primitives (e.g. Residue) were carefully designed to be most useful
+with a simple constant on the <em>left</em>.</li>
 <li>See also <em>Code Golf</em>.</li>
 </ul>
-<h2 id="nested-arrays">Nested arrays</h2>
+
+<h2>
+<a id="user-content-nested-arrays" class="anchor" href="#nested-arrays" aria-hidden="true"><span class="octicon octicon-link"></span></a>Nested arrays</h2>
+
 <ul>
-<li>Enclose (monadic ⊂) boxes any array into a scalar enclosure.</li>
-<li>First (monadic ⊃) is a handy inverse.</li>
+<li>Enclose (monadic <code>⊂</code>) boxes any array into a scalar enclosure.</li>
+<li>First (monadic <code>⊃</code>) is a handy inverse.</li>
 <li>Enclose of a simple scalar is unchanged: turtles all the way down.</li>
-<li>⍴⊂ is a handy idiom for constructing nested arrays: 3⍴⊂&#39;Jay&#39;</li>
+<li>⍴⊂ is a handy idiom for constructing nested arrays: <code>3⍴⊂'Jay'</code>.</li>
 <li>Depth of an array is the level of nesting (0 for simple scalar).</li>
-<li>Mix and split trade off rank for depth.</li>
-<li>Mention prototypical items?</li>
+<li>Mix and Split trade off rank for depth.</li>
+<li>Prototypical items.</li>
 </ul>
-<h2 id="indexing-and-partial-assignment-mk-">Indexing and partial assignment (MK)</h2>
+
+<h2>
+<a id="user-content-indexing-and-partial-assignment" class="anchor" href="#indexing-and-partial-assignment" aria-hidden="true"><span class="octicon octicon-link"></span></a>Indexing and partial assignment</h2>
+
 <ul>
-<li>Show Pick: 5⊃vec, (⊂2 3)⊃mat</li>
-<li>Show Squad: 5⌷vec, 2 3⌷mat</li>
-<li>Finally show the anomalous syntax for bracket indexing: vec[5], mat[2;3]</li>
-<li>N.B. bracket indexing can&#39;t be used as an operand function :-(</li>
-<li><p>Using an array <em>inside</em> the brackets can be very useful: &#39;.⌹&#39;[mat]</p>
+<li>Show Pick: <code>5⊃vec</code>, <code>(⊂2 3)⊃mat</code>
 </li>
-<li><p>Indexed assignment works intuitively: vec[3]←99</p>
+<li>Show Squad: <code>5⌷vec</code>, <code>2 3⌷mat</code>
 </li>
-<li>N.B. arrays still have <strong>value</strong> semantics; other namings of the same array
-are <em>not</em> affected.</li>
-<li>Surprise them with selective assignment: (3↑vec)←4 5 6 also works
-intuitively!</li>
-<li>N.B. but only for &quot;structural&quot; primitive functions; can&#39;t do (0×A)←1</li>
+<li>Finally show the anomalous syntax for bracket indexing: <code>vec[5]</code>, <code>mat[2;3]</code>
+</li>
+<li>N.B. bracket indexing can't be used as an operand function :-(</li>
+<li><p>Using an array <em>inside</em> the brackets can be very useful: <code>'.⌹'[mat]</code></p></li>
+<li><p>Indexed assignment works intuitively: <code>vec[3]←99</code></p></li>
+<li>N.B. arrays still have <strong>value</strong> semantics; other namings of the
+same array are <em>not</em> affected.</li>
+<li>Selective assignment: <code>(3↑vec)←4 5 6</code> <em>also</em> works intuitively!</li>
+<li>But N.B. only for "structural" primitive functions; you can't do <code>(0×A)←1</code>.</li>
 </ul>
-<h2 id="defined-operators">Defined operators</h2>
+
+<h2>
+<a id="user-content-defined-operators" class="anchor" href="#defined-operators" aria-hidden="true"><span class="octicon octicon-link"></span></a>Defined operators</h2>
+
 <ul>
-<li>Lambda-style operator definition with ⍺⍺ and ⍵⍵.</li>
-<li>(Really defines the <em>derived function</em>, not the operator, because you
-have access to ⍺ and ⍵ too.)</li>
+<li>Lambda-style operator definition with <code>⍺⍺</code> and <code>⍵⍵</code>.</li>
+<li>(Really defines the <em>derived function</em>, not the operator, because
+you have access to <code>⍺</code> and <code>⍵</code> too.)</li>
 </ul>
-<pre class="editor-colors lang-text"><div class="line"><span class="text plain"><span class="meta paragraph text"><span>Try:</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta paragraph text"><span>double←{2×⍵}</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;twice←{⍺⍺&nbsp;⍺⍺&nbsp;⍵}</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;double&nbsp;twice&nbsp;3</span></span></span></div></pre><h2 id="procedures-mk-">Procedures (MK)</h2>
+
+<pre><code>Try:
+      double←{2×⍵}
+      twice←{⍺⍺ ⍺⍺ ⍵}
+      double twice 3
+</code></pre>
+
+<h2>
+<a id="user-content-procedures" class="anchor" href="#procedures" aria-hidden="true"><span class="octicon octicon-link"></span></a>Procedures</h2>
+
 <blockquote>
-<p>Unfortunately, however, APL still splits programming
-into a world of expressions and a world of statements.
-Thus the effort to write one-line programs is
-partly motivated by the desire to stay in the more orderly
-world of expressions. --John Backus, &quot;Can Programming Be Liberated from the von
-Neumann Style?&quot;</p>
+<p>Unfortunately, however, APL still splits programming into a world of
+  expressions and a world of statements.  Thus the effort to write
+  one-line programs is partly motivated by the desire to stay in the
+  more orderly world of expressions. --John Backus, "Can Programming
+  Be Liberated from the von Neumann Style?"</p>
 </blockquote>
+
 <ul>
 <li>APL had tradfns long before dfns.</li>
-<li>The only control flow was → (goto).</li>
-<li>Control structures (:If etc) improved life a little.</li>
+<li>The only control flow was <code>→</code> (goto).</li>
+<li>Control structures (<code>:If</code> etc) improved life a little.</li>
 <li>Variables had dynamic scope.</li>
 </ul>
-<h2 id="error-trapping-mk-">Error trapping (MK)</h2>
+
+<h2>
+<a id="user-content-error-trapping" class="anchor" href="#error-trapping" aria-hidden="true"><span class="octicon octicon-link"></span></a>Error trapping</h2>
+
 <ul>
 <li>Error guards in dfns.</li>
-<li>:Trap in tradfns.</li>
+<li>
+<code>:Trap</code> in tradfns.</li>
 </ul>
-<h2 id="interactive-debugging">Interactive debugging</h2>
+
+<h2>
+<a id="user-content-interactive-debugging" class="anchor" href="#interactive-debugging" aria-hidden="true"><span class="octicon octicon-link"></span></a>Interactive debugging</h2>
+
 <ul>
 <li>Using the tracer to step through code.</li>
 <li>Using the session to examine variables.</li>
 <li>Edit windows on variables show live updates.</li>
 </ul>
-<h2 id="schisms-">Schisms (?)</h2>
+
+<h2>
+<a id="user-content-schisms" class="anchor" href="#schisms" aria-hidden="true"><span class="octicon octicon-link"></span></a>Schisms</h2>
+
 <blockquote>
-<p>&quot;Should array indices start at 0 or 1? My compromise of 0.5 was rejected
-without, I thought, proper consideration.&quot; --Stan Kelly Bootle</p>
+<p>"Should array indices start at 0 or 1? My compromise of 0.5 was
+  rejected without, I thought, proper consideration." --Stan Kelly
+  Bootle</p>
 </blockquote>
+
 <ul>
-<li>Index origin (everyone agrees it shouldn&#39;t be settable)</li>
-<li>Floating vs grounded array theory</li>
-<li>APL2 (axis &quot;operator&quot;) vs Rationalised APL (rank operator)</li>
+<li>Index origin can be 0 or 1 (everyone agrees it shouldn't be
+settable, but they don't agree what it should be).</li>
+<li>Floating vs grounded array theory.</li>
+<li>APL2 (axis "operator") vs Rationalised APL (rank operator).</li>
 </ul>
-<h2 id="tacit-programming">Tacit programming</h2>
+
+<h2>
+<a id="user-content-tacit-programming" class="anchor" href="#tacit-programming" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tacit programming</h2>
+
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Tacit_programming">https://en.wikipedia.org/wiki/Tacit_programming</a></li>
 <li>Syntax of function trains (need some compelling examples)</li>
-<li>Tacit or &quot;point free&quot; forms:<ul>
+<li>Tacit or "point free" forms:
+
+<ul>
 <li>Compose</li>
 <li>Commute</li>
 <li>Atop</li>
@@ -679,34 +722,94 @@ without, I thought, proper consideration.&quot; --Stan Kelly Bootle</p>
 </ul>
 </li>
 </ul>
-<p><strong>EXERCISE</strong></p>
-<pre class="editor-colors lang-text"><div class="line"><span class="text plain"><span class="meta paragraph text"><span>What&nbsp;does&nbsp;this&nbsp;do:</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta paragraph text"><span>(∨/&nbsp;≤&nbsp;∧/)&nbsp;booleanvector</span></span></span></div></pre><p>(checks for all zeros OR all ones)</p>
-<h2 id="namespaces">Namespaces</h2>
+
+<p><strong>Exercise</strong> what does this do:</p>
+
+<pre><code>      (∨/ ≤ ∧/) booleanvector
+</code></pre>
+
+<p>(Answer: it checks for all zeros OR all ones.)</p>
+
+<h2>
+<a id="user-content-namespaces" class="anchor" href="#namespaces" aria-hidden="true"><span class="octicon octicon-link"></span></a>Namespaces</h2>
+
 <ul>
-<li>What’s an array, revised:<ul>
+<li>What’s an array, revised:
+
+<ul>
 <li>Rectangular collection of items,</li>
 <li>arranged along zero or more orthogonal axes,</li>
 <li>of numbers, characters, arrays <strong>and refs</strong>.</li>
 </ul>
 </li>
-<li>Create a namespace with <code>⎕NS&#39;&#39;</code> (see <em>System functions</em> below).</li>
-<li>Syntax is extremely general:<pre class="editor-colors lang-text"><div class="line"><span class="text plain"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta paragraph text"><span>ns.name</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;ns.(expr)</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;&nbsp;(ns1&nbsp;ns2).(expr)</span></span></span></div></pre></li>
-<li>Examples:<pre class="editor-colors lang-text"><div class="line"><span class="text plain"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta paragraph text"><span>1&nbsp;2&nbsp;3&nbsp;&nbsp;(p&nbsp;q&nbsp;r).f&nbsp;&nbsp;4&nbsp;5&nbsp;6</span></span></span></div></pre></li>
+<li>Create a namespace with <code>⎕NS''</code> (see <em>System functions</em> below).</li>
+<li>Syntax is extremely general:</li>
 </ul>
-<h2 id="system-functions-mk-">System functions (MK)</h2>
+
+<pre><code>      ns.name
+      ns.(expr)
+      (ns1 ns2).(expr)
+</code></pre>
+
+<ul>
+<li>Examples:</li>
+</ul>
+
+<pre><code>      1 2 3  (p q r).f  4 5 6
+</code></pre>
+
+<h2>
+<a id="user-content-system-functions" class="anchor" href="#system-functions" aria-hidden="true"><span class="octicon octicon-link"></span></a>System functions</h2>
+
 <ul>
 <li>Provide I/O, system interfaces etc. Roughly equivalent to C standard library.</li>
-<li>Mention ⎕FREAD, ⎕NREAD, ⎕XML, ⎕R/⎕S, ...</li>
+<li>Mention <code>⎕FREAD</code>, <code>⎕NREAD</code>, <code>⎕XML</code>, <code>⎕R</code>/<code>⎕S</code>, ...</li>
 </ul>
-<h2 id="building-applications-mk-">Building applications (MK)</h2>
+
+<h2>
+<a id="user-content-building-applications" class="anchor" href="#building-applications" aria-hidden="true"><span class="octicon octicon-link"></span></a>Building applications</h2>
+
 <ul>
 <li>Turn one of our exercises into a web page or service with MiServer ?</li>
 </ul>
-<h2 id="open-discussion">Open discussion</h2>
-<h2 id="finale-stormwind-video">Finale: Stormwind video</h2>
-<p>Distribute quick reference cards</p>
-<p>Primitives are carefully chosen; grade instead of sort: names[⍋ages]</p>
-<p>In general, static parsing is not possible: A B C<br>(in practice this is rarely a problem).</p>
-<p>Parsing and execution are intertwringled because the language is so dynamic:</p>
-<pre class="editor-colors lang-text"><div class="line"><span class="text plain"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta paragraph text"><span>(⎕EX&#39;sum&#39;)sum&nbsp;⍴⎕FX,⊂&#39;sum←{⍺+⍵}&#39;</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>4</span></span></span></div></pre></body>
+
+              </div>
+            </div>
+          </div>
+        
+
+      </div>
+    </div>
+  </div>
+  <div>&nbsp;</div>
+  </div><script>
+    function showCanonicalImages() {
+      var images = document.getElementsByTagName('img');
+      if (!images) {
+        return;
+      }
+      for (var index = 0; index < images.length; index++) {
+        var image = images[index];
+        if (image.getAttribute('data-canonical-src')) {
+          image.src = image.getAttribute('data-canonical-src');
+        }
+      }
+    }
+    function scrollToHash() {
+      if (location.hash && !document.querySelector(":target")) {
+        var element = document.getElementById('user-content-' + location.hash.slice(1));
+        if (element) {
+           element.scrollIntoView();
+        }
+      }
+    }
+    window.onhashchange = function() {
+      scrollToHash();
+    }
+    window.onload = function() {
+      scrollToHash();
+    }
+    showCanonicalImages();
+  </script>
+</body>
 </html>
