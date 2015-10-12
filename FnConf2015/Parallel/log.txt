@@ -1,4 +1,6 @@
-﻿      ]demo c:\dropbox\fnconf15\part1
+﻿⍝ Transcript of live coding / demo
+
+      ]demo c:\dropbox\fnconf15\part1
 Loaded Script c:\dropbox\fnconf15\part1.txt
 Script Initialized...
 
