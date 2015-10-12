@@ -5,7 +5,7 @@ Slides and scripts from [Jay Foad and Morten Krombergs APL Workshop FnConf 2015]
 
 The APL source files are best viewed with the APL385 font that can be found [here](http://www.dyalog.com/apl-font-keyboard.htm).
 ##Files:
-1. Course Outline.html  : Jay's outline and course notes
+1. Course Outline.*     : Jay's outline and course notes
 2. handouts/*           : The handouts
 3. session.txt          : A log of Jay's APL session
 4. Array*.PPTX          : Morten's PowerPoint presentation 
