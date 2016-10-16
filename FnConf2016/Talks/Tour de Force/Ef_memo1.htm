@@ -1,0 +1,38 @@
+﻿<html>
+<head><meta http-equiv="content-type" content="text/html;charset=utf-8">
+<title>A Tour (de Force) of APL in 16 Expressions</title>
+<link href="adoc.css" rel=stylesheet></head>
+<body>
+<a name="top"></a>
+
+<table width=100%><tr><td width=1>&nbsp;</td>
+ <td><font size=+3><b>E. A Memo Operator</b></td>
+ <td valign=top align=right><a href="index.htm">Index</a> &nbsp; 
+  <a href="Ee_memo0.htm">&lt;&lt;</a> &nbsp; <a href="Eg_memo2.htm">&gt;&gt;</a></td>
+</tr></table>
+
+<table><tr><td width=20>&nbsp;</td><td><pre><script src="font.js" type="text/javascript"></script>
+M←{
+ f←⍺⍺
+ i←2+'⋄'⍳⍨t←3↓,⎕CR'f'
+ 0=⎕NC'⍺':⍎' {T←(1+  ⍵)⍴¯1 ⋄  {',(i↑t),'¯1≢T[⍵]  :⊃T[⍵]   ⋄ ⊃T[⍵]  ←⊂',(i↓t),'⍵}⍵'
+          ⍎'⍺{T←(1+⍺,⍵)⍴¯1 ⋄ ⍺{',(i↑t),'¯1≢T[⍺;⍵]:⊃T[⍺;⍵] ⋄ ⊃T[⍺;⍵]←⊂',(i↓t),'⍵}⍵'
+}
+
+   pn M 10
+42
+   pn 10
+42
+
+   pn
+{1≥⍵:0≤⍵ ⋄ -/+⌿∇¨rec ⍵}
+
+   pn M
+<font color=red>{T←(1+⍵)⍴¯1 ⋄ </font>{1≥⍵:0≤⍵ ⋄ <font color=red>¯1≢T[⍵]:⊃T[⍵] ⋄ ⊃T[⍵]←⊂</font>-/+⌿∇¨rec ⍵}<font color=red>⍵}</font>
+
+</font></pre></td></tr></table>
+
+</font></td></tr></table>
+
+</body>
+</html>

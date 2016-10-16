@@ -1,0 +1,3 @@
+﻿⍝ Trace this:
+]load C:\Devt\Presentations\FnConf2016\workshop\FnConfSched.dyalog
+1 #.FnConfSched.Format ⊃⎕NGET'C:\Devt\Presentations\FnConf2016\workshop\fnconf15.txt'

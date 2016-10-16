@@ -1,0 +1,59 @@
+﻿<html>
+<head><title>A Tour (de Force) of APL in 16 Expressions</title>
+<link href="adoc.css" rel=stylesheet></head>
+</head>
+
+<body>
+<table width=100%><tr><td width=1>&nbsp;</td>
+ <td><font size=+3><b><font size=+3>Exercise: Symmetries of the Square</font></b></td>
+ <td valign=top align=right><a href="tourex_index.htm">Index</a> &nbsp; 
+  <a href="tourex_cayley.htm">&lt;&lt;</a> &nbsp; <a href="tourex_interval.htm">&gt;&gt;</a></td>
+</tr></table>
+<br>
+
+<table><tr><td nowrap width=20>&nbsp;</td><td>
+<pre><script src="font.js" type="text/javascript"></script>
+i ←(⍳8),            1 2 3 0 7 4 5 6
+i,←2 3 0 1 6 7 4 5, 3 0 1 2 5 6 7 4
+i,←4 5 6 7 0 1 2 3, 5 6 7 4 3 0 1 2
+i,←6 7 4 5 2 3 0 1, 7 4 5 6 1 2 3 0
+i←8 8⍴i
+D8← (⊂i)⌷1↓¨{(' '=⍵)⊂⍵}' ⊢ ⍒ ⍒⍒ ⍋⌽ ⌽ ⍋ ⍋⍒ ⍒⌽'
+
+</font></pre>
+
+<table>
+<tr><td valign=top><script src="font.js" type="text/javascript"></script>a. &nbsp;</font></td><td>
+<script src="font.js" type="text/javascript"></script>
+Check that Cayley&rsquo;s Theorem holds
+for<tt><script src="font.js" type="text/javascript"></script> D8</font></tt>&nbsp;.
+<pre><script src="font.js" type="text/javascript"></script>r←, ⍳ ⊢
+(r D8) ≡ r ∘.{⍺[⍵]}⍨ ↓r D8
+
+</pre>
+</font></td></tr>
+
+<tr><td valign=top><script src="font.js" type="text/javascript"></script>b.</font></td><td>
+<script src="font.js" type="text/javascript"></script>
+Check that<tt><script src="font.js" type="text/javascript"></script> D8[i;0] </font></tt>
+composed with<tt><script src="font.js" type="text/javascript"></script> D8[0;j] </font></tt>
+is<tt><script src="font.js" type="text/javascript"></script> D8[i;j]</font></tt>
+
+<pre><script src="font.js" type="text/javascript"></script>p ← ?⍨ 97
+(⍎¨D8,¨'p') ≡ ⍎¨(∘.,⍨0⌷D8),¨'p'
+
+D8
+∘.,⍨ 0⌷D8
+</font></pre>
+</font></td></tr>
+</table>
+
+</td></tr></table>
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+</body>
+</html>

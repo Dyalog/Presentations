@@ -1,0 +1,76 @@
+﻿<html>
+<head><meta http-equiv="content-type" content="text/html;charset=utf-8">
+<title>A Tour (de Force) of APL in 16 Expressions</title>
+<link href="adoc.css" rel=stylesheet></head>
+<body>
+<a name="top"></a>
+
+<table width=100%><tr><td width=1>&nbsp;</td>
+ <td><font size=+3><b><font size=+3>B. Symmetries of the Square</font></b></td>
+ <td valign=top align=right><a href="index.htm">Index</a> &nbsp; 
+  <a href="B.htm">&lt;&lt;</a> &nbsp; <a href="Bb.htm">&gt;&gt;</a></td>
+</tr></table>
+
+<table><tr><td width=20>&nbsp;</td><td>
+<br>
+
+<table>
+<tr>
+ <td><p><tt><script src="font.js" type="text/javascript"></script>⊢ &nbsp; &nbsp; ⊢</font></tt></p><img src="img/apl0.jpg"></td> <td width=48>&nbsp;</td>
+ <td><p><tt><script src="font.js" type="text/javascript"></script>⊖⍉ &nbsp;&nbsp; ⍒</font></tt></p><img src="img/apl3.jpg"></td> <td width=48>&nbsp;</td>
+ <td><p><tt><script src="font.js" type="text/javascript"></script>⌽⊖ &nbsp; ⍒⍒</font></tt></p><img src="img/apl2.jpg"></td>      <td width=48>&nbsp;</td>
+ <td><p><tt><script src="font.js" type="text/javascript"></script>⌽⍉ &nbsp; ⍋⌽</font></tt></p><img src="img/apl1.jpg"></td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+ <td><img src="img/apl4.jpg"><p><tt><script src="font.js" type="text/javascript"></script>⊖ &nbsp; &nbsp; ⌽</font></tt></p></td> <td></td>
+ <td><img src="img/apl7.jpg"><p><tt><script src="font.js" type="text/javascript"></script>⍉ &nbsp; &nbsp; ⍋</font></tt></p></td> <td></td>
+ <td><img src="img/apl6.jpg"><p><tt><script src="font.js" type="text/javascript"></script>⌽ &nbsp;&nbsp; ⍋⍒</font></tt></p></td> <td></td>
+ <td><img src="img/apl5.jpg"><p><tt><script src="font.js" type="text/javascript"></script>⊖⍉⊖ &nbsp;⍒⌽</font></tt></p></td>
+</tr>
+</table>
+
+<br><br>
+
+<script src="font.js" type="text/javascript"></script>
+<tt><script src="font.js" type="text/javascript"></script>⊢ ⌽ ⊖ ⍉ </font></tt>
+functions on matrices; &nbsp;
+<tt><script src="font.js" type="text/javascript"></script>⊢ ⍋ ⍒ ⌽ </font></tt>
+functions on permutations
+
+<table><tr>
+<td><pre><script src="font.js" type="text/javascript"></script>
+p← 19?19 
+
+(⊢  m) ≡ pm ⊢ p
+(⊖⍉ m) ≡ pm ⍒ p
+(⌽⊖ m) ≡ pm ⍒⍒p
+(⌽⍉ m) ≡ pm ⍋⌽p
+
+(⊖  m) ≡ pm ⌽ p
+(⍉  m) ≡ pm ⍋ p
+(⌽  m) ≡ pm ⍋⍒p
+(⊖⍉⊖m) ≡ pm ⍒⌽p
+</font></pre></td>
+
+<td width=88 nowrap>&nbsp;</td>
+
+<td><pre><script src="font.js" type="text/javascript"></script>
+m← pm p
+
+(⊢ p) ≡ mp ⊢  m
+(⍒ p) ≡ mp ⊖⍉ m
+(⍒⍒p) ≡ mp ⌽⊖ m
+(⍋⌽p) ≡ mp ⌽⍉ m
+
+(⌽ p) ≡ mp ⊖  m
+(⍋ p) ≡ mp ⍉  m
+(⍋⍒p) ≡ mp ⌽  m
+(⍒⌽p) ≡ mp ⊖⍉⊖m
+</font></pre></td>
+</tr></table>
+
+</font></td></tr></table>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+﻿<html>
+<head><meta http-equiv="content-type" content="text/html;charset=utf-8">
+<title>A Tour (de Force) of APL in 16 Expressions</title>
+<link href="adoc.css" rel=stylesheet></head>
+<body>
+<a name="top"></a>
+
+<table width=100%><tr><td width=1>&nbsp;</td>
+ <td><font size=+3><b><font size=+3>7. Quicksort &mdash; Order Statistics</font></b></td>
+ <td valign=top align=right><a href="index.htm">Index</a> &nbsp; 
+  <a href="7a.htm">&lt;&lt;</a> &nbsp; <a href="8.htm">&gt;&gt;</a></td>
+</tr></table>
+
+<table><tr><td width=20>&nbsp;</td><td>
+<br><br>
+
+<table>
+<tr><td colspan=3><tt><script src="font.js" type="text/javascript"></script>S1←{⍵⌷⍨⍺⌷⍋⍵}</font></tt></td></tr>
+
+<tr><td><pre><script src="font.js" type="text/javascript"></script>
+S←{
+  s←⍵ ⍺⍺ p←⍵⌷⍨?≢⍵
+  ⍺<  +/b←0>s:⍺ ∇ b⌿⍵
+  ⍺&lt;m←+/b←0≥s:p
+  (⍺-m) ∇ (~b)⌿⍵
+}
+</font></pre></td><td width=68 nowrap>&nbsp;</td>
+<td><pre><script src="font.js" type="text/javascript"></script>
+Sn←{
+  p←⍵⌷⍨?≢⍵
+  ⍺< &nbsp;+/b←⍵&lt;p:⍺ ∇ b⌿⍵
+  ⍺&lt;m←+/b←⍵≤p:p
+  (⍺-m) ∇ (~b)⌿⍵
+}
+</font></pre></td></tr>
+
+<tr><td colspan=3><pre><script src="font.js" type="text/javascript"></script>
+   x←?1e6⍴1e9
+
+   cmpx '4e5 S1 x' '4e5 -S x' '4e5 Sn x'
+  4e5 S1 x → 6.19E¯2 |   0% ⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕
+  4e5 -S x → 1.27E¯2 | -80% ⎕⎕⎕⎕⎕⎕                        
+  4e5 Sn x → 9.38E¯3 | -85% ⎕⎕⎕⎕⎕                         
+</font></pre></td></tr>
+</table>
+
+</td></tr></table>
+
+</body>
+</html>

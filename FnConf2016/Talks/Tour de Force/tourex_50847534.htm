@@ -1,0 +1,76 @@
+﻿<html>
+<head><title>A Tour (de Force) of APL in 16 Expressions</title>
+<link href="adoc.css" rel=stylesheet></head>
+</head>
+
+<body>
+<table width=100%><tr><td width=1>&nbsp;</td>
+ <td><font size=+3><b><font size=+3>Exercise: 50847534</font></b></td>
+ <td valign=top align=right><a href="tourex_index.htm">Index</a> &nbsp; 
+  <a href="tourex_interval.htm">&lt;&lt;</a> &nbsp; <a href="tourex_memo.htm">&gt;&gt;</a></td>
+</tr></table>
+<br>
+
+<table><tr><td nowrap width=20>&nbsp;</td><td><script src="font.js" type="text/javascript"></script>
+<pre><script src="font.js" type="text/javascript"></script>
+sieve←{
+  b←⍵⍴{∧⌿↑(×/⍵)⍴¨~⍵↑¨1}q←2 3 5
+  b[⍳6⌊⍵]←(6⌊⍵)⍴0 0 1 1 0 1 
+  49≥⍵:b
+  p←(≢q)↓{⍵/⍳⍴⍵}∇⌈⍵*0.5
+  m←1+⌊(⍵-1+p×p)÷2×p
+  b ⊣ p {b[⍺×⍺+2×⍳⍵]←0}¨ m
+}
+
+</font></pre>
+
+<table>
+<tr><td valign=top><script src="font.js" type="text/javascript"></script>a. &nbsp;</font></td><td>
+<script src="font.js" type="text/javascript"></script>
+Why is<tt><script src="font.js" type="text/javascript"></script> 1 </font></tt>not a prime?  
+(Some older math texts say<tt><script src="font.js" type="text/javascript"></script> 1 </font></tt><i>is</i> a prime.)
+<br>&nbsp;
+ </font></td></tr>
+
+<tr><td valign=top><script src="font.js" type="text/javascript"></script>b.</font></td><td>
+<script src="font.js" type="text/javascript"></script>
+Write a version of<tt><script src="font.js" type="text/javascript"></script> sieve </tt>that 
+checks its argument and result.</p>
+
+<pre><script src="font.js" type="text/javascript"></script>assert←{⍺←'assertion failure' ⋄ 0∊⍵:⍺ ⎕signal 8 ⋄ shy←0}
+
+sieve_chk←{
+  b←sieve ⍵
+  assert(,⍵)≡⍴b:
+  assert∧/b∊0 1:
+   ...
+<!--
+  f←{c←(≢b)⍴~⍵↑1 ⋄ c[(⍵<≢b)⍴⍵]←1 ⋄ ∧/c≥b}
+  assert f¨2↓⍳⌈⍵*0.5: -->  b
+}
+
+(1⊣sieve_chk)¨ ⍳10
+(1⊣sieve_chk)¨ ¯1 0 1∘.+2 3 5 7 11 13 17 19*2
+
+</font></td></tr>
+
+<tr><td valign=top><script src="font.js" type="text/javascript"></script>c.</font></td><td>
+<script src="font.js" type="text/javascript"></script>
+The function<tt><script src="font.js" type="text/javascript"></script> pco </font></tt>from the dfns workspace performs various prime computations.
+In particular,<tt><script src="font.js" type="text/javascript"></script> b←10 pco r,s </font></tt>
+is a boolean vector such that<nobr><tt><script src="font.js" type="text/javascript"></script> r+b/⍳≢b </font></tt></nobr>
+are the primes in the half-open interval<tt><script src="font.js" type="text/javascript"></script> [r,s)</font></tt>&nbsp;. &nbsp;
+Check that<tt><script src="font.js" type="text/javascript"></script> pco </font></tt>is consistent 
+with<tt><script src="font.js" type="text/javascript"></script> sieve </font></tt>
+(and that<tt><script src="font.js" type="text/javascript"></script> pco </font></tt>is self-consistent). 
+</table>
+
+</td></tr></table>
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+</body>
+</html>

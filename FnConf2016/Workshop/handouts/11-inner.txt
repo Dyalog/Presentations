@@ -1,0 +1,3 @@
+﻿⍝ explain ∨.= (et al) in words,
+⍝ ∨.∧ (used in transitive closure of
+⍝ a boolean matrix)

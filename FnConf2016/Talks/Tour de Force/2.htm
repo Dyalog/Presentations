@@ -1,0 +1,53 @@
+﻿<html>
+<head><meta http-equiv="content-type" content="text/html;charset=utf-8">
+<title>A Tour (de Force) of APL in 16 Expressions</title>
+<link href="adoc.css" rel=stylesheet></head>
+<body>
+<a name="top"></a>
+
+<table width=100%><tr><td width=1>&nbsp;</td>
+ <td><font size=+3><b><font size=+3>2. Index-Of Selfie</font></b></td>
+ <td valign=top align=right><a href="index.htm">Index</a> &nbsp; 
+  <a href="1.htm">&lt;&lt;</a> &nbsp; <a href="3.htm">&gt;&gt;</a></td>
+</tr></table>
+
+<table><tr><td width=20>&nbsp;</td><td>
+
+<pre><script src="font.js" type="text/javascript"></script>
+x⍳x
+
+</font></pre>
+
+<table>
+<tr><td><tt><script src="font.js" type="text/javascript"></script>
+ ((⍳≢x)=x⍳x)⌿x</font></td>
+ <td width=38>&nbsp;</td>
+ <td><script src="font.js" type="text/javascript"></script>nub (unique)
+ </font></td></tr>
+<tr><td><tt><script src="font.js" type="text/javascript"></script>
+ (x⍳x)∘.=(x⍳y)</font></td>
+ <td></td>
+ <td><script src="font.js" type="text/javascript"></script>an efficient computation 
+for<tt><script src="font.js" type="text/javascript"></script> x∧.=⍉y </font></tt>
+for matrices<tt><script src="font.js" type="text/javascript"></script> x </font></tt>
+and<tt><script src="font.js" type="text/javascript"></script> y </font></tt>
+ </font></td></tr>
+<tr><td><tt><script src="font.js" type="text/javascript"></script>
+(x⍳x)∘.=(x⍳y)</font></td>
+ <td></td>
+ <td><script src="font.js" type="text/javascript"></script>an efficient computation 
+for<tt><script src="font.js" type="text/javascript"></script> x∘.≡y </font></tt>
+for non-simple vector<tt><script src="font.js" type="text/javascript"></script> x </font></tt>
+ </font></td></tr>
+<tr><td><tt><script src="font.js" type="text/javascript"></script>
+(x⍳x) f⌸ y</font></td>
+ <td></td>
+ <td><script src="font.js" type="text/javascript"></script>equivalent 
+to<tt><script src="font.js" type="text/javascript"></script> x f⌸ y </font>
+ </font></td></tr>
+</table>
+
+</font></td></tr></table>
+
+</body>
+</html>

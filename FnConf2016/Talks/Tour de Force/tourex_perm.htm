@@ -1,0 +1,54 @@
+﻿<html>
+<head><title>A Tour (de Force) of APL in 16 Expressions</title>
+<link href="adoc.css" rel=stylesheet></head>
+</head>
+
+<body>
+<table width=100%><tr><td width=1>&nbsp;</td>
+ <td><font size=+3><b><font size=+3>Exercise: Permutations</font></b></td>
+ <td valign=top align=right><a href="tourex_index.htm">Index</a> &nbsp; 
+  <a href="tourex_itix.htm">&lt;&lt;</a> &nbsp; <a href="tourex_paren.htm">&gt;&gt;</a></td>
+</tr></table>
+<br>
+
+<table><tr><td nowrap width=20>&nbsp;</td><td>
+
+<pre><script src="font.js" type="text/javascript"></script>
+perm←{0=⍵:1 0⍴0 ⋄ ,[⍳2](⊂0,1+∇ ¯1+⍵) ⌷⍤1 ⍒⍤1 ∘.=⍨ ⍳⍵}
+
+</font></pre>
+
+<table>
+<tr><td valign=top><script src="font.js" type="text/javascript"></script>a. &nbsp;</font></td><td>
+<script src="font.js" type="text/javascript"></script>
+Write a version of<tt><script src="font.js" type="text/javascript"></script> perm </font></tt>that checks
+its argument and result.  For example:
+
+<pre><script src="font.js" type="text/javascript"></script>assert←{⍺←'assertion failure' ⋄ 0∊⍵:⍺ ⎕signal 8 ⋄ shy←0}
+
+perm_chk←{
+  assert 0=⍴⍴⍵:
+  assert 0≤⍵:
+  z←perm ⍵
+  assert (⍴z)≡(!⍵),⍵:
+    ...
+  z
+}
+
+</font></pre>
+</font></td></tr>
+
+<tr><td valign=top><script src="font.js" type="text/javascript"></script>b.</font></td><td>
+<script src="font.js" type="text/javascript"></script>
+Write a 1-line, non-recursive, non-looping version of<tt><script src="font.js" type="text/javascript"></script> perm</font></tt>&nbsp;.<tt> </tt>
+<!-- <tt> {(∧/(⍳⍵)∊⍤1⊢t)⌿t←⍪↑,⍳⍵⍴⍵}</tt> -->
+</font></td></tr>
+</table>
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+</body>
+</html>

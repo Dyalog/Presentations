@@ -1,0 +1,28 @@
+﻿⍝ execute   ]box on   in your session
+⎕io←0
+
+x←'Mississippi'
+{⍺,≢⍵}⌸x
+{⍺,≢⍵}⌸2/x
+{⍺,≢⍵}⌸3/x
+x{⍺⍵}⌸⍳≢x
+
+⎕rl←7*5  ⍝ set random seed to get reproducible random numbers
+
+x←('zero' 'one' 'two' 'three' 'four')[?20⍴5]
+x
+y←?20⍴10
+y
+x {⍺⍵}⌸ y
+x {⍺,≢⍵}⌸ y
+x {⍺,+⌿⍵}⌸ y
+x {⍺,⌈⌿⍵}⌸ y
+x {⍺,⌊⌿⍵}⌸ y
+x {⍺,(+⌿÷≢)⍵}⌸ y
+
+x {⊂⍵}⌸ y
+x {+/⍵}⌸ y
+
+y←?20 3⍴10
+x {⍺⍵}⌸ y
+x {⍺,⊂+⌿⍵}⌸ y

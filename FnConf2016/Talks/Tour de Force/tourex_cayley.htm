@@ -1,0 +1,39 @@
+﻿<html>
+<head><title>A Tour (de Force) of APL in 16 Expressions</title>
+<link href="adoc.css" rel=stylesheet></head>
+</head>
+
+<body>
+<table width=100%><tr><td width=1>&nbsp;</td>
+ <td><font size=+3><b><font size=+3>Exercise: Cayley&rsquo;s Theorem</font></b></td>
+ <td valign=top align=right><a href="tourex_index.htm">Index</a> &nbsp; 
+  <a href="tourex_qsort.htm">&lt;&lt;</a> &nbsp; <a href="tourex_symm.htm">&gt;&gt;</a></td>
+</tr></table>
+<br><br>
+
+<table><tr><td nowrap width=20>&nbsp;</td><td><script src="font.js" type="text/javascript"></script>
+Cayley&rsquo;s Theorem states that 
+for<tt><script src="font.js" type="text/javascript"></script> r←, ⍳ ⊢ </font></tt>
+and<tt><script src="font.js" type="text/javascript"></script> G </font></tt>
+a group table,
+
+<pre><script src="font.js" type="text/javascript"></script>   (r G) ≡ r ∘.{⍺[⍵]}⍨ ↓r G
+
+</font></pre>
+
+Try Cayley&rsquo;s Theorem on different groups.  For example:
+
+<pre><script src="font.js" type="text/javascript"></script>
+G←13|∘.+⍨⍳13
+G←13|∘.×⍨1↓⍳13
+</font></pre>
+
+</font></td></tr></table>
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+</body>
+</html>

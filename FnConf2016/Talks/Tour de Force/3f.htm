@@ -1,0 +1,37 @@
+﻿<html>
+<head><meta http-equiv="content-type" content="text/html;charset=utf-8">
+<title>A Tour (de Force) of APL in 16 Expressions</title>
+<link href="adoc.css" rel=stylesheet></head>
+<body>
+
+<table width=100%><tr><td width=1>&nbsp;</td>
+ <td><font size=+3><b>3. Inverted Table Index-Of</b></font></td>
+ <td valign=top align=right><a href="index.htm">Index</a> &nbsp; 
+  <a href="3e.htm">&lt;&lt;</a> &nbsp; <a href="3g.htm">&gt;&gt;</a></td>
+</tr></table>
+
+<table width=100%><tr><td width=1>&nbsp;</td><td><pre><script src="font.js" type="text/javascript"></script>
+   ⍪¨x                       ⍉↑x⍳¨x
+┌──────┬─┬───┬──┐
+│John  │M│USA│26│         0 0 0 0
+│Mary  │F│UK │24│         1 1 1 1
+│Monika│F│DE │31│         2 1 2 2
+│Min   │F│CN │17│         3 1 3 3
+│Max   │M│IT │29│         4 0 4 4
+└──────┴─┴───┴──┘
+   ⍪¨y                       ⍉↑x⍳¨y
+┌──────┬─┬───┬──┐
+│Min   │F│CN │17│         3 1 3 3
+│Mary  │F│UK │24│         1 1 1 1
+│John  │M│UK │26│         0 0 1 0
+│Monika│F│DE │31│         2 1 2 2
+│Mesut │M│DE │24│         5 0 2 1
+│Mesut │M│DE │24│         5 0 2 1
+└──────┴─┴───┴──┘
+   (vert x)⍳(vert y)         (⍉↑x⍳¨x) ⍳ (⍉↑x⍳¨y)
+3 1 5 2 5 5               3 1 5 2 5 5
+</font></pre>
+</td></tr></table>
+
+</body>
+</html>

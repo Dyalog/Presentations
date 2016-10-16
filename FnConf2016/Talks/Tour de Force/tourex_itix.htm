@@ -1,0 +1,63 @@
+﻿<html>
+<head><title>A Tour (de Force) of APL in 16 Expressions</title>
+<link href="adoc.css" rel=stylesheet></head>
+</head>
+
+<body>
+<table width=100%><tr><td width=1>&nbsp;</td>
+ <td><font size=+3><b><font size=+3>Exercise: Inverted Table Index-Of</font></b></td>
+ <td valign=top align=right><a href="tourex_index.htm">Index</a> &nbsp; 
+  <a href="tourex_ix.htm">&lt;&lt;</a> &nbsp; <a href="tourex_perm.htm">&gt;&gt;</a></td>
+</tr></table>
+<br><br>
+
+<table><tr><td nowrap width=20>&nbsp;</td><td>
+
+<pre><script src="font.js" type="text/javascript"></script>invert← {↑¨↓⍉⍵}
+vert  ← {⍉↑⊂⍤¯1¨⍵}
+
+u0←'fourscore' 'and' 'ten' 'years' 'ago'
+u1←'abc'
+u2←'USA' 'UK' 'China' 'Canada' 'Italy' 'Denmark'
+u3←?20⍴100
+u←u0[?30⍴≢u0],u1[?30⍴≢u1],u2[?30⍴≢u2],⍪u3[?30⍴≢u3]
+
+x←invert tx←u[?30⍴≢u;]
+y←invert ty←u[?23⍴≢u;]
+
+</font></pre>
+
+<table>
+<tr><td valign=top><script src="font.js" type="text/javascript"></script>a. &nbsp;</font></td><td>
+<script src="font.js" type="text/javascript"></script>
+Compare:
+
+<pre><script src="font.js" type="text/javascript"></script>⎕size 'x' 'tx'
+⎕size 'y' 'ty'
+
+</font></pre>
+</font></td></tr>
+
+<tr><td valign=top><script src="font.js" type="text/javascript"></script>b.</font></td><td>
+<script src="font.js" type="text/javascript"></script>
+Evaluate.
+
+<pre><script src="font.js" type="text/javascript"></script>↑x⍳¨x
+↑y⍳¨y
+(⍉↑x⍳¨x) ⍳ (⍉↑x⍳¨y)
+vert x
+vert y
+(vert x) ⍳ (vert y)
+x (8⌶) y
+
+</font></pre>
+</font></td></tr>
+</table>
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+﻿<html>
+<head><meta http-equiv="content-type" content="text/html;charset=utf-8">
+<title>A Tour (de Force) of APL in 16 Expressions</title>
+<link href="adoc.css" rel=stylesheet></head>
+<body>
+<a name="top"></a>
+
+<table width=100%><tr><td width=1>&nbsp;</td>
+ <td><font size=+3><b><font size=+3>D. &nbsp;50847534</font></b></td>
+ <td valign=top align=right><a href="index.htm">Index</a> &nbsp; 
+  <a href="Da.htm">&lt;&lt;</a> &nbsp; <a href="E.htm">&gt;&gt;</a></td>
+</tr></table>
+
+<table><tr><td width=20>&nbsp;</td><td>
+
+<pre><script src="font.js" type="text/javascript"></script>
+sieve←{
+  b←⍵⍴{∧⌿↑(×/⍵)⍴¨~⍵↑¨1}q←2 3 5
+  b[⍳6⌊⍵]←(6⌊⍵)⍴0 0 1 1 0 1 
+  49≥⍵:b
+  p←(≢q)↓{⍵/⍳⍴⍵}∇⌈⍵*0.5
+  m←1+⌊(⍵-1+p×p)÷2×p
+  b ⊣ p {b[⍺×⍺+2×⍳⍵]←0}¨ m
+}
+
+   +/ sieve 1e9
+50847534
+
+</font></pre>
+
+<table>
+<tr><td valign=top nowrap><script src="font.js" type="text/javascript"></script>&#149; &nbsp;</font></td>
+ <td><script src="font.js" type="text/javascript"></script>Mark as not-prime multiples of each prime less 
+than<tt><script src="font.js" type="text/javascript"></script> ⍵*0.5</font></tt>&nbsp;.
+ </font></td></tr>
+<tr><td valign=top><script src="font.js" type="text/javascript"></script>&#149;</font></td>
+ <td><script src="font.js" type="text/javascript"></script>Multiples of<tt><script src="font.js" type="text/javascript"></script> 2 3 5 </font></tt>
+are marked by initializing<tt><script src="font.js" type="text/javascript"></script> b </font></tt>
+with<tt><script src="font.js" type="text/javascript"></script> ⍵⍴{∧⌿↑(×/⍵)⍴¨~⍵↑¨1}2 3 5 </font></tt>
+rather than with<tt><script src="font.js" type="text/javascript"></script> ⍵⍴1</font></tt>&nbsp;.
+ </font></td></tr>
+<tr><td valign=top><script src="font.js" type="text/javascript"></script>&#149;</font></td>
+ <td><script src="font.js" type="text/javascript"></script>Subsequently, only odd multiples of 
+primes<tt><script src="font.js" type="text/javascript"></script> > 5 </font></tt>
+need to be marked.
+ </font></td></tr>
+<tr><td valign=top><script src="font.js" type="text/javascript"></script>&#149;</font></td>
+ <td><script src="font.js" type="text/javascript"></script>Multiples of a prime to be marked
+can start at its square.
+ </font></td></tr>
+</table>
+
+</td></tr></table>
+
+</td></tr></table>
+
+</body>
+</html>

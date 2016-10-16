@@ -1,0 +1,40 @@
+﻿<html>
+<head><meta http-equiv="content-type" content="text/html;charset=utf-8">
+<title>A Tour (de Force) of APL in 16 Expressions</title>
+<link href="adoc.css" rel=stylesheet></head>
+<body>
+<a name="top"></a>
+
+<table width=100%><tr><td width=1>&nbsp;</td>
+ <td><font size=+3><b><font size=+3>D. &nbsp;50847534</font></b></td>
+ <td valign=top align=right><a href="index.htm">Index</a> &nbsp; 
+  <a href="D.htm">&lt;&lt;</a> &nbsp; <a href="Db.htm">&gt;&gt;</a></td>
+</tr></table>
+
+<table><tr><td width=20>&nbsp;</td><td>
+
+<pre><script src="font.js" type="text/javascript"></script>
+   siev←{2=+⌿0=(⍳3⌈⍵)∘.|⍳⍵}
+
+   siev 10
+0 0 1 1 0 1 0 1 0 0
+
+   {⍵/⍳⍴⍵} siev 10
+2 3 5 7
+
+   +/ siev 10
+4
+   +/ siev 100
+25
+
+   +/ siev 1e9
+WS FULL
+siev[0] siev←{2=+⌿0=(⍳3⌈⍵)∘.|⍳⍵}
+                           ∧
+</font></pre>
+
+</td></tr></table>
+</font></td></tr></table>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+﻿⍝ System Functions: Standard Library
+⍝ http://help.dyalog.com
+tn←'C:\Temp\mydata' ⎕FCREATE 0
+tn
+⎕←(3 4⍴⍳12) ⎕FAPPEND tn
+⎕←'Hello' 'Bangalore' ⎕FAPPEND tn
+⎕FREAD tn 1
+⎕FREAD tn 2
+(1E6⍴⍳10) ⎕FREPLACE tn 1
+21↑⎕FREAD tn 1
+⎕FSIZE tn
+'C:\Temp\mydata' ⎕FERASE tn
+
+(all encoding nl)←⎕NGET 'C:\Windows\CoreConnectedSingleLanguage.xml'
+encoding nl
+⍴all
+5↑decoded←⎕XML all
+⍴decoded
+2↑(decoded[;2]∊⊂'component')/decoded[;4]
+{⍺,≢⍵}⌸all
+5↑ {⍵[⍒⍵[;2];]} {⍺,≢⍵}⌸all
+
+('.at' ⎕S '\u0') 'The cat sat on the mat'
+('.at' ⎕R '\u0') 'The cat sat on the mat'  
+('\w+' ⎕R {⌽⍵.Match}) 'The cat sat on the mat'
+
+⍝ I-Beams: Experimental / Unnamed / Functionality
+⍝ http://help.dyalog.com
+
+fromJSON←7159⌶ ⋄ toJSON←7160⌶
+json←'{"a": [1, 2, true, "hello"], "b": {"c": 1.2, "d": null}}'
+1 fromJSON json         ⍝ 1: ⎕XML format
+2 fromJSON ⎕←json       ⍝ 2: nested-⎕XML format
+j←0 fromJSON ⎕←json     ⍝ 0: namespace format
+j
+j.a
+j.b.(c d)
+0 toJSON j              ⍝ FROM namespace format TO JSON
+0 1 toJSON j            ⍝ With indenting etc
+jsonname←7162⌶
+0 jsonname '2a'         ⍝ "mangle" name
+1 jsonname '⍙_50_97'    ⍝ "unmangle"
+j.⍙_50_97←42
+0 1 toJSON j            ⍝ With indenting etc
+jsonbool←7161⌶          ⍝ Report JSON boolean representation
+jsonbool 1
+⎕←(true false)←jsonbool¨0 1
+j.a∊true false

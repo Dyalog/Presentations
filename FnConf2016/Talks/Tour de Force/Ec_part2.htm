@@ -1,0 +1,39 @@
+﻿<html>
+<head><meta http-equiv="content-type" content="text/html;charset=utf-8">
+<title>A Tour (de Force) of APL in 16 Expressions</title>
+<link href="adoc.css" rel=stylesheet></head>
+<body>
+<a name="top"></a>
+
+<table width=100%><tr><td width=1>&nbsp;</td>
+ <td><font size=+3><b>E. A Memo Operator &mdash; Partition Function</b></td>
+ <td valign=top align=right><a href="index.htm">Index</a> &nbsp; 
+  <a href="Eb_part1.htm">&lt;&lt;</a> &nbsp; <a href="Ed_part3.htm">&gt;&gt;</a></td>
+</tr></table>
+<br><br>
+
+
+<table><tr><td width=20>&nbsp;</td><td><script src="font.js" type="text/javascript"></script>
+
+<p>Euler&rsquo;s pentagonal number theorem (1750):</p>
+
+<img src="img/euler_p_large.jpg">
+
+<p><a target=16new href="http://mathworld.wolfram.com/PartitionFunctionP.html#eqn11">http://mathworld.wolfram.com/PartitionFunctionP.html</a>,
+equation (11).</p>
+
+<pre><script src="font.js" type="text/javascript"></script>   pn  ← {1≥⍵:0≤⍵ ⋄ -/+⌿∇¨rec ⍵}
+   rec ← {⍵ - (÷∘2 (×⍤1) ¯1 1 ∘.+ 3∘×) 1+⍳⌈0.5*⍨⍵×2÷3}
+
+   pn¨ 0 1 2 3 4 5 6
+1 1 2 3 5 7 11
+
+   pn 30
+5604
+</font></pre>
+</font></td></tr></table>
+
+</td></tr></table>
+
+</body>
+</html>

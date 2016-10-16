@@ -1,0 +1,81 @@
+﻿<html>
+<head><title>A Tour (de Force) of APL in 16 Expressions</title>
+<link href="adoc.css" rel=stylesheet></head>
+</head>
+
+<body>
+<table width=100%><tr><td width=1>&nbsp;</td>
+ <td><font size=+3><b><font size=+3>Exercise: A Memo Operator</font></b></td>
+ <td valign=top align=right><a href="tourex_index.htm">Index</a> &nbsp; 
+  <a href="tourex_50847534.htm">&lt;&lt;</a> &nbsp; <a href="tourex_index.htm">&gt;&gt;</a></td>
+</tr></table>
+<br>
+
+<table><tr><td nowrap width=20>&nbsp;</td><td><script src="font.js" type="text/javascript"></script>
+
+<pre><script src="font.js" type="text/javascript"></script>
+M←{
+  f←⍺⍺
+  i←2+'⋄'⍳⍨t←3↓,⎕CR'f'
+  0=⎕NC'⍺':⍎' {T←(1+  ⍵)⍴¯1 ⋄  {',(i↑t),'¯1≢T[⍵]  :⊃T[⍵]   ⋄ ⊃T[⍵]  ←⊂',(i↓t),'⍵}⍵'
+           ⍎'⍺{T←(1+⍺,⍵)⍴¯1 ⋄ ⍺{',(i↑t),'¯1≢T[⍺;⍵]:⊃T[⍺;⍵] ⋄ ⊃T[⍺;⍵]←⊂',(i↓t),'⍵}⍵'
+}
+</font></pre>
+
+<table>
+<tr><td valign=top><script src="font.js" type="text/javascript"></script>a. &nbsp;</font></td><td>
+<script src="font.js" type="text/javascript"></script>
+The Fibonacci numbers can be written as a double recursion:
+
+<pre><script src="font.js" type="text/javascript"></script>   fib←{1≥⍵:⍵ ⋄ (∇ ⍵-2)+∇ ⍵-1}
+
+   fib¨ ⍳15
+0 1 1 2 3 5 8 13 21 34 55 89 144 233 377
+   (fib ≡ fib M)¨ ⍳15
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+</font></pre>
+
+Run a benchmark of<tt><script src="font.js" type="text/javascript"></script> fib 30 </font></tt>
+<i>versus</i><tt><script src="font.js" type="text/javascript"></script> fib M 30</font></tt>&nbsp;.
+<br>&nbsp;
+</font></td></tr>
+
+<tr><td valign=top><script src="font.js" type="text/javascript"></script>b.</font></td><td>
+<script src="font.js" type="text/javascript"></script>
+The binomial coefficient<tt><script src="font.js" type="text/javascript"></script> ⍺!⍵ </font></tt>
+can be computed by a doubly-recursive function:
+
+<pre><script src="font.js" type="text/javascript"></script>   bc←{(⍺≤0)∨⍵≤⍺:⍺∊0,⍵ ⋄ (⍺-0 1)+.∇ ⍵-1}
+
+   (∘.bc ≡ ∘.!)⍨⍳10
+1
+</font></pre>
+
+Run a benchmark of<tt><script src="font.js" type="text/javascript"></script> 12 bc 24 </font></tt>
+<i>versus</i><tt><script src="font.js" type="text/javascript"></script> 12 bc M 24</font></tt>&nbsp;.
+<br>&nbsp;
+</font></td></tr>
+
+<tr><td valign=top><script src="font.js" type="text/javascript"></script>c.</font></td><td>
+<script src="font.js" type="text/javascript"></script>
+Size<tt><script src="font.js" type="text/javascript"></script> ⍺ </font></tt>combinations 
+of<tt><script src="font.js" type="text/javascript"></script> ⍳⍵ </font></tt>can be enumerated by 
+a doubly-recursive function:
+
+<pre><script src="font.js" type="text/javascript"></script>   comb←{(⍺=0)∨⍺=⍵:(1,⍺)⍴⍳⍺ ⋄ (0,1+(⍺-1)∇ ⍵-1)⍪1+⍺ ∇ ⍵-1}
+</font></pre>
+
+<p>Run a benchmark of<tt><script src="font.js" type="text/javascript"></script> 8 comb 16 </font></tt>
+<i>versus</i><tt><script src="font.js" type="text/javascript"></script> 8 comb M 16</font></tt>&nbsp;.<tt> </tt>
+</font></td></tr>
+</table>
+
+</td></tr></table>
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+</body>
+</html>
