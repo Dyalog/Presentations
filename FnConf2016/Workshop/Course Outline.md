@@ -1,6 +1,7 @@
 # Array-oriented Functional Programming with Dyalog
 ## FnConf'16 APL Workshop, 16 September 2016
-Materials available at https://github.com/Dyalog/Presentations/blob/master/FnConf2016/Workshop
+Materials available at [https://github.com/Dyalog/Presentations/blob/master/FnConf2016/Workshop](https://github.com/Dyalog/Presentations/blob/master/FnConf2016/Workshop)
+
 ## Morten Kromberg & Roger Hui
 ####(With thanks to Jay Foad and John Scholes)
 
@@ -15,6 +16,15 @@ the start of the day making sure everyone is able to use APL.
 
 The format will include many short exercises. Feedback and discussion
 will be encouraged throughout.
+
+## Documentation
+Supporting documentation and materials are available online:
+
+* [http://tryapl.org](http://tryapl.org) see the "resources" tab
+* [http://help.dyalog.com](http://help.dyalog.com) online help
+* [http://docs.dyalog.com](http://doc.dyalog.com) manuals etc
+* [http://http://www.dyalog.com/mastering-dyalog-apl.htm](http://www.dyalog.com/mastering-dyalog-apl.htm) Introduction to Dyalog APL by Bernard Legrand
+* Google: Try e.g. [https://www.google.co.in/?q=dyalog+apl+rank+operator](https://www.google.co.in/?q=dyalog+apl+rank+operator)
 
 # Morning
 
