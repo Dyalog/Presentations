@@ -1,0 +1,16 @@
+﻿⍝ namespaces
+ns1←⎕NS ''
+ns1.x←42
+ns1.x
+ns1.(x+x)
+ns1.(double←{⍵+⍵})
+ns1.(double x)
+ns1.double x
+ns1.double 17
+ns2←⎕NS ''
+ns2.x←99
+namespaces←ns2 ns2
+≢namespaces
+namespaces.(x+x)
+(⌽namespaces).(x+x)
+

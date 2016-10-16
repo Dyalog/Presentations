@@ -293,6 +293,7 @@ img {
 <body>
 <h1>Array-oriented Functional Programming with Dyalog</h1>
 <h2>FnConf'16 APL Workshop, 16 September 2016</h2>
+<p>Materials available at https://github.com/Dyalog/Presentations/blob/master/FnConf2016/Workshop</p>
 <h2>Morten Kromberg &amp; Roger Hui</h2>
 <h4>(With thanks to Jay Foad and John Scholes)</h4>
 <p>The workshop assumes no prior knowledge of APL. It will be geared to
@@ -424,7 +425,7 @@ In APL &quot;everything is an array&quot;, but what’s an array?
 <ul>
 <li>Rectangular collection of items,</li>
 <li>arranged along zero or more orthogonal axes,</li>
-<li>of numbers, characters and arrays (and &quot;objects&quot;)</li>
+<li>of numbers, characters and arrays</li>
 </ul>
 </li>
 <li><em>All</em> primitives work on arrays and return arrays.</li>
@@ -537,20 +538,21 @@ In APL &quot;everything is an array&quot;, but what’s an array?
 </code></pre>
 
 <h2>Searching and Sorting</h2>
-<p><strong>Exercise 97</strong> (searching and sorting):</p>
+<p><strong>Exercise 07a</strong> (searching and sorting):</p>
 <p>Try:</p>
 <pre><code> 'THE CAT IN THE HAT'∊'AEIOU'
  'AT'⍷'THE CAT IN THE HAT'
  'THE CAT IN THE HAT'~'AEIOU'
  3 1 4 1 5 9 ⍳ 1 2 3 4
- (3 3⍴'CATHATSAT')⍳2 2⍴'HATMAT'
+ (3 3⍴'CATHATSAT')⍳2 3⍴'HATMAT'
  'ABCD'∪'DEFG'
  'ABCD'∩'DEFG'
  ⍋pi←3 1 4 1 5 9
  pi[⍋pi]
 </code></pre>
 
-<p><strong>Tour De Force 2: Index Selfie</strong></p>
+<h2>Tour De Force 2: Index Selfie</h2>
+<p>see file://Talks/Tour de Force/2.htm</p>
 <h2>Defined functions</h2>
 <ul>
 <li>Dyalog has anonymous (lambda-style) function definitions called
@@ -726,6 +728,7 @@ In APL &quot;everything is an array&quot;, but what’s an array?
 <p><strong>Exercise</strong> Luhn credit card checksum algorithm: https://en.wikipedia.org/wiki/Luhn_algorithm</p>
 <h1>Afternoon</h1>
 <h2>Reading APL</h2>
+<p>(Powerpoint 11-14)</p>
 <p>How to understand a line of APL: a detailed look at the game of life
 one-liner http://dfns.dyalog.com/n_life.htm</p>
 <p>http://www.youtube.com/watch?v=a9xAKttWgP4</p>
@@ -769,6 +772,7 @@ one-liner http://dfns.dyalog.com/n_life.htm</p>
 <li>Prototypical items.</li>
 </ul>
 <h2>Indexing and partial assignment</h2>
+<p><strong>Exercise M1</strong> (indexing)</p>
 <ul>
 <li>Show Pick: <code>5⊃vec</code>, <code>(⊂2 3)⊃mat</code></li>
 <li>Show Squad: <code>5⌷vec</code>, <code>2 3⌷mat</code></li>
@@ -791,7 +795,8 @@ one-liner http://dfns.dyalog.com/n_life.htm</p>
 <li>(Really defines the <em>derived function</em>, not the operator, because
   you have access to <code>⍺</code> and <code>⍵</code> too.)</li>
 </ul>
-<p><strong>Tour De Force 7: Quicksort</strong></p>
+<h2>Tour De Force 7: Quicksort</h2>
+<p>see file://Talks/Tour de Force/7.htm</p>
 <p><strong>Exercise 14</strong> (dops)</p>
 <p>Try:</p>
 <pre><code>  double←{2×⍵}
@@ -887,6 +892,7 @@ one-liner http://dfns.dyalog.com/n_life.htm</p>
 </code></pre>
 
 <h2>Procedures</h2>
+<p>(Powerpoint, 15-18)</p>
 <blockquote>
 <p>Unfortunately, however, APL still splits programming into a world of
 expressions and a world of statements.  Thus the effort to write
@@ -901,6 +907,7 @@ Be Liberated from the von Neumann Style?&quot;</p>
 <li>Variables had dynamic scope.</li>
 </ul>
 <h2>Error trapping</h2>
+<p>(Powerpoint 19-23)</p>
 <ul>
 <li>Error guards in dfns.</li>
 <li><code>:Trap</code> in tradfns.</li>
@@ -953,22 +960,27 @@ What’s an array, revised:
 <li>of numbers, characters, arrays <strong>and refs</strong>.</li>
 </ul>
 </li>
-<li>Create a namespace with <code>⎕NS''</code> (see <em>System functions</em> below).</li>
-<li>Syntax is extremely general:</li>
 </ul>
+<p><strong>Exercise 16</strong> (namespaces)</p>
 <p>Try:</p>
-<pre><code>  ns.name
-  ns.(expr)
-  (ns1 ns2).(expr)
+<pre><code>  ns1←⎕NS ''
+  ns1.x←42
+  ns1.x
+  ns1.(x+x)
+  ns1.(double←{⍵+⍵})
+  ns1.(double x)
+  ns1.double x
+  ns1.double 17
+  ns2←⎕NS ''
+  ns2.x←99
+  namespaces←ns2 ns2
+  ≢namespaces
+  namespaces.(x+x)
+  (⌽namespaces).(x+x)
 </code></pre>
 
-<ul>
-<li>
-<p>Examples:</p>
-<p>1 2 3  (p q r).f  4 5 6</p>
-</li>
-</ul>
 <h2>System functions</h2>
+<p><strong>Exercise M2</strong> (sysfns)</p>
 <ul>
 <li>Provide I/O, system interfaces etc. Roughly equivalent to C standard library.</li>
 <li>Mention <code>⎕FREAD</code>, <code>⎕NREAD</code>, <code>⎕XML</code>, <code>⎕R</code>/<code>⎕S</code>, ...</li>

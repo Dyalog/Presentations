@@ -7,7 +7,7 @@ The APL source files are best viewed with the APL385 font that can be found [her
 ##Files:
 1. Course Outline.*     : Outline and course notes
 2. handouts/*           : The handouts
-3. session.txt          : A log of Jay's APL session
+3. session.txt          : A log of Jay's APL session from 2015
 4. Intro*.PPTX|PDF      : Introduction (PowerPoint & PDF) 
 5. indexing.txt         : Demo of indexing primitives
 6. sysfns.txt           : Demo of system functions (=library function)

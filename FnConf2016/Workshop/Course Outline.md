@@ -1,5 +1,6 @@
 # Array-oriented Functional Programming with Dyalog
 ## FnConf'16 APL Workshop, 16 September 2016
+Materials available at https://github.com/Dyalog/Presentations/blob/master/FnConf2016/Workshop
 ## Morten Kromberg & Roger Hui
 ####(With thanks to Jay Foad and John Scholes)
 
@@ -127,7 +128,7 @@ Try these expressions:
 * In APL "everything is an array", but what’s an array?
   * Rectangular collection of items,
   * arranged along zero or more orthogonal axes,
-  * of numbers, characters and arrays (and "objects")
+  * of numbers, characters and arrays
 * *All* primitives work on arrays and return arrays.
 * Strings are just vectors of characters.
 
@@ -240,7 +241,7 @@ Try:
 
 ## Searching and Sorting
 
-**Exercise 97** (searching and sorting):
+**Exercise 07a** (searching and sorting):
 
 Try:
 
@@ -248,13 +249,15 @@ Try:
      'AT'⍷'THE CAT IN THE HAT'
      'THE CAT IN THE HAT'~'AEIOU'
      3 1 4 1 5 9 ⍳ 1 2 3 4
-     (3 3⍴'CATHATSAT')⍳2 2⍴'HATMAT'
+     (3 3⍴'CATHATSAT')⍳2 3⍴'HATMAT'
      'ABCD'∪'DEFG'
      'ABCD'∩'DEFG'
      ⍋pi←3 1 4 1 5 9
      pi[⍋pi]
 
-**Tour De Force 2: Index Selfie**
+## Tour De Force 2: Index Selfie
+
+see file://Talks/Tour de Force/2.htm
 
 ## Defined functions
 
@@ -433,6 +436,8 @@ Operator muse:
 
 ## Reading APL
 
+(Powerpoint 11-14)
+
 How to understand a line of APL: a detailed look at the game of life
 one-liner http://dfns.dyalog.com/n_life.htm
 
@@ -478,6 +483,8 @@ Quirks that you may notice:
 
 ## Indexing and partial assignment
 
+**Exercise M1** (indexing)
+
 * Show Pick: `5⊃vec`, `(⊂2 3)⊃mat`
 * Show Squad: `5⌷vec`, `2 3⌷mat`
 * Finally show the anomalous syntax for bracket indexing: `vec[5]`, `mat[2;3]`
@@ -496,7 +503,9 @@ Quirks that you may notice:
 * (Really defines the *derived function*, not the operator, because
   you have access to `⍺` and `⍵` too.)
 
-**Tour De Force 7: Quicksort**
+## Tour De Force 7: Quicksort
+
+see file://Talks/Tour de Force/7.htm
 
 **Exercise 14** (dops)
 
@@ -601,6 +610,8 @@ Try:
 
 ## Procedures
 
+(Powerpoint, 15-18)
+
 > Unfortunately, however, APL still splits programming into a world of
   expressions and a world of statements.  Thus the effort to write
   one-line programs is partly motivated by the desire to stay in the
@@ -613,6 +624,8 @@ Try:
 * Variables had dynamic scope.
 
 ## Error trapping
+
+(Powerpoint 19-23)
 
 * Error guards in dfns.
 * `:Trap` in tradfns.
@@ -657,20 +670,29 @@ Try:
   * Rectangular collection of items,
   * arranged along zero or more orthogonal axes,
   * of numbers, characters, arrays **and refs**.
-* Create a namespace with `⎕NS''` (see *System functions* below).
-* Syntax is extremely general:
+
+**Exercise 16** (namespaces)
 
 Try:
 
-      ns.name
-      ns.(expr)
-      (ns1 ns2).(expr)
-
-* Examples:
-
-      1 2 3  (p q r).f  4 5 6
+      ns1←⎕NS ''
+      ns1.x←42
+      ns1.x
+      ns1.(x+x)
+      ns1.(double←{⍵+⍵})
+      ns1.(double x)
+      ns1.double x
+      ns1.double 17
+      ns2←⎕NS ''
+      ns2.x←99
+      namespaces←ns2 ns2
+      ≢namespaces
+      namespaces.(x+x)
+      (⌽namespaces).(x+x)
 
 ## System functions
+
+**Exercise M2** (sysfns)
 
 * Provide I/O, system interfaces etc. Roughly equivalent to C standard library.
 * Mention `⎕FREAD`, `⎕NREAD`, `⎕XML`, `⎕R`/`⎕S`, ...
