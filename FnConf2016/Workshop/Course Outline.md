@@ -20,8 +20,8 @@ will be encouraged throughout.
 * Installing Dyalog and keyboard layouts (http://dyalog.com/apl-font-keyboard.htm).
 * Entering APL glyphs from the keyboard:
   * Click on language bar (hover for help)
-  * Use double back-tick with auto-complete (Mac/RIDE only)
-  * Use back-tick + letter (Mac/RIDE only)
+  * Use double back-tick with auto-complete (Mac+Linux/RIDE only)
+  * Use back-tick + letter (Mac+Linux/RIDE only)
   * Use modifier keys
 * Configuration: please use `]box on`.
 * TryAPL (http://tryapl.org/) has a floating soft keyboard, or you can use the IME (Windows) or Mac & Linux keyboard layouts.
@@ -45,7 +45,7 @@ maths down.
 
     mean←{(+⌿⍵)÷≢⍵}
 
-* The character set: APL uses funny squiggles.
+* The character set: APL uses special symbols.
 * Simple regular syntax.
 * No reserved words in the language.
 
