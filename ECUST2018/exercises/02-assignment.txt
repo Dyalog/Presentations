@@ -1,0 +1,9 @@
+﻿x←3
+x+x
+y+(y←4)
+(x y z)←1 2 3
+(x y)←y x
+q←x
+x q
+x←4
+x q

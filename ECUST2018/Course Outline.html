@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="utf-8">
+<title>Meddy</title>
+<style media="screen">
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{display:block;}audio,canvas,progress,video{display:inline-block;vertical-align:baseline;}audio:not([controls]){display:none;height:0;}[hidden],template{display:none;}a{background-color:transparent;}a:active,a:hover{outline:0;}abbr[title]{border-bottom:1px dotted;}b,strong{font-weight:bold;}dfn{font-style:italic;}h1{font-size:2em;margin:0.67em 0;}mark{background:#ff0;color:#000;}small{font-size:80%;}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline;}sup{top:-0.5em;}sub{bottom:-0.25em;}img{border:0;}svg:not(:root){overflow:hidden;}figure{margin:1em 40px;}hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0;}code,kbd,pre,samp{font-family:APLFont;font-size:1em;}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0;}button{overflow:visible;}button,select{text-transform:none;}button,html input[type="button"], input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer;}button[disabled],html input[disabled]{cursor:default;}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0;}input{line-height:normal;}input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0;}input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-outer-spin-button{height:auto;}input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;}input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none;}fieldset{border:1px solid #c0c0c0;margin:0 2px;padding:0.35em 0.625em 0.75em;}legend{border:0;padding:0;}textarea{overflow:auto;}optgroup{font-weight:bold;}table{border-collapse:collapse;border-spacing:0;}td,th{padding:0;}body{margin:0pt 0pt 0pt 0pt;font-family:"Bookman Old Style", serif;background-color:#fdfdfd;font-size:18px;line-height:1.4;max-width:900px;padding:15px;}h1, h2, h3, h4, h5, h6{color:#868686;font-weight:800;padding-left:0;}h1, h2, h3, h4, p{margin-bottom:16px;}h1{font-size:32px;margin:5px 0 20px 0;}h1 > code, h2 > code, h3 > code, h4 > code, h5 > code, h6 > code{font-size:100%;background-color:inherit;}h2{font-size:26px;margin:10px 0 10px 0;padding-top:10px;border-bottom:1px solid Silver;}h3{margin:0; margin-top:10px;font-size:22px;}h4{font-size:18px;margin:0;margin-top:10px;}h5, h6{font-size:16px;margin:0;margin-top:12px;padding:0;}a{color:#0099ff;margin:0;padding:0;vertical-align:baseline;}a:visited{color:purple;}a.autoheader_anchor{text-decoration:none;}ul{list-style-type:disc;}ul, ol{padding:0;margin:0;}li > ul, ol{padding-bottom:0;}li{line-height:1.3;margin-left:25px;margin-bottom:10px;}ul > li{margin-left:20px;}li ul{margin-left:10px;}li ul{margin-left:5px;}li p{padding:1px 0 0 0; margin:10px 0 5px 0;line-height:1.3;}p, ul, ol{line-height:1.3;padding:8px 0 0 0;margin:0;color:#292929;}pre{overflow:auto;padding:10px 5px;margin:10px 0 10px 0 !important;white-space:pre-wrap;background-color:#faebd7;color:#3e3e3e;border:1px Silver dashed;display:block;font-family:APLFont, monospace;font-weight:400;}pre > code{line-height:1.2;border:0;padding:0;margin:0;background-color:inherit;color:inherit;font-weight:inherit;}li > pre{left-margin:0;}nav code{background-color:inherit;}code{font-family:APLFont, monospace;background-color:#efefef;color:Black;font-weight:800;line-height:1.2;font-size:16px;margin:0;color:#950000;padding:0 3px;}tbody tr:nth-child(odd){background-color:#f5f5f5;}th, td{padding:3px 10px;}table{border-color:Black;background-color:#ebebeb;margin:20px 0 20px 0;border:2px black;border-collapse:collapse;font-family:APLFont;font-size:16px;line-height:1.2;border:1pt solid Gray;}li > table{margin:10px 0 10px 0;}tr{margin:20px;}th{font-weight:bold;}tfoot td{font-weight:bold;}blockquote{border-left:5px solid silver;padding-left:5px;margin:15px 5px 15px 10px;}blockquote ul li{margin-left:215px;}blockquote ol li{margin-left:25px;}li > blockquote{margin-left:0;}nav{background-color:#f5f5f5;border:1px solid Black;padding:10px;margin:10px;margin-right:0;box-shadow:5px 5px 5px Gray; float:right;width:auto;}nav code{font-size:80%;}nav#main_nav{position:fixed;top:0;right:10px;float:none;}nav ul{list-style-type:none; margin:0 0 2px 0;padding:0;}nav a:visited{ color:black;}nav ul li{margin-bottom:0px;}nav li p{margin:0;padding:0;line-height:1;margin:0;padding:0;}nav li{font-size:11px;line-height:1.3;padding:0;margin-top:0;margin-bottom:0;margin-left:15px;}nav p{font-weight:bold;font-size:75%;padding-top:0;}dl{margin-top:0.1em;margin-bottom:0.1em;}dt{margin-top:0.75em;margin-bottom:0.1em;font-weight:800;}label#hide_toc_label{font-size:80%;}.toc-container{position:relative;height:auto;}[type="checkbox"]{position:absolute;left:-9999px;}label{display:block;width:100%;height:1.1em;cursor:pointer;top:0;padding-left:10pt;}label:before{content:'Table of contents (Show)';font-weight:bold;font-size:90%;padding-bottom:0pt;}[type="checkbox"] ~ div{display:none;}[type="checkbox"]:checked ~ div{display:block;margin-top:10pt;}[type="checkbox"]:checked + label{top:100%;}[type="checkbox"]:checked + label:before{content:'Table of contents (Hide)';}.print_only{display:none;}div#footnotes_div p{line-height:1; padding-bottom:0;padding-top:0;}div#footnotes_div ol{padding-top:0;}@font-face{font-family:"APLFont";src:local("APL385 Unicode"), url("http://misc.aplteam.com/apl385.ttf") format("truetype");}
+</style>
+<style media="print">
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;}body{-webkit-print-color-adjust:exact;}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{display:block;}audio,canvas,progress,video{display:inline-block;vertical-align:baseline;}audio:not([controls]){display:none;height:0;}[hidden],template{display:none;}a{background-color:transparent;}a{color:black !important;text-decoration:none;}a:active,a:hover{color:black;outline:0;}b,strong{font-weight:bold;}dfn{font-style:italic;}h1{margin:0.67em 0;}mark{background:#ff0;color:#000;}small{font-size:80%;}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline;}sup{top:-0.5em;}sub{bottom:-0.25em;}img{border:0;}svg:not(:root){overflow:hidden;}figure{margin:1em 40pt;}hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0;}code,kbd,pre,samp{font-family:monospace, monospace;font-size:1em;}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0;}button{overflow:visible;}button,select{text-transform:none;}button,html input[type="button"], input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer;}button[disabled],html input[disabled]{cursor:default;}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0;}input{line-height:normal;}input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0;}input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-outer-spin-button{height:auto;}input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;}input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none;}fieldset{border:1pt solid #c0c0c0;margin:0 2pt;padding:0.35em 0.625em 0.75em;}legend{border:0;padding:0;}textarea{overflow:auto;}optgroup{font-weight:bold;}table{border-collapse:collapse;border-spacing:0px;}td, th{padding:2pt 8pt;}body{margin:10pt 0 0 0;font-family:"Bookman Old Style", serif;background-color:#fdfdfd;font-size:9pt;line-height:1.2;max-width:auto;padding:15pt;}h1, h2, h3, h4 h5 h6{color:black;font-weight:800;padding-left:0;margin:5pt 0 0 0;padding:0}h1, h2, h3, h4, p{margin-bottom:5pt;}h1 > code, h2 > code, h3 > code, h4 > code, h5 > code, h6 > code{font-size:100%;}h1{font-size:150%;margin-top:5pt;}h2{font-size:135%;margin:15pt 0 10pt 0;border-bottom:1pt solid Silver;}h3{font-size:125%;}h3, h4 > pre{margin-bottom:8pt;}h4{font-size:115%;}h5{font-size:105%;padding-bottom:0;margin-bottom:0;}h5{font-size:100%;}a{color:#0099ff;margin:0;padding:0;vertical-align:baseline;}a.autoheader_anchor{text-decoration:none;}ul{list-style-type:square;}ul, ol{padding:0;margin:0;}li > ul, ol{padding-bottom:0;}li{line-height:1.3;margin-left:13pt;margin-bottom:5pt;}ul > li{margin-left:10pt;}li ul{margin-left:5pt;}li ul{margin-left:3pt;}li p{padding:1pt 0 0 0; margin:5pt 0 3pt 0;line-height:1.3;}p, ul, ol{line-height:1.3;padding:4pt 0 0 0;margin:0;color:#292929;}pre{padding:3pt;margin:5px 0;white-space:pre-wrap;background-color:#f8f8f8;border:1pt Silver solid;display:block;font-family:APLFont, monospace;font-weight:800;overflow:auto;}pre code{ background-color:#f0f0f0; color:Black; padding:0; margin:0 0 -6pt 0; line-height:1.1; border:0;}code{font-family:APLFont, monospace;font-weight:800;line-height:1.2;font-size:8pt;color:#950000;padding:2pt 1pt;}tbody tr:nth-child(odd){background-color:#fafafa;}th, td{padding:1pt 5pt;}table{background-color:#f1f1f1;margin:20pt 0;font-family:APLFont;font-size:8pt;padding:3pt 5pt;border:1pt solid silver;page-break-inside:avoid;}li > table{margin:10pt 0 10pt 0;}tr{margin:20pt;}th{font-weight:bold;}tfoot td{font-weight:bold;}blockquote{border-left:5pt solid silver;padding-left:5pt;margin:8pt 3pt 8pt 8pt;}nav{background-color:#f8f8f8;border:1pt solid Gray;width:auto; float:right;padding:5pt 5pt 5pt 0;margin:5pt 0 5pt 5pt;}nav *{font-size:75%;}nav ul{list-style-type:none; margin:0 0 2px 0;padding:0;}nav ul li{margin-bottom:0px;}nav li p{margin:0;padding:0;line-height:1;margin:0;padding:0;}nav li{font-size:8pt;line-height:1;padding:0;margin-top:0;margin-bottom:0;margin-left:15px;}dl{margin-top:0.1em;margin-bottom:0.1em;}dt{margin-top:0.1em;margin-bottom:0.75em;font-weight:800;}label#hide_toc_label{font-size:65%;}.toc-container{position:relative;height:auto;margin-top:10pt;}[type="checkbox"]{display:none;}label{display:block;width:100%;height:1.1em;top:0;padding-left:10pt;}label:before{content:'Table of contents (Show)';font-weight:bold;font-size:140%;padding-bottom:10pt;}a.external_link::before{content:" 🌎";}a.bookmark_link::before{content:" ➯";}a.bookmark_link{font-style:italic;}a.mailto_link::before{content:" ✉"}nav a.bookmark_link{font-style:normal;}nav p{margin-left:10pt;font-weight:bold;font-size:10pt;}nav a.bookmark_link::before{content:"";}div#footnotes_div a::before{content:"";}div#footnotes_div a{font-style:normal;}@font-face{font-family:"APLFont";src:local("APL385 Unicode"), url("http://misc.aplteam.com/apl385.ttf") format("truetype");}
+</style>
+<meta name="author" content="mkrom">
+</head>
+<body>
+<div class="h_tag">
+<a href="#Array-oriented-Functional-Programming-with-Dyalog" id="Array-oriented-Functional-Programming-with-Dyalog" class="autoheader_anchor">
+<h1>Array-oriented Functional Programming with Dyalog</h1>
+</a>
+</div>
+<div class="h_tag">
+<a href="#Workshop-at-East-China-University-of-Science-and-Technology" id="Workshop-at-East-China-University-of-Science-and-Technology" class="autoheader_anchor">
+<h2>Workshop at East China University of Science and Technology</h2>
+</a>
+</div>
+<div class="h_tag">
+<a href="#July-5th-2018" id="July-5th-2018" class="autoheader_anchor">
+<h2>July 5th, 2018</h2>
+</a>
+</div>
+<p>Materials available at <a href="https://github.com/mkromberg/ECUST" class="external_link">https://github.com/mkromberg/ECUST</a></p>
+<div class="h_tag">
+<a href="#Morten-Kromberg" id="Morten-Kromberg" class="autoheader_anchor">
+<h2>Morten Kromberg</h2>
+</a>
+</div>
+<p>####(With thanks to Jay Foad, Roger Hui and John Scholes)</p>
+<p>The workshop assumes no prior knowledge of APL.</p>
+<p>Prerequisites: It would help if attendees installed Dyalog on their laptops prior to the workshop - though we will spend a little time at the start of the day making sure everyone is able to use APL.</p>
+<p>The format will include many short exercises. Feedback and discussion will be encouraged throughout.</p>
+<div class="h_tag">
+<a href="#Documentation" id="Documentation" class="autoheader_anchor">
+<h2>Documentation</h2>
+</a>
+</div>
+<p>Supporting documentation and materials are available online:</p>
+<ul>
+<li><a href="http://tryapl.org" class="external_link">http://tryapl.org</a> see the “resources” tab</li>
+<li><a href="http://help.dyalog.com" class="external_link">http://help.dyalog.com</a> online help</li>
+<li><a href="http://doc.dyalog.com" class="external_link">http://docs.dyalog.com</a> manuals etc</li>
+<li><a href="http://www.dyalog.com/mastering-dyalog-apl.htm" class="external_link">http://http://www.dyalog.com/mastering-dyalog-apl.htm</a> Introduction to Dyalog APL by Bernard Legrand</li>
+<li>Google: Try e.g. <a href="https://www.google.co.in/?q=dyalog+apl+rank+operator" class="external_link">https://www.google.co.in/?q=dyalog+apl+rank+operator</a></li>
+</ul>
+<div class="h_tag">
+<a href="#Morning" id="Morning" class="autoheader_anchor">
+<h1>Morning</h1>
+</a>
+</div>
+<ul>
+<li>Installing Dyalog and keyboard layouts (http://dyalog.com/apl-font-keyboard.htm).</li>
+<li>Entering APL glyphs from the keyboard:
+<ul>
+<li>Click on language bar (hover for help)</li>
+<li>Use double back-tick with auto-complete (Mac+Linux/RIDE only)</li>
+<li>Use back-tick + letter (Mac+Linux/RIDE only)</li>
+<li>Use modifier keys</li>
+</ul></li>
+<li>Configuration: please use <code>]box on</code>.</li>
+<li>TryAPL (http://tryapl.org/) has a floating soft keyboard, or you can use the IME (Windows) or Mac &amp; Linux keyboard layouts.</li>
+</ul>
+<div class="h_tag">
+<a href="#Introduction" id="Introduction" class="autoheader_anchor">
+<h2>Introduction</h2>
+</a>
+</div>
+<p>Powerpoint slides (1-8):</p>
+<ul>
+<li>How APL evolved from a mathematical notation.</li>
+<li>Started as “Iverson notation”, used on the blackboard for teaching.</li>
+<li>“A Programming Language” book published in 1962, long before it was implemented on any computer. (<em>Program</em> just meant <em>algorithm</em>.)</li>
+<li>Used to formally describe the System/360 at IBM.</li>
+<li>First interpreter for the 360 in 1966, developed by Ken, Larry Breed, Adin Falkoff, Dick Lathwell and Roger Moore.</li>
+<li>Notation had to be linearised.</li>
+<li>Most other languages (e.g. Fortran) grew from the machine up, not from maths down.</li>
+</ul>
+<div class="h_tag">
+<a href="#First-impressions" id="First-impressions" class="autoheader_anchor">
+<h2>First impressions</h2>
+</a>
+</div>
+<p>mean←{(+⌿⍵)÷≢⍵}</p>
+<ul>
+<li>The character set: APL uses special symbols.</li>
+<li>Simple regular syntax.</li>
+<li>No reserved words in the language.</li>
+<li>Array programming is a paradigm in its own right.</li>
+<li>There are other APLs (APL2, NARS2000, GNU APL, NGN APL, ELI, etc), generally not completely compatible despite an ISO standard…</li>
+<li>and other languages in the family (A, A+, Nial, J, K etc).</li>
+</ul>
+<p>Array languages tend to share three features:</p>
+<ul>
+<li>terse</li>
+<li>symbolic (not wordy)</li>
+<li>high-order functions</li>
+</ul>
+<blockquote>
+<p>The only program which stands a chance of being correct is a short one –Arthur Whitney</p>
+</blockquote>
+<ul>
+<li>Primitives are carefully chosen; e.g. you get Grade instead of Sort, which enables <code>names[⍋ages]</code>.</li>
+</ul>
+<div class="h_tag">
+<a href="#Syntax-functions-arguments-and-naming" id="Syntax-functions-arguments-and-naming" class="autoheader_anchor">
+<h2>Syntax: functions, arguments and naming</h2>
+</a>
+</div>
+<ul>
+<li>Functions are prefix or infix (<em>monadic</em> or <em>dyadic</em>) e.g. <code>-</code> stands for negate or subtract respectively.</li>
+<li>Unlike many languages (e.g. C, Java), this goes for user-defined functions too.</li>
+<li><em>All</em> functions associate right: <code>3×2+1</code> is <code>3×(2+1)</code>.</li>
+</ul>
+<p><strong>Exercise 01:</strong> go through quickly as a group, introducing some scalar functions:</p>
+<p>What do these expressions evaluate to?</p>
+<p>3+2 3<em>2 ⍝ * is not multiplication! 3×2 9</em>0.5 ⍝ square root 6÷2 5-3-1 ⍝ not 1 1 2 3 -1 + 2⍝ not 1 ¯1 + 2 1 + 2 3 1 2 + 3 1 2 + 3 4 1 2 + 3 4 5 ⍝ errors: see later 1÷2 3÷4 1 (2 3) + (4 5) 6 ⍝ as if (1 1)(2 3) + (4 5)(6 6)</p>
+<ul>
+<li>Conformability rules for scalar functions: vectors must have same length, or either argument can be a scalar (“scalar extension”)</li>
+<li>Assignment uses the left arrow to name an array, <code>x←3</code>.</li>
+</ul>
+<p><strong>Exercise 02</strong> (introducing assignment):</p>
+<p>What do these expressions do?</p>
+<p>x←3 ⍝ result of assignment isn't printed x+x y+(y←4) ⍝ R-to-L execution guaranteed here, pass through result (x y z)←1 2 3 (x y)←y x</p>
+<p><strong>Exercise 03</strong> (first sight of a non-scalar function):</p>
+<p>Try these expressions:</p>
+<p>5=2+3 ⍝ not “true” but “1” A←⍳3 A=1 2 3 A≡1 2 3 ⍝ non-scalar function</p>
+<div class="h_tag">
+<a href="#Arrays" id="Arrays" class="autoheader_anchor">
+<h2>Arrays</h2>
+</a>
+</div>
+<ul>
+<li>In APL “everything is an array”, but what’s an array?
+<ul>
+<li>Rectangular collection of items,</li>
+<li>arranged along zero or more orthogonal axes,</li>
+<li>of numbers, characters and arrays</li>
+</ul></li>
+<li><em>All</em> primitives work on arrays and return arrays.</li>
+<li>Strings are just vectors of characters.</li>
+</ul>
+<p><strong>Exercise 04</strong> (introducing some structural primitives):</p>
+<p>Try:</p>
+<p>⍴1 2 3 ⍴'JAY' ⍳4 ⍴⍳4 ⌽⍳4 4↑'BANGALORE' ¯4↑'BANGALORE' ⍴(1 2 3)(4 5 6) ⍴'Morten' 'Kromberg' 5⍴'JAY' ⍝ introduce Reshape A←3 3⍴⍳9 A ⍝ display is “row major” ⍴A ⍴⍴A ⌽A ⊖A ⍝ discuss rank operator later ,A 3 3⍴'APL' 2 3 4⍴⍳24 ⍝ display is in planes B←2 3 4 5 6 7⍴99 ⍝ N.B. don't display this! ⍴B ⍴⍴B</p>
+<ul>
+<li>Other languages have scalars and arrays, but in APL there is no such distinction.</li>
+<li>Every array has a rank. What is the rank of a scalar? Try it! What is the shape of a scalar? Compare with <code>⍳0</code> and <code>⍬</code>.</li>
+<li>How many items in a rank-0 array? Try <code>×/⍬</code>.</li>
+<li>APL <em>recycles</em> the word “scalar” to mean “rank-zero array”.</li>
+<li>Why is a scalar an array? Because <em>everything</em> is an array! And it helps with consistency: reduction of matrix is vector, of vector is scalar.</li>
+<li>(Muse: “there's no access to the mote”. See Trenchard More's papers on “Nested Rectangular Arrays”.)</li>
+<li>Using the array as the fundamental type means that performance can be very good, even though it's interpreted.</li>
+</ul>
+<div class="h_tag">
+<a href="#Workspaces-and-scripts" id="Workspaces-and-scripts" class="autoheader_anchor">
+<h2>Workspaces and scripts</h2>
+</a>
+</div>
+<p>Powerpoint (9-10)</p>
+<ul>
+<li>Introduce )save and )load as a way to take a snapshot of the VM</li>
+<li>And ]save and ]load to work with functions as text files</li>
+</ul>
+<div class="h_tag">
+<a href="#Numbers" id="Numbers" class="autoheader_anchor">
+<h2>Numbers</h2>
+</a>
+</div>
+<ul>
+<li>APL presents the illusion that “a number is just a number”.</li>
+<li>Users don't have to think about data types.</li>
+<li>Automatic promotion on overflow; occasional demotion on heap compaction / garbage collection.</li>
+</ul>
+<p><strong>Exercise 06</strong> (more scalar arithmetic):</p>
+<p>Try:</p>
+<p>0 0 1 1 ∨ 0 1 0 1 0 0 1 1 ∧ 0 1 0 1 15 ∨ 35 15 ∧ 35 3÷4 <em>1 ○1 2</em>0.5 ¯1<em>0.5 3</em>99 3<em>999</p>
+<div class="h_tag">
+<a href="#Booleans" id="Booleans" class="autoheader_anchor">
+<h2>Booleans</h2>
+</a>
+</div>
+<ul>
+<li>Booleans are just numbers 0 and 1 (we saw this with <code>=</code>).</li>
+<li>Knuth even called this “Iverson's convention” in his paper “Two Notes on Notation” (https://www.maa.org/sites/default/files/pdf/upload_library/22/Ford/knuth403-422.pdf).</li>
+<li>This allows useful tricks like <code>+/A&gt;0</code> (how many positive numbers in A?).</li>
+<li>See Scholes's blog on Data-driven Conditionals (http://www.dyalog.com/blog/2014/10/data-driven-conditionals-2/).</li>
+<li>(Morten Kromberg calls it loop-free programming.)</li>
+<li>Coming back into fashion because of GPUs.</li>
+</ul>
+<p><strong>Exercise 07</strong> (boolean tricks):</p>
+<p>Try:</p>
+<p>A←1 ¯2 3 4 ¯5 A&gt;0 (A&gt;0)/A 2 3 0/'XYZ' B←0 1 0 1 1 0 0 1 B/⍳⍴B</p>
+<div class="h_tag">
+<a href="#Searching-and-Sorting" id="Searching-and-Sorting" class="autoheader_anchor">
+<h2>Searching and Sorting</h2>
+</a>
+</div>
+<p><strong>Exercise 07a</strong> (searching and sorting):</p>
+<p>Try:</p>
+<p>'THE CAT IN THE HAT'∊'AEIOU' 'AT'⍷'THE CAT IN THE HAT' 'THE CAT IN THE HAT'~'AEIOU' 3 1 4 1 5 9 ⍳ 1 2 3 4 (3 3⍴'CATHATSAT')⍳2 3⍴'HATMAT' 'ABCD'∪'DEFG' 'ABCD'∩'DEFG' ⍋pi←3 1 4 1 5 9 pi[⍋pi]</p>
+<div class="h_tag">
+<a href="#Tour-De-Force-2-Index-Selfie" id="Tour-De-Force-2-Index-Selfie" class="autoheader_anchor">
+<h2>Tour De Force 2: Index Selfie</h2>
+</a>
+</div>
+<p>see file://Talks/Tour de Force/2.htm</p>
+<div class="h_tag">
+<a href="#Defined-functions" id="Defined-functions" class="autoheader_anchor">
+<h2>Defined functions</h2>
+</a>
+</div>
+<ul>
+<li>Dyalog has anonymous (lambda-style) function definitions called <em>dfns</em>.</li>
+<li>MANY examples: http://dfns.dyalog.com</li>
+<li>Defined in braces, with <code>⍺</code> and <code>⍵</code> standing for the arguments.</li>
+<li>Functions have at most two arguments, but it's easy to make an argument tuple and decompose it with strand assignment.</li>
+</ul>
+<p><strong>Exercise 08</strong> (single line dfns):</p>
+<p>Try:</p>
+<p>{⍺+⍵} 3{⍺+⍵}4 3{⍵+⍵}4 {⍵+⍵}4 {⍺+⍺}4 where←{⍵/⍳⍴⍵} where 0 1 0 1 1 0 0 1 disc←{(a b c)←⍵ ⋄ (b<em>2)-4×a×c} disc 1 ¯1 ¯1 ⍝ (defining equation of the golden ratio)</p>
+<ul>
+<li>There is only one control structure: the guard.</li>
+<li>Dfns consist of a single expression preceded by zero or more local definitions and guards.</li>
+<li>At a pinch, you can use diamonds to separate “lines”.</li>
+<li>Use the <em>function editor</em> to define multi-line dfns. Hit ESC to exit the editor.</li>
+<li>The current functions is denoted <code>∇</code> to facilitate simple recursion:</li>
+</ul>
+<p><strong>Exercise 09</strong> (multi-line dfns):</p>
+<p>Try:</p>
+<p>)ed sign sign←{ ⍵&lt;0:'negative' ⍵&gt;0:'positive' 'zero' } sign 2 )ed fact fact←{ ⍵=0:1 ⍵×∇ ⍵-1 } fact 10 !10</p>
+<ul>
+<li>User defined functions can Just Work on arrays of arbitrary rank! See dfns.easter (http://dfns.dyalog.com/n_easter.htm)</li>
+</ul>
+<div class="h_tag">
+<a href="#Operators" id="Operators" class="autoheader_anchor">
+<h2>Operators</h2>
+</a>
+</div>
+<p>+/1 2 3</p>
+<ul>
+<li><code>/</code> here is an operator called Reduce (or fold)</li>
+<li>(Monadic) operators take a function operand on their <em>left</em>.</li>
+<li>So <code>+/</code> is “plus reduce”, or “sum”.</li>
+<li>Reduce inserts its operand function in the spaces: <code>1+2+3</code></li>
+<li>Generalises in ways that are more useful than you might expect! (See http://www.dyalog.com/blog/2014/11/musings-on-reduction/)</li>
+</ul>
+<p><strong>Exercise 10</strong> (operators):</p>
+<p>Try:</p>
+<p>+/2 3 4 ⍝ “summation over” (KEI) ×/2 3 4 ⍝ “product over” (KEI) ⌈/2 3 4 ≠/1 0 1 1 ⍝ parity</p>
+<ul>
+<li><code>¨</code> (dieresis) is an operator called Each (or map):</li>
+</ul>
+<p>Try:</p>
+<p>A←'Jay' 'Foad' ⍴A ⍴¨A ⌽A ⌽¨A</p>
+<ul>
+<li><code>⍨</code> is an operator called Commute (see <em>Tacit programming</em>, later):</li>
+</ul>
+<p>Try:</p>
+<p>2<em>3 2</em>⍨3 <em>⍨3</p>
+<ul>
+<li><em>Dyadic</em> operators also take an operand on the right.</li>
+<li>All dyadic operators are left-associative (cf functions).</li>
+<li><code>.</code> (dot) is a <em>dyadic</em> operator called Inner Product:</li>
+</ul>
+<p>Try:</p>
+<p>1 2 3 +.× 4 5 6 +/ 1 2 3 × 4 5 6 A←2 2⍴1 2 3 4 A +.× A +.×⍨A ⍝ function vs operator binding makes this very neat +.×/A A ⍴ (2 3 4⍴⍳24) +.× (4 5 6⍴⍳120) ⍝ arbitrary ranks 0.5 <em>⍨ 3 4 5 +.</em> 2 ⍝ scalar extension 'ABC' ∨.= 'APL'</p>
+<ul>
+<li>As a special case, left operand of <code>∘</code> gives Outer Product (or table):</li>
+</ul>
+<p>Try:</p>
+<p>∘.+ ⍨ ⍳4 ⍝ “addition table” (KEI) ∘.× ⍨ ⍳4 ⍝ “multiplication table” (KEI) ∘.⌈ ⍨ ⍳4 ⍝ maximum table ∘.= ⍨ ⍳4 ⍝ identity matrix ⍴ (2 3⍴⍳6) ∘.+ (4 5⍴⍳20) ⍝ arbitrary ranks</p>
+<ul>
+<li><code>⍣</code> is a dyadic operator called power:</li>
+</ul>
+<p>Try:</p>
+<p>({1+÷⍵}⍣10)1 ⍝ one of the few times when you need parens! {1+÷⍵}⍣≡1</p>
+<p><strong>Exercise 11a</strong> explain <code>∨.=</code> (et al) in words.</p>
+<p><strong>Exercise 11b</strong> explain <code>∨.∧</code> (used in transitive closure of a boolean matrix)</p>
+<p>Operator muse:</p>
+<ul>
+<li>Operators take fns or arrays as operands; creates a 3-layer food chain
+<ul>
+<li>Order 0: array</li>
+<li>Order 1: function, takes (array) <em>arguments</em></li>
+<li>Order 2: operator, takes (array or function) <em>operands</em></li>
+</ul></li>
+<li>Functions are right-associative and monadic functions are prefix.</li>
+<li>Operators are  left-associative and monadic operators are postfix.</li>
+<li>Some kind of beautiful symmetry there.</li>
+<li>(But it's not completely symmetrical, because the grammar distinguishes monadic/dyadic operators but not monadic/dyadic functions.)</li>
+</ul>
+<div class="h_tag">
+<a href="#Thinking-arrays" id="Thinking-arrays" class="autoheader_anchor">
+<h2>Thinking arrays</h2>
+</a>
+</div>
+<ul>
+<li>Use brace nesting depth as an example. First show a lisp-style recursive algorithm; then show how to do it a whole array at a time, bang!
+<p>⍝ Tail recursion:       brace1←{         ⍺←⍬         0=≢⍵:⍺         (⍺,1 ¯1 0['()'⍳⊃⍵]+⊃⌽⍺)∇ 1↓⍵       }</p>
+<p>⍝ Array thinking:       brace2←{(+\⍵='(')-(+\⍵=')')}       brace3←{+\1 ¯1 0['()'⍳⍵]}</p></li>
+<li>Modern processors love arrays. Arthur Whitney recommended these videos:
+<ul>
+<li>Bjarne Stroustrup. Vector good. Linked list bad. https://www.youtube.com/watch?v=YQs6IC-vgmo</li>
+<li>Mike Acton. Vector good. Struct &amp; object bad. https://www.youtube.com/watch?v=rX0ItVEVjHc</li>
+</ul></li>
+</ul>
+<p><strong>Exercise</strong> Rainfall: https://medium.com/@bearsandsharks/i-failed-a-twitter-interview-52062fbb534b</p>
+<p><strong>Exercise</strong> Luhn credit card checksum algorithm: https://en.wikipedia.org/wiki/Luhn_algorithm</p>
+<div class="h_tag">
+<a href="#Afternoon" id="Afternoon" class="autoheader_anchor">
+<h1>Afternoon</h1>
+</a>
+</div>
+<div class="h_tag">
+<a href="#Reading-APL" id="Reading-APL" class="autoheader_anchor">
+<h2>Reading APL</h2>
+</a>
+</div>
+<p>(Powerpoint 11-14)</p>
+<p>How to understand a line of APL: a detailed look at the game of life one-liner http://dfns.dyalog.com/n_life.htm</p>
+<p>http://www.youtube.com/watch?v=a9xAKttWgP4</p>
+<ul>
+<li><code>life←{↑1 ⍵∨.∧3 4=+/,¯1 0 1∘.⊖¯1 0 1∘.⌽⊂⍵}</code></li>
+<li>Try it out in small chunks, starting from the right.</li>
+<li>Split it into <em>named</em> small chunks on several lines.</li>
+<li>Know what's a function and what's an operator.</li>
+<li>Note the creative use of inner product.</li>
+<li>Finally try reading it from left to right.</li>
+</ul>
+<p><strong>Exercise 12</strong> (reading)</p>
+<ul>
+<li><code>(2×a)÷⍨(-b)(+,-)0.5\*⍨(b*2)-4×a×c</code> (“2 times a divided into minus b plus or minus the square root of [the discriminant] b squared minus 4 a c”)</li>
+<li>Find primes from 1 to R: <code>(~R∊R∘.×R)/R←1↓⍳R</code></li>
+<li>Or <code>{(~R∊R∘.×R)/R←1↓⍳⍵}</code></li>
+<li>Or <code>{{(~⍵∊⍵∘.×⍵)/⍵}1↓⍳⍵}</code></li>
+<li>Or <code>{(~⍵∊⍵∘.×⍵)/⍵}∘{1↓⍳⍵}</code></li>
+</ul>
+<p>Quirks that you may notice:</p>
+<ul>
+<li>Some APL programmers like to avoid parentheses, to reduce the cognitive load!</li>
+<li>Hence, put simple argument on left: <code>1+expr</code>, <code>0&lt;expr</code></li>
+<li>Or, use Commute: <code>2*⍨...</code></li>
+<li>N.B. game of life has no parentheses, partly because (some) primitives (e.g. Residue) were carefully designed to be most useful with a simple constant on the <em>left</em>.</li>
+<li>See also <em>Code Golf</em>.</li>
+</ul>
+<div class="h_tag">
+<a href="#Nested-arrays" id="Nested-arrays" class="autoheader_anchor">
+<h2>Nested arrays</h2>
+</a>
+</div>
+<ul>
+<li>Enclose (monadic <code>⊂</code>) boxes any array into a scalar enclosure.</li>
+<li>First (monadic <code>⊃</code>) is a handy inverse.</li>
+<li>Enclose of a simple scalar is unchanged: turtles all the way down.</li>
+<li>⍴⊂ is a handy idiom for constructing nested arrays: <code>3⍴⊂'Jay'</code>.</li>
+<li>Depth of an array is the level of nesting (0 for simple scalar).</li>
+<li>Mix and Split trade off rank for depth.</li>
+<li>Prototypical items.</li>
+</ul>
+<div class="h_tag">
+<a href="#Indexing-and-partial-assignment" id="Indexing-and-partial-assignment" class="autoheader_anchor">
+<h2>Indexing and partial assignment</h2>
+</a>
+</div>
+<p><strong>Exercise M1</strong> (indexing)</p>
+<ul>
+<li>Show Pick: <code>5⊃vec</code>, <code>(⊂2 3)⊃mat</code></li>
+<li>Show Squad: <code>5⌷vec</code>, <code>2 3⌷mat</code></li>
+<li>Finally show the anomalous syntax for bracket indexing: <code>vec[5]</code>, <code>mat[2;3]</code></li>
+<li>N.B. bracket indexing can't be used as an operand function :-(</li>
+<li>Using an array <em>inside</em> the brackets can be very useful: <code>'.⌹'[mat]</code></li>
+<li>Indexed assignment works intuitively: <code>vec[3]←99</code></li>
+<li>N.B. arrays still have <strong>value</strong> semantics; other namings of the same array are <em>not</em> affected.</li>
+<li>Selective assignment: <code>(3↑vec)←4 5 6</code> <em>also</em> works intuitively!</li>
+<li>But N.B. only for “structural” primitive functions; you can't do <code>(0×A)←1</code>.</li>
+</ul>
+<div class="h_tag">
+<a href="#Defined-operators" id="Defined-operators" class="autoheader_anchor">
+<h2>Defined operators</h2>
+</a>
+</div>
+<ul>
+<li>Lambda-style operator definition with <code>⍺⍺</code> and <code>⍵⍵</code>.</li>
+<li>(Really defines the <em>derived function</em>, not the operator, because you have access to <code>⍺</code> and <code>⍵</code> too.)</li>
+</ul>
+<div class="h_tag">
+<a href="#Tour-De-Force-7-Quicksort" id="Tour-De-Force-7-Quicksort" class="autoheader_anchor">
+<h2>Tour De Force 7: Quicksort</h2>
+</a>
+</div>
+<p>see file://Talks/Tour de Force/7.htm</p>
+<p><strong>Exercise 14</strong> (dops)</p>
+<p>Try:</p>
+<p>double←{2×⍵} twice←{⍺⍺ ⍺⍺ ⍵} double twice 3</p>
+<div class="h_tag">
+<a href="#Rank" id="Rank" class="autoheader_anchor">
+<h2>Rank</h2>
+</a>
+</div>
+<p><strong>Exercise R1</strong> (rank)</p>
+<p>Try:</p>
+<p>⍝ ensure ]box on in your session ⎕io←0</p>
+<p>⍝ rank with a monadic function</p>
+<p>x←2 3 5⍴⍳30 x ⊂⍤1 ⊢x ⊂⍤2 ⊢x ⊂⍤3 ⊢x ⊂⍤0 ⊢x ⍝ ⊂ on a simple scalar (rank 0 array) is that scalar itself</p>
+<p>⊂⍤¯1 ⊢x (⊂⍤¯1 ⊢x) ≡ ⊂⍤2 ⊢x (⊂⍤¯1 ⊢x) ≡ ⊂⍤((≢⍴x)-1) ⊢x ≢⍴x (≢⍴x)-1</p>
+<p>⊂⍤¯1 ⊢5 2⍴⍳10 ⊂⍤¯1 ⊢5 2 3⍴⍳60 ⊂⍤¯1 ⊢5 2 3 4⍴⍳120 ⊂⍤¯1 ⊢5 2 3 2 2⍴⍳120</p>
+<p>a←2 3 4⍴⎕a a ⊂⍤1 ⊢a ⊂⍤2 ⊢a ⊂⍤3 ⊢a ⊂⍤0 ⊢a</p>
+<p>⊂⍤¯1 ⊢a</p>
+<p>And:</p>
+<p><strong>Exercise R2</strong> (rank)</p>
+<p>x←3 5⍴⎕a x y←3 6⍴⍳18 y</p>
+<p>x {⍺⍵}⍤1 ⊢y x {⍺⍵}⍤1 1 ⊢y x {⍺⍵}⍤1 2 ⊢y x {⍺⍵}⍤2 1 ⊢y x {⍺⍵}⍤0 2 ⊢y ⊂⍤2 ⊢x {⍺⍵}⍤0 2 ⊢y x {⍺⍵}⍤2 0 ⊢y ⊂⍤2 ⊢x {⍺⍵}⍤2 0 ⊢y</p>
+<div class="h_tag">
+<a href="#Key" id="Key" class="autoheader_anchor">
+<h2>Key</h2>
+</a>
+</div>
+<p><strong>Exercise R3</strong> (key)</p>
+<p>Try:</p>
+<p>⍝ ensure ]box on in your session ⎕io←0</p>
+<p>x←'Mississippi' {⍺,≢⍵}⌸x {⍺,≢⍵}⌸2/x {⍺,≢⍵}⌸3/x x{⍺⍵}⌸⍳≢x</p>
+<p>⎕rl←7<em>5 ⍝ set random seed to get reproducible random numbers</p>
+<p>x←('zero' 'one' 'two' 'three' 'four')[?20⍴5] x y←?20⍴10 y x {⍺⍵}⌸ y x {⍺,≢⍵}⌸ y x {⍺,+⌿⍵}⌸ y x {⍺,⌈⌿⍵}⌸ y x {⍺,⌊⌿⍵}⌸ y x {⍺,(+⌿÷≢)⍵}⌸ y</p>
+<p>x {⊂⍵}⌸ y x {+/⍵}⌸ y</p>
+<p>y←?20 3⍴10 x {⍺⍵}⌸ y x {⍺,⊂+⌿⍵}⌸ y</p>
+<div class="h_tag">
+<a href="#Procedures" id="Procedures" class="autoheader_anchor">
+<h2>Procedures</h2>
+</a>
+</div>
+<p>(Powerpoint, 15-18)</p>
+<blockquote>
+<p>Unfortunately, however, APL still splits programming into a world of expressions and a world of statements. Thus the effort to write one-line programs is partly motivated by the desire to stay in the more orderly world of expressions. –John Backus, “Can Programming Be Liberated from the von Neumann Style?”</p>
+</blockquote>
+<ul>
+<li>APL had tradfns long before dfns.</li>
+<li>The only control flow was <code>→</code> (goto).</li>
+<li>Control structures (<code>:If</code> etc) improved life a little.</li>
+<li>Variables had dynamic scope.</li>
+</ul>
+<div class="h_tag">
+<a href="#Error-trapping" id="Error-trapping" class="autoheader_anchor">
+<h2>Error trapping</h2>
+</a>
+</div>
+<p>(Powerpoint 19-23)</p>
+<ul>
+<li>Error guards in dfns.</li>
+<li><code>:Trap</code> in tradfns.</li>
+</ul>
+<div class="h_tag">
+<a href="#Interactive-debugging" id="Interactive-debugging" class="autoheader_anchor">
+<h2>Interactive debugging</h2>
+</a>
+</div>
+<ul>
+<li>Using the tracer to step through code.</li>
+<li>Using the session to examine variables.</li>
+<li>Edit windows on variables show live updates.</li>
+</ul>
+<div class="h_tag">
+<a href="#Schisms" id="Schisms" class="autoheader_anchor">
+<h2>Schisms</h2>
+</a>
+</div>
+<blockquote>
+<p>“Should array indices start at 0 or 1? My compromise of 0.5 was rejected without, I thought, proper consideration.” –Stan Kelly Bootle</p>
+</blockquote>
+<ul>
+<li>Index origin can be 0 or 1 (everyone agrees it shouldn't be settable, but they don't agree what it should be).</li>
+<li>Floating vs grounded array theory.</li>
+<li>APL2 (axis “operator”) vs Rationalised APL (rank operator).</li>
+</ul>
+<div class="h_tag">
+<a href="#Tacit-programming" id="Tacit-programming" class="autoheader_anchor">
+<h2>Tacit programming</h2>
+</a>
+</div>
+<ul>
+<li>https://en.wikipedia.org/wiki/Tacit_programming</li>
+<li>Syntax of function trains (need some compelling examples)</li>
+<li>Tacit or “point free” forms:
+<ul>
+<li>Compose</li>
+<li>Commute</li>
+<li>Atop</li>
+<li>Fork</li>
+<li>Right operand currying</li>
+</ul></li>
+</ul>
+<p><strong>Exercise 15</strong> (tacit)</p>
+<p>(∨/ ≤ ∧/) booleanvector</p>
+<p>(Answer: it checks for all zeros OR all ones.)</p>
+<div class="h_tag">
+<a href="#Namespaces" id="Namespaces" class="autoheader_anchor">
+<h2>Namespaces</h2>
+</a>
+</div>
+<ul>
+<li>What’s an array, revised:
+<ul>
+<li>Rectangular collection of items,</li>
+<li>arranged along zero or more orthogonal axes,</li>
+<li>of numbers, characters, arrays <strong>and refs</strong>.</li>
+</ul></li>
+</ul>
+<p><strong>Exercise 16</strong> (namespaces)</p>
+<p>Try:</p>
+<p>ns1←⎕NS '' ns1.x←42 ns1.x ns1.(x+x) ns1.(double←{⍵+⍵}) ns1.(double x) ns1.double x ns1.double 17 ns2←⎕NS '' ns2.x←99 namespaces←ns2 ns2 ≢namespaces namespaces.(x+x) (⌽namespaces).(x+x)</p>
+<div class="h_tag">
+<a href="#System-functions" id="System-functions" class="autoheader_anchor">
+<h2>System functions</h2>
+</a>
+</div>
+<p><strong>Exercise M2</strong> (sysfns)</p>
+<ul>
+<li>Provide I/O, system interfaces etc. Roughly equivalent to C standard library.</li>
+<li>Mention <code>⎕FREAD</code>, <code>⎕NREAD</code>, <code>⎕XML</code>, <code>⎕R</code>/<code>⎕S</code>, …</li>
+</ul>
+<div class="h_tag">
+<a href="#Building-applications" id="Building-applications" class="autoheader_anchor">
+<h2>Building applications</h2>
+</a>
+</div>
+<ul>
+<li>Turn one of our exercises into a web page or service with MiServer ?</li>
+</ul>
+</body>
+</html>

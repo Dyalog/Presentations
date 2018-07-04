@@ -1,0 +1,34 @@
+﻿⍝ System Functions: Standard Library
+⍝ http://help.dyalog.com
+tn←'C:\Temp\mydata' ⎕FCREATE 0
+tn
+⎕←(3 4⍴⍳12) ⎕FAPPEND tn
+⎕←'Hello' 'Bangalore' ⎕FAPPEND tn
+⎕FREAD tn 1
+⎕FREAD tn 2
+(1E6⍴⍳10) ⎕FREPLACE tn 1
+21↑⎕FREAD tn 1
+⎕FSIZE tn
+'C:\Temp\mydata' ⎕FERASE tn
+
+(all encoding nl)←⎕NGET 'C:\Windows\CoreConnectedSingleLanguage.xml'
+encoding nl
+⍴all
+5↑decoded←⎕XML all
+⍴decoded
+2↑(decoded[;2]∊⊂'component')/decoded[;4]
+{⍺,≢⍵}⌸all
+5↑ {⍵[⍒⍵[;2];]} {⍺,≢⍵}⌸all
+
+('.at' ⎕S '\u0') 'The cat sat on the mat'
+('.at' ⎕R '\u0') 'The cat sat on the mat'  
+('\w+' ⎕R {⌽⍵.Match}) 'The cat sat on the mat'
+
+json←'{"a": [1, 2, true, "hello"], "b": {"c": 1.2, "d": null}}'
+j←⎕JSON json     ⍝ 0: namespace format
+j
+j.a
+j.b.(c d)
+(⎕JSON⍠'M') ⎕←json      ⍝ Array representation of the "tree"
+⎕JSON j                 ⍝ If argument is NOT a character vector
+(⎕JSON⍠'Compact' 0) j   ⍝ With indenting etc

@@ -1,0 +1,4 @@
+﻿⍝What does this do:
+⍝      (∨/ ≤ ∧/) booleanvector
+⍝ Spoiler alert!
+⍝(checks for all zeros OR all ones)
