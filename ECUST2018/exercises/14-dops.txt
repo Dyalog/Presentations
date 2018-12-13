@@ -1,4 +1,0 @@
-Try:
-      double←{2×⍵}
-      twice←{⍺⍺ ⍺⍺ ⍵}
-      double twice 3
